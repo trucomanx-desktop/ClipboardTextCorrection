@@ -1,0 +1,2 @@
+# ClipboardTextCorrection
+clipboard text correction
