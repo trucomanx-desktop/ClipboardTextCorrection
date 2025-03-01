@@ -9,8 +9,8 @@ long_description = (here / "README.md").read_text(encoding="utf-8");
 
 setup(
     name="clipboard_text_correction",
-    version="0.1.0",
-    description="Program that collects text from clipboard and improves text writing",
+    version="0.1.1",
+    description="Program that collects text from the clipboard and improves text writing",
     author="Fernando Pujaico Rivera",
     author_email="fernando.pujaico.rivera@gmail.com",
     maintainer='Fernando Pujaico Rivera',

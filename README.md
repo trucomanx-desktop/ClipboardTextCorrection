@@ -21,6 +21,12 @@ Install `clipboard-text-correction` from `pypi` and add the program to the bar i
 ```bash
 curl -fsSL https://raw.githubusercontent.com/trucomanx/ClipboardTextCorrection/main/install_linux_indicator_session.sh | sh
 ```
+## LLM
+The program needs an API_KEY to be used. This can be obtained from
+https://deepinfra.com/dash/api_keys
+
+Place the obtained API_KEY in the program menu under `Open config file`.
+
 
 ## License
 This project is licensed under the GPLv3 License.

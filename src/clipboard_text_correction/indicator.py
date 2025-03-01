@@ -247,11 +247,11 @@ def main():
     menu = Gtk.Menu()
 
 
-    # Improve writings
+    # Improve writing
     item_improve_writing = Gtk.MenuItem()
     box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
     icon = Gtk.Image.new_from_icon_name("accessories-text-editor", Gtk.IconSize.MENU)  # Nome do ícone do sistema
-    label = Gtk.Label(label="Improve writings")
+    label = Gtk.Label(label="Improve writing")
     box.pack_start(icon, False, False, 0)
     box.pack_start(label, False, False, 0)
     item_improve_writing.add(box)
