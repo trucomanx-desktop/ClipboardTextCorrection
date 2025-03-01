@@ -13,7 +13,7 @@ cd src
 python3 setup.py sdist
 pip install dist/clipboard_text_correction-*.tar.gz
 ```
-### Using
+Using:
 
 ```bash
 clipboard-text-correction-indicator
@@ -32,7 +32,7 @@ curl -fsSL https://raw.githubusercontent.com/trucomanx/ClipboardTextCorrection/m
 pip install --upgrade clipboard-text-correction
 ```
 
-### Using
+Using:
 
 ```bash
 clipboard-text-correction-indicator
