@@ -38,6 +38,9 @@ Using:
 clipboard-text-correction-indicator
 ```
 
+## License
+This project is licensed under the GPLv3 License.
+
 ## More information
 
 More information can be found in [README.extras.md](README.extras.md)
