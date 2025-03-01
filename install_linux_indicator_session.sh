@@ -1,5 +1,7 @@
 #!/bin/bash
 
+pip install --upgrade clipboard-text-correction
+
 # Defina as variáveis que você deseja substituir
 USER=$(whoami)  # Nome do usuário atual
 GROUP=$(id -gn) # Nome do grupo principal do usuário atual
