@@ -40,4 +40,4 @@ clipboard-text-correction-indicator
 
 ## More information
 
-More information can be found in README.extras.md
+More information can be found in [README.extras.md](README.extras.md)
