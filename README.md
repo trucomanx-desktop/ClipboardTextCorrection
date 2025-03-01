@@ -19,14 +19,14 @@ Using:
 clipboard-text-correction-indicator
 ```
 
-## Install from PIP and add to the Linux startup session
-Install `clipboard-text-correction` from pip and add the program to the bar indicator on Linux startup by creating `~/.config/autostart/clipboard-text-correction-indicator.desktop`.
+## Install from PYPI and add to the Linux startup session
+Install `clipboard-text-correction` from `pypi` and add the program to the bar indicator on Linux startup by creating `~/.config/autostart/clipboard-text-correction-indicator.desktop`.
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/trucomanx/ClipboardTextCorrection/main/install_linux_indicator_session.sh | sh
 ```
 
-## Install from PIP
+## Install from PYPI
 
 ```bash
 pip install --upgrade clipboard-text-correction
@@ -37,3 +37,7 @@ Using:
 ```bash
 clipboard-text-correction-indicator
 ```
+
+## More information
+
+More information can be found in README.extras.md

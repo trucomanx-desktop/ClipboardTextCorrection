@@ -46,6 +46,15 @@ except json.JSONDecodeError:
 ################################################################################
 ################################################################################
 
+def show_notification_message(title,message,icon="help-about"):
+    Notify.init("ClipboardTextCorrection")
+    notification = Notify.Notification.new(
+        title,
+        message,
+        icon
+    )
+    notification.show()
+    
 def show_message(message):
     """Exibe uma janela com uma mensagem copiável e um botão OK."""
     # Cria uma janela
@@ -141,13 +150,7 @@ def basic_consult(type_consult):
     #lib_play.play_message("The text was sent, please wait.")
     #show_message("The text was sent, please wait.")
     
-    Notify.init("ClipboardTextCorrection")
-    notification = Notify.Notification.new(
-        type_consult,
-        "The text was sent, please wait.",
-        "help-about"
-    )
-    notification.show()
+    show_notification_message(type_consult,"The text was sent, please wait.")
     
     try:
         res=lib_funcs.consultation_in_depth(config_data,
@@ -168,13 +171,7 @@ def basic_consult(type_consult):
 def question_answer_consult(type_consult):
     msg=get_clipboard_text()
         
-    Notify.init("ClipboardTextCorrection")
-    notification = Notify.Notification.new(
-        type_consult,
-        "The text was sent, please wait.",
-        "help-about"
-    )
-    notification.show()
+    show_notification_message(type_consult,"The text was sent, please wait.")
     
     try:
         res=lib_funcs.question_answer_in_depth( config_data,
@@ -226,8 +223,13 @@ def edit_config(source):
     lib_files.open_from_filepath(config_file_path)
     
 def open_url_usage(source):
+    show_notification_message("open_url_usage",config_data["usage"])
     lib_files.open_url(config_data["usage"])
 
+################################################################################
+def buy_me_a_coffee(source):
+    show_notification_message("Buy me a coffee","https://ko-fi.com/trucomanx")
+    lib_files.open_url("https://ko-fi.com/trucomanx")
 
 
 ################################################################################
@@ -248,7 +250,7 @@ def main():
     # Improve writings
     item_improve_writing = Gtk.MenuItem()
     box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
-    icon = Gtk.Image.new_from_icon_name("document-edit", Gtk.IconSize.MENU)  # Nome do ícone do sistema
+    icon = Gtk.Image.new_from_icon_name("accessories-text-editor", Gtk.IconSize.MENU)  # Nome do ícone do sistema
     label = Gtk.Label(label="Improve writings")
     box.pack_start(icon, False, False, 0)
     box.pack_start(label, False, False, 0)
@@ -260,7 +262,7 @@ def main():
     # Improve scientific writing
     item_improve_scientific_writing = Gtk.MenuItem()
     box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
-    icon = Gtk.Image.new_from_icon_name("document-edit", Gtk.IconSize.MENU)  # Nome do ícone do sistema
+    icon = Gtk.Image.new_from_icon_name("accessories-text-editor", Gtk.IconSize.MENU)  # Nome do ícone do sistema
     label = Gtk.Label(label="Improve scientific writing")
     box.pack_start(icon, False, False, 0)
     box.pack_start(label, False, False, 0)
@@ -272,7 +274,7 @@ def main():
     # Concise writing
     item_concise_writing = Gtk.MenuItem()
     box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
-    icon = Gtk.Image.new_from_icon_name("document-edit", Gtk.IconSize.MENU)  # Nome do ícone do sistema
+    icon = Gtk.Image.new_from_icon_name("accessories-text-editor", Gtk.IconSize.MENU)  # Nome do ícone do sistema
     label = Gtk.Label(label="Concise writing")
     box.pack_start(icon, False, False, 0)
     box.pack_start(label, False, False, 0)
@@ -284,7 +286,7 @@ def main():
     # Paraphrase
     item_paraphrase = Gtk.MenuItem()
     box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
-    icon = Gtk.Image.new_from_icon_name("document-edit", Gtk.IconSize.MENU)  # Nome do ícone do sistema
+    icon = Gtk.Image.new_from_icon_name("accessories-text-editor", Gtk.IconSize.MENU)  # Nome do ícone do sistema
     label = Gtk.Label(label="Paraphrase")
     box.pack_start(icon, False, False, 0)
     box.pack_start(label, False, False, 0)
@@ -342,7 +344,7 @@ def main():
     # Text to latex equation
     item_text_to_latex_equation = Gtk.MenuItem()
     box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
-    icon = Gtk.Image.new_from_icon_name("document-edit", Gtk.IconSize.MENU)  # Nome do ícone do sistema
+    icon = Gtk.Image.new_from_icon_name("font-x-generic", Gtk.IconSize.MENU)  # Nome do ícone do sistema
     label = Gtk.Label(label="Text to latex equation")
     box.pack_start(icon, False, False, 0)
     box.pack_start(label, False, False, 0)
@@ -354,7 +356,7 @@ def main():
     # Text to latex table
     item_text_to_latex_table = Gtk.MenuItem()
     box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
-    icon = Gtk.Image.new_from_icon_name("document-edit", Gtk.IconSize.MENU)  # Nome do ícone do sistema
+    icon = Gtk.Image.new_from_icon_name("font-x-generic", Gtk.IconSize.MENU)  # Nome do ícone do sistema
     label = Gtk.Label(label="Text to latex table")
     box.pack_start(icon, False, False, 0)
     box.pack_start(label, False, False, 0)
@@ -392,6 +394,23 @@ def main():
     item_open_url_usage.connect("activate", open_url_usage)
     menu.append(item_open_url_usage)
     
+    
+    # Adicionando um separador
+    separator = Gtk.SeparatorMenuItem()
+    menu.append(separator)
+    separator.show()
+    
+    
+    # Buy me a coffee
+    item_buy_me_a_coffee = Gtk.MenuItem()
+    box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
+    icon = Gtk.Image.new_from_icon_name("emblem-favorite", Gtk.IconSize.MENU)  # Nome do ícone do sistema
+    label = Gtk.Label(label="Buy me a coffee: TrucomanX")
+    box.pack_start(icon, False, False, 0)
+    box.pack_start(label, False, False, 0)
+    item_buy_me_a_coffee.add(box)
+    item_buy_me_a_coffee.connect("activate", buy_me_a_coffee)
+    menu.append(item_buy_me_a_coffee)
     
     
     # Adicionando um separador
