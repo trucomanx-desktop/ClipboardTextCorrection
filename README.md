@@ -6,7 +6,7 @@ Program that improves text writing
 
 This program requires **Meld** to be installed on your system to function correctly. The **Meld** is a graphical tool for comparing files and directories.
 
-### How to install or **Meld**
+How to install or **Meld**
 
 - **Ubuntu/Debian**:
 
@@ -14,23 +14,6 @@ This program requires **Meld** to be installed on your system to function correc
 sudo apt-get install meld
 ```
 - **Windows**: You can download the Meld installer at [meldmerge.org](meldmerge.org).
-
-## Install from source
-Installing `clipboard-text-correction` program
-
-```bash
-git clone https://github.com/trucomanx/ClipboardTextCorrection.git
-cd ClipboardTextCorrection
-pip install -r requirements.txt
-cd src
-python3 setup.py sdist
-pip install dist/clipboard_text_correction-*.tar.gz
-```
-Using:
-
-```bash
-clipboard-text-correction-indicator
-```
 
 ## Install from PYPI and add to the Linux startup session
 Install `clipboard-text-correction` from `pypi` and add the program to the bar indicator on Linux startup by creating `~/.config/autostart/clipboard-text-correction-indicator.desktop`.
@@ -45,6 +28,23 @@ curl -fsSL https://raw.githubusercontent.com/trucomanx/ClipboardTextCorrection/m
 pip install --upgrade clipboard-text-correction
 ```
 
+Using:
+
+```bash
+clipboard-text-correction-indicator
+```
+
+## Install from source
+Installing `clipboard-text-correction` program
+
+```bash
+git clone https://github.com/trucomanx/ClipboardTextCorrection.git
+cd ClipboardTextCorrection
+pip install -r requirements.txt
+cd src
+python3 setup.py sdist
+pip install dist/clipboard_text_correction-*.tar.gz
+```
 Using:
 
 ```bash

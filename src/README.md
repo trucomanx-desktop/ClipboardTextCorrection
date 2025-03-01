@@ -2,6 +2,20 @@
 
 Program that improves text writing.
 
+## Dependencies
+
+This program requires **Meld** to be installed on your system to function correctly. The **Meld** is a graphical tool for comparing files and directories.
+
+How to install or **Meld**
+
+- **Ubuntu/Debian**:
+
+```bash
+sudo apt-get install meld
+```
+- **Windows**: You can download the Meld installer at [meldmerge.org](meldmerge.org).
+
+
 ## 1. Installing
 
 ### 1.1. Install the package pip
