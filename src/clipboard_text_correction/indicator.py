@@ -47,7 +47,7 @@ except json.JSONDecodeError:
 ################################################################################
 ################################################################################
 
-def show_notification_message(title,message,icon="help-about"):
+def show_notification_message(title,message,icon="emblem-generic"):
     Notify.init("ClipboardTextCorrection")
     notification = Notify.Notification.new(
         "⚠️ "+title+" ⚠️",
