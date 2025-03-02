@@ -189,7 +189,7 @@ def basic_consult(type_consult, msg=None):
         fmts=lib_files.detect_formats(msg)
         fmt=max(fmts, key=fmts.get)
         ext = lib_files.EXTENSION[fmt]
-        print("format:",fmt)
+        print("sent format:",fmt)
         
         show_notification_message(type_consult,"The text was sent, please wait.")
         
@@ -201,7 +201,7 @@ def basic_consult(type_consult, msg=None):
             show_message(lib_funcs.SYSTEM_RESPONSE[res])
         else:
             lib_files.compare_texts(msg,OUT,program='meld',filetype=ext)
-        print(res)
+        print("recived:",res)
         
     except Exception as e:
         # Captura qualquer exceção e exibe o erro
