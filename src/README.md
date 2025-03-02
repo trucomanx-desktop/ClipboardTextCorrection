@@ -13,7 +13,7 @@ How to install **Meld**:
 ```bash
 sudo apt-get install meld
 ```
-- **Windows**: You can download the Meld installer at [meldmerge.org](meldmerge.org).
+- **Windows**: You can download the Meld installer at [http://meldmerge.org](http://meldmerge.org).
 
 
 ## 2. Installing

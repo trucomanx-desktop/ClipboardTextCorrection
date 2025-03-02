@@ -13,7 +13,7 @@ How to install **Meld**:
 ```bash
 sudo apt-get install meld
 ```
-- **Windows**: You can download the Meld installer at [meldmerge.org](meldmerge.org).
+- **Windows**: You can download the Meld installer at [http://meldmerge.org](http://meldmerge.org).
 
 ## 2. Install from PYPI and add to Linux start session
 Install `clipboard-text-correction` from `pypi` and add the program to the bar indicator on Linux startup session.
