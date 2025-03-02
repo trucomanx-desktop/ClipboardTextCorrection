@@ -193,14 +193,14 @@ def basic_consult(type_consult, msg=None):
         
         show_notification_message(type_consult,"The text was sent, please wait.")
         
-        res=lib_funcs.consultation_in_depth(config_data,
+        res, OUT=lib_funcs.consultation_in_depth(config_data,
                                         lib_funcs.SYSTEM_QUESTION[type_consult]+
                                         f"\n- The text sent is probably written in {fmt} format.",
-                                        msg,
-                                        program='meld',
-                                        filetype=ext)
+                                        msg)
         if res!="<OK>":
             show_message(lib_funcs.SYSTEM_RESPONSE[res])
+        else:
+            lib_files.compare_texts(msg,OUT,program='meld',filetype=ext)
         print(res)
         
     except Exception as e:
@@ -208,16 +208,17 @@ def basic_consult(type_consult, msg=None):
         error_message = f"Error: {str(e)}\n\nDetails:\n{traceback.format_exc()}"
         show_error_dialog(error_message)
 
-def question_answer_consult(type_consult):
-    msg=get_clipboard_text()
-        
-    show_notification_message(type_consult,"The text was sent, please wait.")
-    
+def question_answer_consult(type_consult, msg=None):
+    if msg is None: 
+        msg=get_clipboard_text()
+       
     try:
         fmts=lib_files.detect_formats(msg)
         fmt=max(fmts, key=fmts.get)
         ext = lib_files.EXTENSION[fmt]
         print("format:",fmt)
+    
+        show_notification_message(type_consult,"The text was sent, please wait.")
         
         res=lib_funcs.question_answer_in_depth( config_data,
                                                 lib_funcs.SYSTEM_QUESTION[type_consult]+

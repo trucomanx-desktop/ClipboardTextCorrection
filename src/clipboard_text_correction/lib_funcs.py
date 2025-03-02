@@ -118,7 +118,7 @@ You are an expert in LaTeX table formatting. Your task is to convert a given tex
 }
 
 
-def consultation_in_depth(system_data,system_question,msg,program='meld',filetype="txt"):
+def consultation_in_depth(system_data,system_question,msg):
 
     OUT=consult_with_deepchat(  system_data["base_url"],
                                 system_data["api_key"],
@@ -128,15 +128,14 @@ def consultation_in_depth(system_data,system_question,msg,program='meld',filetyp
 
     if len(OUT)>0:
         if "<NOERROR>" in OUT or msg.strip()==OUT.strip():         
-            return "<NOERROR>"
+            return "<NOERROR>", OUT
 
-        lib_files.compare_texts(msg,OUT,program,filetype)
-        return "<OK>"
+        return "<OK>", OUT
 
     else:
-        return "<ZERO>"
+        return "<ZERO>", OUT
     
-    return "<OK>"
+    return "<OK>", OUT
 
 def question_answer_in_depth(system_data,system_question,msg):
 

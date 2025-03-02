@@ -24,7 +24,8 @@ def generate_word_token_json(text):
     result = {
         'approximate_word_count': word_count,
         'approximate_no_word_count': no_word_count,
-        'approximate_token_count': token_count
+        'approximate_token_count': token_count,
+        'character_count': len(text)
     }
     
     # Converter o dicionário para string JSON
