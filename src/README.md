@@ -4,23 +4,23 @@ Program that improves text writing.
 
 ## 1. Dependencies
 
-This program requires **Meld** to be installed on your system to function correctly. The **Meld** is a graphical tool for comparing files and directories.
+This program requires **Meld** to be installed on your system to function correctly. **Meld** is a graphical tool for comparing files and directories.
 
-How to install or **Meld**
+How to install **Meld**:
 
 - **Ubuntu/Debian**:
 
 ```bash
 sudo apt-get install meld
 ```
-- **Windows**: You can download the Meld installer at [meldmerge.org](meldmerge.org).
+- **Windows**: You can download the Meld installer from [meldmerge.org](http://meldmerge.org).
 
 
 ## 2. Installing
 
-### 2.1. Install the package pip
+### 2.1. Install the package with pip
 
-To install the package from `pypi`, follow the instructions below:
+To install the package from `PyPI`, follow the instructions below:
 
 
 ```bash
@@ -40,7 +40,7 @@ curl -fsSL https://raw.githubusercontent.com/trucomanx/ClipboardTextCorrection/m
 
 ## 3. Using
 
-If the program was not added to the Linux start session, then to start use the command below:
+If the program was not added to the Linux start session, then to start, use the command below:
 
 ```bash
 clipboard-text-correction-indicator

@@ -11,6 +11,7 @@ from PyQt5.QtWidgets import QApplication
 import clipboard_text_correction.lib_funcs as lib_funcs
 import clipboard_text_correction.lib_files as lib_files
 import clipboard_text_correction.lib_play  as lib_play
+import clipboard_text_correction.lib_stats as lib_stats
 
 import sys
 import os
@@ -55,20 +56,28 @@ def show_notification_message(title,message,icon="help-about"):
     )
     notification.show()
     
-def show_message(message):
+def show_message(message,width=600,height=300):
     """Exibe uma janela com uma mensagem copiável e um botão OK."""
     # Cria uma janela
     window = Gtk.Window(title="Message")
-    window.set_default_size(300, 100)
+    window.set_default_size(width, height)
 
     # Cria o contêiner (Gtk.Box) para empacotar o conteúdo
     box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
     box.set_border_width(10)
 
-    # Cria um rótulo com a mensagem e permite seleção de texto
-    label = Gtk.Label(label=message)
-    label.set_selectable(True)  # Permite copiar o texto
-    box.pack_start(label, True, True, 0)
+    # Cria o TextView para exibir a mensagem
+    text_view = Gtk.TextView()
+    text_buffer = text_view.get_buffer()
+    text_buffer.set_text(message)  # Define o texto no TextBuffer
+    text_view.set_wrap_mode(Gtk.WrapMode.WORD)  # Ativa a quebra de linha automática
+    text_view.set_editable(False)  # Torna o TextView somente leitura
+    text_view.set_cursor_visible(False)  # Oculta o cursor
+
+    # Adiciona o TextView dentro de um ScrolledWindow para permitir rolagem
+    scrolled_window = Gtk.ScrolledWindow()
+    scrolled_window.add(text_view)  # Adiciona o TextView ao ScrolledWindow
+    box.pack_start(scrolled_window, True, True, 0)
 
     # Botão OK
     ok_button = Gtk.Button(label="OK")
@@ -88,7 +97,7 @@ def show_message(message):
 def show_error_dialog(message):
     """Exibe um quadro de diálogo modal com a mensagem de erro usando Gtk, permitindo rolagem e cópia."""
     dialog = Gtk.Dialog(
-        title="Erro",
+        title="Error message",
         parent=None,
         modal=True,  # Substitui flags=Gtk.DialogFlags.MODAL
         destroy_with_parent=True
@@ -99,7 +108,7 @@ def show_error_dialog(message):
     box = dialog.get_content_area()
 
     # Label para título do erro
-    label = Gtk.Label(label="Ocorreu um erro:")
+    label = Gtk.Label(label="An error occurred:")
     label.set_halign(Gtk.Align.START)
     box.pack_start(label, False, False, 5)
 
@@ -130,6 +139,33 @@ def show_error_dialog(message):
     dialog.destroy()
 
 
+def select_file(initial_path=None):
+    '''
+    Return None se nao acha
+    '''
+    dialog = Gtk.FileChooserDialog(
+        title="Select a file",
+        action=Gtk.FileChooserAction.OPEN
+    )
+
+    if initial_path:
+        dialog.set_current_folder(initial_path)
+
+    # Adicionando botões usando o método add_buttons
+    dialog.add_buttons(
+        Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
+        Gtk.STOCK_OPEN, Gtk.ResponseType.OK
+    )
+
+    response = dialog.run()
+    filename = dialog.get_filename() if response == Gtk.ResponseType.OK else None
+    dialog.close()#dialog.destroy()
+    
+    while Gtk.events_pending():
+        Gtk.main_iteration()
+    
+    return filename
+
 def get_clipboard_text():
     # Verifica se QApplication já existe
     app = QApplication.instance()
@@ -145,21 +181,25 @@ def quit(source):
 
 
 
-def basic_consult(type_consult):
-    msg=get_clipboard_text()
-    #lib_play.play_message("The text was sent, please wait.")
-    #show_message("The text was sent, please wait.")
-    
-    show_notification_message(type_consult,"The text was sent, please wait.")
+def basic_consult(type_consult, msg=None):
+    if msg is None: 
+        msg=get_clipboard_text()
     
     try:
+        fmts=lib_files.detect_formats(msg)
+        fmt=max(fmts, key=fmts.get)
+        ext = lib_files.EXTENSION[fmt]
+        print("format:",fmt)
+        
+        show_notification_message(type_consult,"The text was sent, please wait.")
+        
         res=lib_funcs.consultation_in_depth(config_data,
-                                        lib_funcs.SYSTEM_QUESTION[type_consult],
+                                        lib_funcs.SYSTEM_QUESTION[type_consult]+
+                                        f"\n- The text sent is probably written in {fmt} format.",
                                         msg,
                                         program='meld',
-                                        filetype="txt")
+                                        filetype=ext)
         if res!="<OK>":
-            #lib_play.play_message(lib_funcs.SYSTEM_RESPONSE[res])
             show_message(lib_funcs.SYSTEM_RESPONSE[res])
         print(res)
         
@@ -174,8 +214,14 @@ def question_answer_consult(type_consult):
     show_notification_message(type_consult,"The text was sent, please wait.")
     
     try:
+        fmts=lib_files.detect_formats(msg)
+        fmt=max(fmts, key=fmts.get)
+        ext = lib_files.EXTENSION[fmt]
+        print("format:",fmt)
+        
         res=lib_funcs.question_answer_in_depth( config_data,
-                                                lib_funcs.SYSTEM_QUESTION[type_consult],
+                                                lib_funcs.SYSTEM_QUESTION[type_consult]+
+                                                f"\n- The text sent is probably written in {fmt} format.",
                                                 msg)
         show_message(res)
         
@@ -195,8 +241,17 @@ def improve_scientific_writing(source):
 def concise_writing(source):
     basic_consult("concise_writing")
 
-def paraphrase  (source):
+def paraphrase(source):
     basic_consult("paraphrase")
+
+################################################################################
+def improves_file_writing(source):
+    file_path=select_file()
+    show_notification_message("Selected",file_path)
+
+    if file_path:
+        msg=lib_files.load_file_content(file_path)
+        basic_consult("improve_writing", msg=msg)
 
 ################################################################################
 
@@ -216,6 +271,12 @@ def text_to_latex_equation(source):
     
 def text_to_latex_table(source):
     question_answer_consult("text_to_latex_table")
+    
+################################################################################    
+def statistics(source):
+    msg=get_clipboard_text()
+    res=lib_stats.generate_word_token_json(msg)
+    show_message(res)
     
 ################################################################################
 
@@ -294,6 +355,25 @@ def main():
     item_paraphrase.connect("activate", paraphrase)
     menu.append(item_paraphrase)
     
+
+    # Adicionando um separador
+    separator = Gtk.SeparatorMenuItem()
+    menu.append(separator)
+    separator.show()
+
+
+    # Improves file writing
+    item_improves_file_writing = Gtk.MenuItem()
+    box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
+    icon = Gtk.Image.new_from_icon_name("edit-find-replace", Gtk.IconSize.MENU)  # Nome do ícone do sistema
+    label = Gtk.Label(label="Improves file writing")
+    box.pack_start(icon, False, False, 0)
+    box.pack_start(label, False, False, 0)
+    item_improves_file_writing.add(box)
+    item_improves_file_writing.connect("activate", improves_file_writing)
+    menu.append(item_improves_file_writing)
+    
+    
     # Adicionando um separador
     separator = Gtk.SeparatorMenuItem()
     menu.append(separator)
@@ -363,6 +443,23 @@ def main():
     item_text_to_latex_table.add(box)
     item_text_to_latex_table.connect("activate", text_to_latex_table)
     menu.append(item_text_to_latex_table)
+
+    # Adicionando um separador
+    separator = Gtk.SeparatorMenuItem()
+    menu.append(separator)
+    separator.show()
+    
+    
+    # Statistics
+    item_statistics = Gtk.MenuItem()
+    box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
+    icon = Gtk.Image.new_from_icon_name("applications-utilities", Gtk.IconSize.MENU)  # Nome do ícone do sistema
+    label = Gtk.Label(label="Text statistics")
+    box.pack_start(icon, False, False, 0)
+    box.pack_start(label, False, False, 0)
+    item_statistics.add(box)
+    item_statistics.connect("activate", statistics)
+    menu.append(item_statistics)
     
     
     # Adicionando um separador

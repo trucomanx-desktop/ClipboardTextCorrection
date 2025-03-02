@@ -69,3 +69,65 @@ def compare_texts(texto1, texto2, program="meld", filetype="txt",suffix1="input"
     # Executa o Meld sem bloquear a execução do script
     subprocess.Popen([program, temp1_path, temp2_path], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
+################################################################################
+
+def load_file_content(file_path):
+    with open(file_path, 'r', encoding='utf-8') as file:
+        content = file.read()
+    return content
+    
+################################################################################
+import re
+
+EXTENSION = {
+    "HTML": "html",
+    "Markdown": "md",
+    "LaTeX": "tex",
+    "TXT": "txt"
+}
+
+def detect_formats(texto):
+    """Retorna um dicionário com a probabilidade de o texto pertencer a cada formato"""
+
+    formatos = {
+        "HTML": 0,
+        "Markdown": 0,
+        "LaTeX": 0,
+        "TXT": 0  # Será usado como complemento caso outros formatos tenham baixa contagem
+    }
+
+    # Padrões para cada formato
+    padroes = {
+        "HTML": [
+            r"<\s*(html|body|p|a|div|span|h[1-6]|br|img|table|tr|td|th)[^>]*>"
+        ],
+        "Markdown": [
+            r"(^|\n)(#+\s)",  # Títulos (#)
+            r"(^|\n)(\* |\- |\d+\.)",  # Listas (*, -, 1.)
+            r"(\*\*.*?\*\*|\*.*?\*)",  # Ênfase (**bold**, *italic*)
+            r"(\[.*?\]\(.*?\))",  # Links [text](url)
+            r"(\!\[.*?\]\(.*?\))"  # Imagens ![alt](url)
+        ],
+        "LaTeX": [
+            r"\\(documentclass|begin|end|chapter|section|subsection|subsubsection|textsc|textbf|textit|frac|usepackage)",
+            r"\$\$.*?\$\$",  # Modo matemático em bloco
+            r"\$.*?\$",  # Modo matemático inline
+        ]
+    }
+
+    # Contar ocorrências de cada padrão
+    for formato, regex_list in padroes.items():
+        for regex in regex_list:
+            ocorrencias = len(re.findall(regex, texto, re.MULTILINE))
+            formatos[formato] += ocorrencias
+
+    # Se nenhum formato for identificado, assume-se TXT como 100%
+    total_ocorrencias = sum(formatos.values())
+    if total_ocorrencias == 0:
+        formatos["TXT"] = 1.0
+    else:
+        # Normaliza os valores para serem probabilidades (soma 1.0)
+        for formato in formatos:
+            formatos[formato] /= total_ocorrencias
+
+    return formatos
