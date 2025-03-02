@@ -13,7 +13,7 @@ How to install **Meld**:
 ```bash
 sudo apt-get install meld
 ```
-- **Windows**: You can download the Meld installer from [meldmerge.org](http://meldmerge.org).
+- **Windows**: You can download the Meld installer at [meldmerge.org](meldmerge.org).
 
 
 ## 2. Installing
@@ -29,16 +29,7 @@ pip install clipboard-text-correction
 
 Execute `which clipboard-text-correction` to see where it was installed, probably in `/home/USERNAME/.local/bin/clipboard-text-correction`.
 
-
-### 2.2. Add clipboard-text-correction to the Linux start session
-
-Adding bar indicator to Linux start session (`~/.config/autostart/clipboard-text-correction-indicator.desktop`)
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/trucomanx/ClipboardTextCorrection/main/install_linux_indicator_session.sh | sh
-```
-
-## 3. Using
+#### Using
 
 If the program was not added to the Linux start session, then to start, use the command below:
 
@@ -46,6 +37,27 @@ If the program was not added to the Linux start session, then to start, use the 
 clipboard-text-correction-indicator
 ```
 
-## 4. License
+
+### 2.2. Install from PYPI and add to Linux start session
+Install `clipboard-text-correction` from `pypi` and add the program to the bar indicator on [Linux startup session](~/.config/autostart/clipboard-text-correction-indicator.desktop).
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/trucomanx/ClipboardTextCorrection/main/install_linux_indicator_session.sh | sh
+```
+
+## 3. LLM
+The program needs an API_KEY to be used. This can be obtained from
+https://deepinfra.com/dash/api_keys
+
+Place the obtained API_KEY in the program menu under `Open config file`.
+
+## 4. Buy me a coffee
+
+If you find this tool useful and would like to support its development, you can buy me a coffee!  
+Your donations help keep the project running and improve future updates.  
+
+[☕ Buy me a coffee](https://ko-fi.com/trucomanx) 
+
+## 5. License
 
 This project is licensed under the GPL license. See the `LICENSE` file for more details.
