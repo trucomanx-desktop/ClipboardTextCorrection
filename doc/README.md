@@ -1,17 +1,17 @@
 # Documentation
 
-# Improve texts from clipboard
+## Improve texts from clipboard
 
 * Improve writing – Enhances the clarity and coherence of the text.
 * Improve scientific writing – Refines the text with a formal and academic tone.
 * Concise writing – Reduces wordiness while maintaining meaning.
 * Paraphrase – Rewrites the text with different wording while keeping the original meaning.
 
-# Improve texts from files
+## Improve texts from files
 
 * Improves file writing – Enhances the writing quality of text stored in a file.
 
-# Synthesize texts from clipboard
+## Synthesize texts from clipboard
 
 * Summarize text – Generates a concise summary of the input text.
 * Abstract to title – Extract 3 different possible titles from an abstract.
@@ -22,7 +22,7 @@
     4. Proposed computational solution.
     5. Obtained results.
 
-# Synthesize LaTeX texts from clipboard
+## Synthesize LaTeX texts from clipboard
 
 * Text to LaTeX equation – Converts plain text description into a LaTeX-formatted equation.
 * Text to LaTeX table – Transforms text description into a properly formatted LaTeX table.
