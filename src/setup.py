@@ -16,14 +16,14 @@ setup(
     maintainer='Fernando Pujaico Rivera',
     maintainer_email='fernando.pujaico.rivera@gmail.com',
     url="https://github.com/trucomanx/ClipboardTextCorrection",
-    keywords="tts, server",  # Optional
+    keywords="writing, spelling",  # Optional
     long_description=long_description,  # Optional
     long_description_content_type="text/markdown",  # Optional (see note above)
     packages=find_packages(),
     install_requires=[
         "PyQt5",
         'deep-consultation',
-        'langdetect'
+        'PyGObject'
     ],
     entry_points={
         'console_scripts': [

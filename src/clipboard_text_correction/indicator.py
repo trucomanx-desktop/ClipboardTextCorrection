@@ -212,6 +212,8 @@ def basic_consult(type_consult, msg=None):
                 all_out = all_out + text
             else:
                 is_ok=False
+                
+            show_notification_message(type_consult,f"{index+1}/{len(texts)} - Answer {res} recived! "+lib_funcs.SYSTEM_RESPONSE[res])
             
             print("recived:", res)
             
