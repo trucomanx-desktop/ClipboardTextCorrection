@@ -9,7 +9,7 @@
 
 ## Improve texts from files
 
-* **Improves file writing**: Enhances the writing quality of text stored in a file.
+* **Improves file writing**: Enhances the clarity and coherence of text stored in a file.
 
 ## Synthesize texts from clipboard
 
@@ -25,7 +25,20 @@
 ## Synthesize LaTeX texts from clipboard
 
 * **Text to LaTeX equation**: Converts plain text description into a LaTeX-formatted equation.
-* **Text to LaTeX table**: Transforms text description into a properly formatted LaTeX table.
+* **Text to LaTeX table**: Converts plain text description into a LaTeX-formatted table.
 
+## Text analysis from clipboard
+
+* **Text statistics**: Returns an approximate analysis of the number of words, no-words and tokens in the text.
+
+## Information
+
+* **Open config file**: Opens the configuration file, showing where to set the API key.  
+* **Open url usage**: Opens a webpage displaying LLM usage, useful for tracking costs.  
+* **Open url help**: Opens this help page for troubleshooting and support.  
+
+## About
+
+* **Buy me a coffee: TrucomanX**: Supports the developer with a small donation.  
 
 

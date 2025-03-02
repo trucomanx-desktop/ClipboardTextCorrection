@@ -22,7 +22,8 @@ def generate_word_token_json(text):
     
     # Criar o dicionário com as contagens
     result = {
-        'approximate_word_count': word_count+no_word_count,
+        'approximate_word_count': word_count,
+        'approximate_no_word_count': no_word_count,
         'approximate_token_count': token_count
     }
     

@@ -286,6 +286,11 @@ def edit_config(source):
 def open_url_usage(source):
     show_notification_message("open_url_usage",config_data["usage"])
     lib_files.open_url(config_data["usage"])
+    
+def open_url_help(source):
+    url="https://github.com/trucomanx/ClipboardTextCorrection/blob/main/doc/README.md"
+    show_notification_message("open_url_help",url)
+    lib_files.open_url(url)
 
 ################################################################################
 def buy_me_a_coffee(source):
@@ -453,7 +458,7 @@ def main():
     # Statistics
     item_statistics = Gtk.MenuItem()
     box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
-    icon = Gtk.Image.new_from_icon_name("applications-utilities", Gtk.IconSize.MENU)  # Nome do ícone do sistema
+    icon = Gtk.Image.new_from_icon_name("document-page-setup", Gtk.IconSize.MENU)  # Nome do ícone do sistema
     label = Gtk.Label(label="Text statistics")
     box.pack_start(icon, False, False, 0)
     box.pack_start(label, False, False, 0)
@@ -471,7 +476,7 @@ def main():
     # Open configfile
     item_edit_config = Gtk.MenuItem()
     box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
-    icon = Gtk.Image.new_from_icon_name("preferences-system", Gtk.IconSize.MENU)  # Nome do ícone do sistema
+    icon = Gtk.Image.new_from_icon_name("applications-utilities", Gtk.IconSize.MENU)  # Nome do ícone do sistema
     label = Gtk.Label(label="Open config file")
     box.pack_start(icon, False, False, 0)
     box.pack_start(label, False, False, 0)
@@ -483,13 +488,26 @@ def main():
     # Open url usage
     item_open_url_usage = Gtk.MenuItem()
     box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
-    icon = Gtk.Image.new_from_icon_name("go-home", Gtk.IconSize.MENU)  # Nome do ícone do sistema
+    icon = Gtk.Image.new_from_icon_name("applications-internet", Gtk.IconSize.MENU)  # Nome do ícone do sistema
     label = Gtk.Label(label="Open url usage")
     box.pack_start(icon, False, False, 0)
     box.pack_start(label, False, False, 0)
     item_open_url_usage.add(box)
     item_open_url_usage.connect("activate", open_url_usage)
     menu.append(item_open_url_usage)
+    
+    
+    # Open url help
+    item_open_url_help = Gtk.MenuItem()
+    box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
+    icon = Gtk.Image.new_from_icon_name("help-contents", Gtk.IconSize.MENU)  # Nome do ícone do sistema
+    label = Gtk.Label(label="Open url help")
+    box.pack_start(icon, False, False, 0)
+    box.pack_start(label, False, False, 0)
+    item_open_url_help.add(box)
+    item_open_url_help.connect("activate", open_url_help)
+    menu.append(item_open_url_help)
+    
     
     
     # Adicionando um separador
