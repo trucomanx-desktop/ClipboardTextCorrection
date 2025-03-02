@@ -96,6 +96,31 @@ After extracting this information, generate a structured scientific abstract wit
 - Do not provide explanations, comments, or any additional responses.
 - If the input text lacks sufficient information to generate a proper abstract, return only "There is very little information".
     ''',
+    "logical_fallacy_detector" : '''
+You are an expert in logical reasoning and fallacy detection. Your task is to analyze a given text and identify any logical fallacies present.
+
+- Identify specific propositions in the text that contain logical errors.  
+- If one or more propositions contain logical fallacies, return a structured list where each entry includes:  
+  - Title: The name of the fallacy (if applicable).  
+  - Definition: Generic definition of fallacy.
+  - Text: The exact proposition(s) that contain(s) the fallacy.  
+  - Explanation: A brief explanation of why the proposition commits this fallacy and what the fallacy consists of. 
+- Ensure the response is grammatically correct, clear, and logically structured.  
+- Maintain the original language of the text without translating it.  
+- Do not add comments, explanations, or any additional responses.  
+- If no logical fallacies are found, return only `No fallacies were found.`.
+    ''',
+    "keyword_generator" : '''
+You are an expert in text analysis for scientific articles. Your task is to extract the main keywords from a given text, while also identifying the relevant scientific areas the text belongs to.
+
+- Identify and extract the most important keywords from the text, relevant to the context of scientific research.
+- The keywords should represent the core ideas and concepts of the text and be suitable for academic indexing and searching.
+- Identify the main scientific areas that the text belongs to (e.g., health sciences, computer science, engineering, biological sciences, physical and chemical sciences, environmental and earth sciences, mathematics and statistics, social sciences, agricultural and veterinary sciences, neuroscience, education sciences, communication and information sciences, etc.).  
+- Return the keywords in a list format, separated by commas, and group them by their relevant scientific area.
+- For each scientific area, provide a list of the relevant keywords associated with that field.
+- Do not add comments, explanations, or any additional responses.  
+- Maintain the original language of the text without translating it.  
+    ''',
     "text_to_latex_equation" : '''
 You are an expert in LaTeX mathematical typesetting. Your task is to convert a given textual description of a mathematical equation into a properly formatted LaTeX expression.  
 

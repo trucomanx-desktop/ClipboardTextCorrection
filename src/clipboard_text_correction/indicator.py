@@ -8,10 +8,14 @@ gi.require_version('Notify', '0.7')
 from gi.repository import Gtk, AppIndicator3, Notify
 from PyQt5.QtWidgets import QApplication
 
+from clipboard_text_correction.about import __version__
+
 import clipboard_text_correction.lib_funcs as lib_funcs
 import clipboard_text_correction.lib_files as lib_files
 import clipboard_text_correction.lib_play  as lib_play
 import clipboard_text_correction.lib_stats as lib_stats
+
+import clipboard_text_correction.about as about
 
 import sys
 import os
@@ -92,6 +96,47 @@ def show_message(message,width=600,height=300):
 
     # Aguarda a janela ser fechada
     window.connect("destroy", Gtk.main_quit)
+    Gtk.main()
+
+
+def show_about_window():
+    """Cria e exibe a janela 'Sobre'."""
+    
+    # Criação da janela principal
+    about_window = Gtk.Window(title="About")
+    about_window.set_default_size(400, 250)
+    about_window.connect("destroy", Gtk.main_quit)
+
+    # Box vertical para adicionar os widgets
+    vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
+    about_window.add(vbox)
+
+    # Adiciona o título e descrição do programa
+    text_buffer = Gtk.TextBuffer()  # Cria o buffer de texto
+    text_buffer.set_text(f"{about.__description__}\n\n"
+                         f"Version: {about.__version__}\n"
+                         f"Author: {about.__author__}\n"
+                         f"Email: {about.__email__}\n\n"
+                         f"Source: {about.__url_source__}\n"
+                         f"Funding: {about.__url_funding__}\n"
+                         f"Bugs: {about.__url_bugs__}\n")
+    
+    text_view = Gtk.TextView(buffer=text_buffer)  # Cria o TextView com o buffer
+    text_view.set_editable(False)  # Torna o texto não editável
+    text_view.set_cursor_visible(False)  # Esconde o cursor
+    text_view.set_wrap_mode(Gtk.WrapMode.WORD)  # Quebra de linha automática
+    vbox.pack_start(text_view, True, True, 0)
+
+    # Botão OK para fechar a janela
+    button_ok = Gtk.Button(label="OK")
+    button_ok.connect("clicked", lambda x: about_window.close())
+    vbox.pack_start(button_ok, False, False, 0)
+
+    # Exibe a janela
+    about_window.show_all()
+    
+    # Aguarda a janela ser fechada
+    about_window.connect("destroy", Gtk.main_quit)
     Gtk.main()
 
 def show_error_dialog(message):
@@ -233,6 +278,10 @@ def basic_consult(type_consult, msg=None):
 def question_answer_consult(type_consult, msg=None):
     if msg is None: 
         msg=get_clipboard_text()
+        
+    if len(msg)<3:
+        show_message("Too few elements on clipboard.")
+        return
        
     try:
         fmts=lib_files.detect_formats(msg)
@@ -246,6 +295,9 @@ def question_answer_consult(type_consult, msg=None):
                                                 lib_funcs.SYSTEM_QUESTION[type_consult]+
                                                 f"\n- The text sent is probably written in {fmt} format.",
                                                 msg)
+        
+        show_notification_message(type_consult,"Answer recived!")
+        
         show_message(res)
         
         
@@ -286,6 +338,12 @@ def abstract_to_title(source):
     
 def text_to_computer_science_abstract(source):
     question_answer_consult("text_to_computer_science_abstract")
+    
+def logical_fallacy_detector(source):
+    question_answer_consult("logical_fallacy_detector")
+
+def keyword_generator(source):
+    question_answer_consult("keyword_generator")
 
 ################################################################################
 
@@ -320,6 +378,8 @@ def buy_me_a_coffee(source):
     show_notification_message("Buy me a coffee","https://ko-fi.com/trucomanx")
     lib_files.open_url("https://ko-fi.com/trucomanx")
 
+def open_about(source):
+    show_about_window()
 
 ################################################################################
 ################################################################################
@@ -443,6 +503,30 @@ def main():
     menu.append(item_text_to_computer_science_abstract)
     
     
+    # Logical fallacy detector
+    item_logical_fallacy_detector = Gtk.MenuItem()
+    box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
+    icon = Gtk.Image.new_from_icon_name("document-edit", Gtk.IconSize.MENU)  # Nome do ícone do sistema
+    label = Gtk.Label(label="Logical fallacy detector")
+    box.pack_start(icon, False, False, 0)
+    box.pack_start(label, False, False, 0)
+    item_logical_fallacy_detector.add(box)
+    item_logical_fallacy_detector.connect("activate", logical_fallacy_detector)
+    menu.append(item_logical_fallacy_detector)
+    
+    
+    # keyword_generator
+    item_keyword_generator = Gtk.MenuItem()
+    box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
+    icon = Gtk.Image.new_from_icon_name("document-edit", Gtk.IconSize.MENU)  # Nome do ícone do sistema
+    label = Gtk.Label(label="Keyword generator")
+    box.pack_start(icon, False, False, 0)
+    box.pack_start(label, False, False, 0)
+    item_keyword_generator.add(box)
+    item_keyword_generator.connect("activate", keyword_generator)
+    menu.append(item_keyword_generator)
+    
+    
     # Adicionando um separador
     separator = Gtk.SeparatorMenuItem()
     menu.append(separator)
@@ -549,6 +633,18 @@ def main():
     item_buy_me_a_coffee.add(box)
     item_buy_me_a_coffee.connect("activate", buy_me_a_coffee)
     menu.append(item_buy_me_a_coffee)
+    
+    
+    # About
+    item_open_about = Gtk.MenuItem()
+    box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
+    icon = Gtk.Image.new_from_icon_name("help-about", Gtk.IconSize.MENU)  # Nome do ícone do sistema
+    label = Gtk.Label(label="About")
+    box.pack_start(icon, False, False, 0)
+    box.pack_start(label, False, False, 0)
+    item_open_about.add(box)
+    item_open_about.connect("activate", open_about)
+    menu.append(item_open_about)
     
     
     # Adicionando um separador
