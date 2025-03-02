@@ -50,7 +50,7 @@ except json.JSONDecodeError:
 def show_notification_message(title,message,icon="help-about"):
     Notify.init("ClipboardTextCorrection")
     notification = Notify.Notification.new(
-        title,
+        "⚠️ "+title+" ⚠️",
         message,
         icon
     )
@@ -189,19 +189,39 @@ def basic_consult(type_consult, msg=None):
         fmts=lib_files.detect_formats(msg)
         fmt=max(fmts, key=fmts.get)
         ext = lib_files.EXTENSION[fmt]
-        print("sent format:",fmt)
         
-        show_notification_message(type_consult,"The text was sent, please wait.")
         
-        res, OUT=lib_funcs.consultation_in_depth(config_data,
-                                        lib_funcs.SYSTEM_QUESTION[type_consult]+
-                                        f"\n- The text sent is probably written in {fmt} format.",
-                                        msg)
-        if res!="<OK>":
-            show_message(lib_funcs.SYSTEM_RESPONSE[res])
+        texts = lib_files.split_text(msg, max_size=8000, separators=["\n\n", " ", ".", ","])
+        
+        all_out=""
+        is_ok=True
+        
+        for index, text in enumerate(texts):
+            show_notification_message(type_consult,f"{index+1}/{len(texts)} - The text was sent, please wait.")
+            
+            print(f"{index+1}/{len(texts)} - sent format:",fmt)
+            
+            res, OUT=lib_funcs.consultation_in_depth(config_data,
+                                            lib_funcs.SYSTEM_QUESTION[type_consult]+
+                                            f"\n- The text sent is probably written in {fmt} format.",
+                                            text)
+            
+            if   res=="<OK>":
+                all_out = all_out + OUT
+            elif res=="<NOERROR>":
+                all_out = all_out + text
+            else:
+                is_ok=False
+            
+            print("recived:", res)
+            
+            
+        if is_ok:
+            lib_files.compare_texts(msg,all_out,program='meld',filetype=ext)
         else:
-            lib_files.compare_texts(msg,OUT,program='meld',filetype=ext)
-        print("recived:",res)
+            show_message("Errors in the query some answers were <ZERO>")
+
+
         
     except Exception as e:
         # Captura qualquer exceção e exibe o erro
