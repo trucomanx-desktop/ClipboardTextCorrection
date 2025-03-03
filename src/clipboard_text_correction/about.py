@@ -1,6 +1,6 @@
 # about.py
 
-__version__ = "0.1.2"
+__version__ = "0.1.3"
 __author__ = "Fernando Pujaico Rivera" 
 __email__ = "fernando.pujaico.rivera@gmail.com"
 __description__ = "Program that collects text from the clipboard and improves text writing"

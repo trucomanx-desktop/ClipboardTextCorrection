@@ -236,7 +236,7 @@ def basic_consult(type_consult, msg=None):
         ext = lib_files.EXTENSION[fmt]
         
         
-        texts = lib_files.split_text(msg, max_size=8000, separators=["\n\n", " ", ".", ","])
+        texts = lib_files.split_text(msg, max_size=8000, separators=["\n\n", ".", "!", "?"])
         
         all_out=""
         is_ok=True

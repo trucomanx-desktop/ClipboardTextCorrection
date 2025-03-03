@@ -78,7 +78,7 @@ def load_file_content(file_path):
 
 ################################################################################
 
-def split_text(texto, max_size=10000, separators=["\n\n", " ", ".", ","]):
+def split_text(texto, max_size=10000, separators=["\n\n", ".", "!", "?"]):
     partes = []
     inicio = 0
 
