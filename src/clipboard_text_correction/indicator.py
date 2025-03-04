@@ -400,6 +400,13 @@ def main():
     menu = Gtk.Menu()
 
 
+    # Criando improve_submenu
+    item_improve_submenu = Gtk.MenuItem(label="Improve texts from clipboard")
+    improve_submenu = Gtk.Menu()
+    item_improve_submenu.set_submenu(improve_submenu)
+    menu.append(item_improve_submenu)
+
+
     # Improve writing
     item_improve_writing = Gtk.MenuItem()
     box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
@@ -409,7 +416,7 @@ def main():
     box.pack_start(label, False, False, 0)
     item_improve_writing.add(box)
     item_improve_writing.connect("activate", improve_writing)
-    menu.append(item_improve_writing)
+    improve_submenu.append(item_improve_writing)
     
     
     # Improve scientific writing
@@ -421,7 +428,7 @@ def main():
     box.pack_start(label, False, False, 0)
     item_improve_scientific_writing.add(box)
     item_improve_scientific_writing.connect("activate", improve_scientific_writing)
-    menu.append(item_improve_scientific_writing)
+    improve_submenu.append(item_improve_scientific_writing)
     
     
     # Concise writing
@@ -433,7 +440,7 @@ def main():
     box.pack_start(label, False, False, 0)
     item_concise_writing.add(box)
     item_concise_writing.connect("activate", concise_writing)
-    menu.append(item_concise_writing)
+    improve_submenu.append(item_concise_writing)
 
 
     # Paraphrase
@@ -445,7 +452,7 @@ def main():
     box.pack_start(label, False, False, 0)
     item_paraphrase.add(box)
     item_paraphrase.connect("activate", paraphrase)
-    menu.append(item_paraphrase)
+    improve_submenu.append(item_paraphrase)
     
 
     # Adicionando um separador
@@ -453,6 +460,13 @@ def main():
     menu.append(separator)
     separator.show()
 
+
+    # Criando improve_file_submenu
+    item_improve_file_submenu = Gtk.MenuItem(label="Improve texts from files")
+    improve_file_submenu = Gtk.Menu()
+    item_improve_file_submenu.set_submenu(improve_file_submenu)
+    menu.append(item_improve_file_submenu)
+    
 
     # Improves file writing
     item_improves_file_writing = Gtk.MenuItem()
@@ -463,13 +477,20 @@ def main():
     box.pack_start(label, False, False, 0)
     item_improves_file_writing.add(box)
     item_improves_file_writing.connect("activate", improves_file_writing)
-    menu.append(item_improves_file_writing)
+    improve_file_submenu.append(item_improves_file_writing)
     
     
     # Adicionando um separador
     separator = Gtk.SeparatorMenuItem()
     menu.append(separator)
     separator.show()
+    
+    
+    # Criando synthesize_submenu
+    item_synthesize_submenu = Gtk.MenuItem(label="Synthesize texts from clipboard")
+    synthesize_submenu = Gtk.Menu()
+    item_synthesize_submenu.set_submenu(synthesize_submenu)
+    menu.append(item_synthesize_submenu)
     
     
     # Summarize text
@@ -481,7 +502,7 @@ def main():
     box.pack_start(label, False, False, 0)
     item_summarize_text.add(box)
     item_summarize_text.connect("activate", summarize_text)
-    menu.append(item_summarize_text)
+    synthesize_submenu.append(item_summarize_text)
         
     
     # Abstract to title
@@ -493,7 +514,7 @@ def main():
     box.pack_start(label, False, False, 0)
     item_abstract_to_title.add(box)
     item_abstract_to_title.connect("activate", abstract_to_title)
-    menu.append(item_abstract_to_title)
+    synthesize_submenu.append(item_abstract_to_title)
     
     # Text to computer science abstract
     item_text_to_computer_science_abstract = Gtk.MenuItem()
@@ -504,7 +525,7 @@ def main():
     box.pack_start(label, False, False, 0)
     item_text_to_computer_science_abstract.add(box)
     item_text_to_computer_science_abstract.connect("activate", text_to_computer_science_abstract)
-    menu.append(item_text_to_computer_science_abstract)
+    synthesize_submenu.append(item_text_to_computer_science_abstract)
     
     
     # Logical fallacy detector
@@ -516,7 +537,7 @@ def main():
     box.pack_start(label, False, False, 0)
     item_logical_fallacy_detector.add(box)
     item_logical_fallacy_detector.connect("activate", logical_fallacy_detector)
-    menu.append(item_logical_fallacy_detector)
+    synthesize_submenu.append(item_logical_fallacy_detector)
     
     
     # keyword_generator
@@ -528,7 +549,7 @@ def main():
     box.pack_start(label, False, False, 0)
     item_keyword_generator.add(box)
     item_keyword_generator.connect("activate", keyword_generator)
-    menu.append(item_keyword_generator)
+    synthesize_submenu.append(item_keyword_generator)
     
     
     # Adicionando um separador
@@ -536,6 +557,12 @@ def main():
     menu.append(separator)
     separator.show()
     
+    
+    # Criando latex_submenu
+    item_latex_submenu = Gtk.MenuItem(label="Synthesize LaTeX texts from clipboard")
+    latex_submenu = Gtk.Menu()
+    item_latex_submenu.set_submenu(latex_submenu)
+    menu.append(item_latex_submenu)
     
     # Text to latex equation
     item_text_to_latex_equation = Gtk.MenuItem()
@@ -546,7 +573,7 @@ def main():
     box.pack_start(label, False, False, 0)
     item_text_to_latex_equation.add(box)
     item_text_to_latex_equation.connect("activate", text_to_latex_equation)
-    menu.append(item_text_to_latex_equation)
+    latex_submenu.append(item_text_to_latex_equation)
     
     
     # Text to latex table
@@ -558,12 +585,19 @@ def main():
     box.pack_start(label, False, False, 0)
     item_text_to_latex_table.add(box)
     item_text_to_latex_table.connect("activate", text_to_latex_table)
-    menu.append(item_text_to_latex_table)
+    latex_submenu.append(item_text_to_latex_table)
 
     # Adicionando um separador
     separator = Gtk.SeparatorMenuItem()
     menu.append(separator)
     separator.show()
+    
+    
+    # Criando analysis_submenu
+    item_analysis_submenu = Gtk.MenuItem(label="Text analysis from clipboard")
+    analysis_submenu = Gtk.Menu()
+    item_analysis_submenu.set_submenu(analysis_submenu)
+    menu.append(item_analysis_submenu)
     
     
     # Statistics
@@ -575,13 +609,20 @@ def main():
     box.pack_start(label, False, False, 0)
     item_statistics.add(box)
     item_statistics.connect("activate", statistics)
-    menu.append(item_statistics)
+    analysis_submenu.append(item_statistics)
     
     
     # Adicionando um separador
     separator = Gtk.SeparatorMenuItem()
     menu.append(separator)
     separator.show()
+    
+    
+    # Criando program_information_submenu
+    item_program_information_submenu = Gtk.MenuItem(label="Program usage information")
+    program_information_submenu = Gtk.Menu()
+    item_program_information_submenu.set_submenu(program_information_submenu)
+    menu.append(item_program_information_submenu)
     
     
     # Open configfile
@@ -593,7 +634,7 @@ def main():
     box.pack_start(label, False, False, 0)
     item_edit_config.add(box)
     item_edit_config.connect("activate", edit_config)
-    menu.append(item_edit_config)
+    program_information_submenu.append(item_edit_config)
     
     
     # Open url usage
@@ -605,7 +646,7 @@ def main():
     box.pack_start(label, False, False, 0)
     item_open_url_usage.add(box)
     item_open_url_usage.connect("activate", open_url_usage)
-    menu.append(item_open_url_usage)
+    program_information_submenu.append(item_open_url_usage)
     
     
     # Open url help
@@ -617,7 +658,7 @@ def main():
     box.pack_start(label, False, False, 0)
     item_open_url_help.add(box)
     item_open_url_help.connect("activate", open_url_help)
-    menu.append(item_open_url_help)
+    program_information_submenu.append(item_open_url_help)
     
     
     

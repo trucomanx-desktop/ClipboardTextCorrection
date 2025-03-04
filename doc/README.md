@@ -33,7 +33,7 @@
 
 * **Text statistics**: Returns an approximate analysis of the number of words, no-words and tokens in the text.
 
-## Information
+## Program usage information
 
 * **Open config file**: Opens the configuration file, showing where to set the API key.  
 * **Open url usage**: Opens a webpage displaying LLM usage, useful for tracking costs.  
@@ -42,5 +42,5 @@
 ## About
 
 * **Buy me a coffee: TrucomanX**: Supports the developer with a small donation.  
-
+* **About**: A brief description about the software, its name and version, etc.
 
