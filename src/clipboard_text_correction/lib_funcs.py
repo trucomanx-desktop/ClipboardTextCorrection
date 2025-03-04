@@ -82,6 +82,7 @@ You are an expert in academic and scientific writing. Your task is to rewrite a 
 - Ensure proper structure and logical flow, adapting the text to an academic tone.  
 - Preserve technical terminology and enhance clarity without oversimplification.  
 - Do not add personal opinions or additional information beyond what is present in the original text.  
+- Do not provide explanations, comments, or additional responses.  
 - Maintain the original language of the text without translating it.  
 - If the text is already suitable for academic writing, return only "<NOERROR>". 
     ''',
