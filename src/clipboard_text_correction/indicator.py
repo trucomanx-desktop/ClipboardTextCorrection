@@ -229,6 +229,10 @@ def quit(source):
 def basic_consult(type_consult, msg=None):
     if msg is None: 
         msg=get_clipboard_text()
+        
+    if len(msg)<3:
+        show_message("Too few elements on clipboard.")
+        return
     
     try:
         fmts=lib_files.detect_formats(msg)
