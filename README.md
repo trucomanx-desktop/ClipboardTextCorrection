@@ -25,7 +25,7 @@ curl -fsSL https://raw.githubusercontent.com/trucomanx/ClipboardTextCorrection/m
 The program needs an API_KEY to be used. This can be obtained from
 https://deepinfra.com/dash/api_keys
 
-Place the obtained API_KEY in the program menu under `Open config file`.
+Place the obtained API_KEY in the program menu under `Program usage information >> Open config file`.
 
 ## 4. Buy me a coffee
 
