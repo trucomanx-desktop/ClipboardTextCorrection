@@ -49,6 +49,8 @@ https://deepinfra.com/dash/api_keys
 
 Place the obtained API_KEY in the `clipboard-text-correction-indicator` program under menu `Program usage information >> Open config file`.
 
+![open-config-file](https://raw.githubusercontent.com/trucomanx/ClipboardTextCorrection/main/src/open-config-file.png)
+
 ## 4. Buy me a coffee
 
 If you find this tool useful and would like to support its development, you can buy me a coffee!  
