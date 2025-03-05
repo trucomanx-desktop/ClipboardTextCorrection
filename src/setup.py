@@ -30,8 +30,11 @@ setup(
     packages=find_packages(),
     install_requires=[
         "PyQt5",
+        'PyGObject',
         'deep-consultation',
-        'PyGObject'
+        'textstat',
+        'gTTS',
+        'playsound'
     ],
     entry_points={
         'console_scripts': [

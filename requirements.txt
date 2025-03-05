@@ -1,3 +1,6 @@
 PyQt5
-deep-consultation
 PyGObject
+deep-consultation
+textstat
+gTTS
+playsound

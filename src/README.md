@@ -2,32 +2,30 @@
 
 Program that improves text writing.
 
+![logo](https://raw.githubusercontent.com/trucomanx/ClipboardTextCorrection/main/src/clipboard_text_correction/icons/logo.png)
+
 ## 1. Dependencies
 
 This program requires **Meld** to be installed on your system to function correctly. **Meld** is a graphical tool for comparing files and directories.
 
 How to install **Meld**:
 
-- **Ubuntu/Debian**:
-
 ```bash
 sudo apt-get install meld
 ```
-- **Windows**: You can download the Meld installer at [http://meldmerge.org](http://meldmerge.org).
-
 
 ## 2. Installing
 
-### 2.1. Install the package with pip
+### 2.1. Install from PyPI
 
 To install the package from `PyPI`, follow the instructions below:
 
 
 ```bash
-pip install clipboard-text-correction
+pip install --upgrade clipboard-text-correction
 ```
 
-Execute `which clipboard-text-correction` to see where it was installed, probably in `/home/USERNAME/.local/bin/clipboard-text-correction`.
+Execute `which clipboard-text-correction-indicator` to see where it was installed, probably in `/home/USERNAME/.local/bin/clipboard-text-correction-indicator`.
 
 #### Using
 
@@ -38,7 +36,7 @@ clipboard-text-correction-indicator
 ```
 
 
-### 2.2. Install from PYPI and add to Linux start session
+### 2.2. Install from PyPI and add to Linux start session
 Install `clipboard-text-correction` from `pypi` and add the program to the bar indicator on Linux startup session.
 
 ```bash
@@ -49,7 +47,7 @@ curl -fsSL https://raw.githubusercontent.com/trucomanx/ClipboardTextCorrection/m
 The program needs an API_KEY to be used. This can be obtained from
 https://deepinfra.com/dash/api_keys
 
-Place the obtained API_KEY in the program menu under `Program usage information >> Open config file`.
+Place the obtained API_KEY in the `clipboard-text-correction-indicator` program under menu `Program usage information >> Open config file`.
 
 ## 4. Buy me a coffee
 
