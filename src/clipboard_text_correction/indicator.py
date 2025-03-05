@@ -279,7 +279,7 @@ def basic_consult(type_consult, msg=None):
         error_message = f"Error: {str(e)}\n\nDetails:\n{traceback.format_exc()}"
         show_error_dialog(error_message)
 
-def question_answer_consult(type_consult, msg=None):
+def question_answer_consult(type_consult, msg=None, show=True):
     if msg is None: 
         msg=get_clipboard_text()
         
@@ -302,13 +302,20 @@ def question_answer_consult(type_consult, msg=None):
         
         show_notification_message(type_consult,"Answer recived!")
         
-        show_message(res)
+        if show:
+            show_message(res)
+        
+        return res
         
         
     except Exception as e:
         # Captura qualquer exceção e exibe o erro
         error_message = f"Error: {str(e)}\n\nDetails:\n{traceback.format_exc()}"
-        show_error_dialog(error_message)
+        
+        if show:
+            show_error_dialog(error_message)
+        
+        return error_message
 ################################################################################
         
 def improve_writing(source):
@@ -326,11 +333,15 @@ def paraphrase(source):
 ################################################################################
 def improves_file_writing(source):
     file_path=select_file()
+    
     show_notification_message("Selected",file_path)
-
+    
     if file_path:
-        msg=lib_files.load_file_content(file_path)
-        basic_consult("improve_writing", msg=msg)
+        if lib_files.is_binary(file_path):
+            show_message("❌ 🤦‍♂️ The selected file must be a text file:\n"+file_path)
+        else:
+            msg=lib_files.load_file_content(file_path)
+            basic_consult("improve_writing", msg=msg)
 
 ################################################################################
 
@@ -363,6 +374,13 @@ def statistics(source):
     res=lib_stats.generate_word_token_json(msg)
     show_message(res)
     
+def readability(source):
+    msg=get_clipboard_text()
+    OUT, results=lib_stats.analyze_readability(msg)
+    res=question_answer_consult("readability",msg=str(results),show=False)
+    
+    show_message(OUT+"\nComment:\n"+res)
+    
 ################################################################################
 
 def edit_config(source):
@@ -389,10 +407,12 @@ def open_about(source):
 ################################################################################
 
 def main():
+    base_dir_path = os.path.dirname(os.path.abspath(__file__))
+
     # Criação do indicador
     indicator = AppIndicator3.Indicator.new(
         "clipboard-text-correction-indicador",                       # ID do indicador
-        os.path.join(os.path.dirname(os.path.abspath(__file__)), 'icons', 'logo.png'), 
+        os.path.join(base_dir_path, 'icons', 'logo.png'), 
         AppIndicator3.IndicatorCategory.APPLICATION_STATUS
     )
 
@@ -401,7 +421,7 @@ def main():
 
 
     # Criando improve_submenu
-    item_improve_submenu = Gtk.MenuItem(label="Improve texts from clipboard")
+    item_improve_submenu = Gtk.MenuItem(label="📋 Improve texts from clipboard")
     improve_submenu = Gtk.Menu()
     item_improve_submenu.set_submenu(improve_submenu)
     menu.append(item_improve_submenu)
@@ -410,7 +430,7 @@ def main():
     # Improve writing
     item_improve_writing = Gtk.MenuItem()
     box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
-    icon = Gtk.Image.new_from_icon_name("accessories-text-editor", Gtk.IconSize.MENU)  # Nome do ícone do sistema
+    icon = Gtk.Image.new_from_icon_name("accessories-text-editor", Gtk.IconSize.MENU)  
     label = Gtk.Label(label="Improve writing")
     box.pack_start(icon, False, False, 0)
     box.pack_start(label, False, False, 0)
@@ -422,7 +442,7 @@ def main():
     # Improve scientific writing
     item_improve_scientific_writing = Gtk.MenuItem()
     box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
-    icon = Gtk.Image.new_from_icon_name("accessories-text-editor", Gtk.IconSize.MENU)  # Nome do ícone do sistema
+    icon = Gtk.Image.new_from_icon_name("accessories-text-editor", Gtk.IconSize.MENU)  
     label = Gtk.Label(label="Improve scientific writing")
     box.pack_start(icon, False, False, 0)
     box.pack_start(label, False, False, 0)
@@ -434,7 +454,7 @@ def main():
     # Concise writing
     item_concise_writing = Gtk.MenuItem()
     box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
-    icon = Gtk.Image.new_from_icon_name("accessories-text-editor", Gtk.IconSize.MENU)  # Nome do ícone do sistema
+    icon = Gtk.Image.new_from_icon_name("accessories-text-editor", Gtk.IconSize.MENU)  
     label = Gtk.Label(label="Concise writing")
     box.pack_start(icon, False, False, 0)
     box.pack_start(label, False, False, 0)
@@ -446,7 +466,7 @@ def main():
     # Paraphrase
     item_paraphrase = Gtk.MenuItem()
     box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
-    icon = Gtk.Image.new_from_icon_name("accessories-text-editor", Gtk.IconSize.MENU)  # Nome do ícone do sistema
+    icon = Gtk.Image.new_from_icon_name("accessories-text-editor", Gtk.IconSize.MENU)  
     label = Gtk.Label(label="Paraphrase")
     box.pack_start(icon, False, False, 0)
     box.pack_start(label, False, False, 0)
@@ -462,7 +482,7 @@ def main():
 
 
     # Criando improve_file_submenu
-    item_improve_file_submenu = Gtk.MenuItem(label="Improve texts from files")
+    item_improve_file_submenu = Gtk.MenuItem(label="💻 Improve texts from files")
     improve_file_submenu = Gtk.Menu()
     item_improve_file_submenu.set_submenu(improve_file_submenu)
     menu.append(item_improve_file_submenu)
@@ -471,7 +491,7 @@ def main():
     # Improves file writing
     item_improves_file_writing = Gtk.MenuItem()
     box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
-    icon = Gtk.Image.new_from_icon_name("edit-find-replace", Gtk.IconSize.MENU)  # Nome do ícone do sistema
+    icon = Gtk.Image.new_from_icon_name("edit-find-replace", Gtk.IconSize.MENU)  
     label = Gtk.Label(label="Improves file writing")
     box.pack_start(icon, False, False, 0)
     box.pack_start(label, False, False, 0)
@@ -487,7 +507,7 @@ def main():
     
     
     # Criando synthesize_submenu
-    item_synthesize_submenu = Gtk.MenuItem(label="Synthesize texts from clipboard")
+    item_synthesize_submenu = Gtk.MenuItem(label="📋 Synthesize texts from clipboard")
     synthesize_submenu = Gtk.Menu()
     item_synthesize_submenu.set_submenu(synthesize_submenu)
     menu.append(item_synthesize_submenu)
@@ -496,7 +516,7 @@ def main():
     # Summarize text
     item_summarize_text = Gtk.MenuItem()
     box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
-    icon = Gtk.Image.new_from_icon_name("document-edit", Gtk.IconSize.MENU)  # Nome do ícone do sistema
+    icon = Gtk.Image.new_from_icon_name("document-edit", Gtk.IconSize.MENU)  
     label = Gtk.Label(label="Summarize text")
     box.pack_start(icon, False, False, 0)
     box.pack_start(label, False, False, 0)
@@ -508,7 +528,7 @@ def main():
     # Abstract to title
     item_abstract_to_title = Gtk.MenuItem()
     box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
-    icon = Gtk.Image.new_from_icon_name("document-edit", Gtk.IconSize.MENU)  # Nome do ícone do sistema
+    icon = Gtk.Image.new_from_icon_name("document-edit", Gtk.IconSize.MENU)  
     label = Gtk.Label(label="Abstract to title")
     box.pack_start(icon, False, False, 0)
     box.pack_start(label, False, False, 0)
@@ -519,7 +539,7 @@ def main():
     # Text to computer science abstract
     item_text_to_computer_science_abstract = Gtk.MenuItem()
     box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
-    icon = Gtk.Image.new_from_icon_name("document-edit", Gtk.IconSize.MENU)  # Nome do ícone do sistema
+    icon = Gtk.Image.new_from_icon_name("document-edit", Gtk.IconSize.MENU)  
     label = Gtk.Label(label="Text to computer science abstract")
     box.pack_start(icon, False, False, 0)
     box.pack_start(label, False, False, 0)
@@ -531,7 +551,7 @@ def main():
     # Logical fallacy detector
     item_logical_fallacy_detector = Gtk.MenuItem()
     box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
-    icon = Gtk.Image.new_from_icon_name("document-edit", Gtk.IconSize.MENU)  # Nome do ícone do sistema
+    icon = Gtk.Image.new_from_icon_name("document-edit", Gtk.IconSize.MENU)  
     label = Gtk.Label(label="Logical fallacy detector")
     box.pack_start(icon, False, False, 0)
     box.pack_start(label, False, False, 0)
@@ -543,7 +563,7 @@ def main():
     # keyword_generator
     item_keyword_generator = Gtk.MenuItem()
     box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
-    icon = Gtk.Image.new_from_icon_name("document-edit", Gtk.IconSize.MENU)  # Nome do ícone do sistema
+    icon = Gtk.Image.new_from_icon_name("document-edit", Gtk.IconSize.MENU)  
     label = Gtk.Label(label="Keyword generator")
     box.pack_start(icon, False, False, 0)
     box.pack_start(label, False, False, 0)
@@ -559,7 +579,7 @@ def main():
     
     
     # Criando latex_submenu
-    item_latex_submenu = Gtk.MenuItem(label="Synthesize LaTeX texts from clipboard")
+    item_latex_submenu = Gtk.MenuItem(label="📋 Synthesize LaTeX texts from clipboard")
     latex_submenu = Gtk.Menu()
     item_latex_submenu.set_submenu(latex_submenu)
     menu.append(item_latex_submenu)
@@ -567,7 +587,7 @@ def main():
     # Text to latex equation
     item_text_to_latex_equation = Gtk.MenuItem()
     box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
-    icon = Gtk.Image.new_from_icon_name("font-x-generic", Gtk.IconSize.MENU)  # Nome do ícone do sistema
+    icon = Gtk.Image.new_from_icon_name("font-x-generic", Gtk.IconSize.MENU)  
     label = Gtk.Label(label="Text to latex equation")
     box.pack_start(icon, False, False, 0)
     box.pack_start(label, False, False, 0)
@@ -579,7 +599,7 @@ def main():
     # Text to latex table
     item_text_to_latex_table = Gtk.MenuItem()
     box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
-    icon = Gtk.Image.new_from_icon_name("font-x-generic", Gtk.IconSize.MENU)  # Nome do ícone do sistema
+    icon = Gtk.Image.new_from_icon_name("font-x-generic", Gtk.IconSize.MENU)  
     label = Gtk.Label(label="Text to latex table")
     box.pack_start(icon, False, False, 0)
     box.pack_start(label, False, False, 0)
@@ -594,7 +614,7 @@ def main():
     
     
     # Criando analysis_submenu
-    item_analysis_submenu = Gtk.MenuItem(label="Text analysis from clipboard")
+    item_analysis_submenu = Gtk.MenuItem(label="📋 Text analysis from clipboard")
     analysis_submenu = Gtk.Menu()
     item_analysis_submenu.set_submenu(analysis_submenu)
     menu.append(item_analysis_submenu)
@@ -603,13 +623,24 @@ def main():
     # Statistics
     item_statistics = Gtk.MenuItem()
     box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
-    icon = Gtk.Image.new_from_icon_name("document-page-setup", Gtk.IconSize.MENU)  # Nome do ícone do sistema
+    icon = Gtk.Image.new_from_icon_name("document-page-setup", Gtk.IconSize.MENU)  
     label = Gtk.Label(label="Text statistics")
     box.pack_start(icon, False, False, 0)
     box.pack_start(label, False, False, 0)
     item_statistics.add(box)
     item_statistics.connect("activate", statistics)
     analysis_submenu.append(item_statistics)
+    
+    # Readability
+    item_readability = Gtk.MenuItem()
+    box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
+    icon = Gtk.Image.new_from_icon_name("document-page-setup", Gtk.IconSize.MENU)  
+    label = Gtk.Label(label="Text readability")
+    box.pack_start(icon, False, False, 0)
+    box.pack_start(label, False, False, 0)
+    item_readability.add(box)
+    item_readability.connect("activate", readability)
+    analysis_submenu.append(item_readability)
     
     
     # Adicionando um separador
@@ -619,7 +650,7 @@ def main():
     
     
     # Criando program_information_submenu
-    item_program_information_submenu = Gtk.MenuItem(label="Program usage information")
+    item_program_information_submenu = Gtk.MenuItem(label="🛠️ Program usage information")
     program_information_submenu = Gtk.Menu()
     item_program_information_submenu.set_submenu(program_information_submenu)
     menu.append(item_program_information_submenu)
@@ -628,7 +659,7 @@ def main():
     # Open configfile
     item_edit_config = Gtk.MenuItem()
     box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
-    icon = Gtk.Image.new_from_icon_name("applications-utilities", Gtk.IconSize.MENU)  # Nome do ícone do sistema
+    icon = Gtk.Image.new_from_icon_name("applications-utilities", Gtk.IconSize.MENU)  
     label = Gtk.Label(label="Open config file")
     box.pack_start(icon, False, False, 0)
     box.pack_start(label, False, False, 0)
@@ -640,7 +671,7 @@ def main():
     # Open url usage
     item_open_url_usage = Gtk.MenuItem()
     box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
-    icon = Gtk.Image.new_from_icon_name("applications-internet", Gtk.IconSize.MENU)  # Nome do ícone do sistema
+    icon = Gtk.Image.new_from_icon_name("applications-internet", Gtk.IconSize.MENU)  
     label = Gtk.Label(label="Open url usage")
     box.pack_start(icon, False, False, 0)
     box.pack_start(label, False, False, 0)
@@ -652,7 +683,7 @@ def main():
     # Open url help
     item_open_url_help = Gtk.MenuItem()
     box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
-    icon = Gtk.Image.new_from_icon_name("help-contents", Gtk.IconSize.MENU)  # Nome do ícone do sistema
+    icon = Gtk.Image.new_from_icon_name("help-contents", Gtk.IconSize.MENU)  
     label = Gtk.Label(label="Open url help")
     box.pack_start(icon, False, False, 0)
     box.pack_start(label, False, False, 0)
@@ -671,8 +702,8 @@ def main():
     # Buy me a coffee
     item_buy_me_a_coffee = Gtk.MenuItem()
     box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
-    icon = Gtk.Image.new_from_icon_name("emblem-favorite", Gtk.IconSize.MENU)  # Nome do ícone do sistema
-    label = Gtk.Label(label="Buy me a coffee: TrucomanX")
+    icon = Gtk.Image.new_from_icon_name("emblem-favorite", Gtk.IconSize.MENU) 
+    label = Gtk.Label(label="☕ Buy me a coffee: TrucomanX")
     box.pack_start(icon, False, False, 0)
     box.pack_start(label, False, False, 0)
     item_buy_me_a_coffee.add(box)
@@ -683,8 +714,8 @@ def main():
     # About
     item_open_about = Gtk.MenuItem()
     box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
-    icon = Gtk.Image.new_from_icon_name("help-about", Gtk.IconSize.MENU)  # Nome do ícone do sistema
-    label = Gtk.Label(label="About")
+    icon = Gtk.Image.new_from_icon_name("help-about", Gtk.IconSize.MENU)  
+    label = Gtk.Label(label="🌟 About")
     box.pack_start(icon, False, False, 0)
     box.pack_start(label, False, False, 0)
     item_open_about.add(box)
@@ -699,7 +730,7 @@ def main():
     
     
     # Adicionando exit
-    item_quit = Gtk.MenuItem(label="Exit")
+    item_quit = Gtk.MenuItem(label="❌ Exit")
     item_quit.connect("activate", quit)
     menu.append(item_quit)
 

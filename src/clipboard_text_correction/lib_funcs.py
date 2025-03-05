@@ -1,11 +1,6 @@
 #!/usr/bin/python3
 
-'''
-You are an expert in text readability analysis. Your task is to analyze the provided readability metrics and generate a concise summary assessing the complexity and readability of the analyzed text.
 
-- Your response must be a single, well-structured paragraph.
-- Do not include explanations, comments, or additional responses.
-'''
 
 '''
 You are an expert in text simplification and accessibility. Your task is to rewrite a given text to make it more accessible to a broader audience while preserving its meaning.
@@ -62,7 +57,7 @@ You are an expert in text paraphrasing. Your task is to rewrite a given text usi
 - Maintain coherence, cohesion, and logical flow.  
 - Do not alter the meaning, tone, or intent of the original text.  
 - Respect the original language of the text without translating it.  
-- Do not provide explanations, comments, or any additional responses.  
+- Do not provide explanations, comments, or any additional responses. Just return the text of a response.  
 - If the text is already well-paraphrased, return only "<NOERROR>". 
     ''',
     "improve_writing" : '''
@@ -70,7 +65,7 @@ You are an expert system in text correction. Your task is to detect and correct 
 
 - If errors are found, return only a corrected version of the text, maintaining the original structure, line breaks, and formatting.  
 - Make only the necessary changes, preserving the original meaning and tone.  
-- Do not provide explanations, comments, or additional responses.  
+- Do not provide explanations, comments, or additional responses. Just return the text of a response. 
 - Do not translate or modify the language of the text.  
 - If the text has no errors, return only "<NOERROR>". 
     ''',
@@ -82,7 +77,7 @@ You are an expert in academic and scientific writing. Your task is to rewrite a 
 - Ensure proper structure and logical flow, adapting the text to an academic tone.  
 - Preserve technical terminology and enhance clarity without oversimplification.  
 - Do not add personal opinions or additional information beyond what is present in the original text.  
-- Do not provide explanations, comments, or additional responses.  
+- Do not provide explanations, comments, or additional responses. Just return the text of a response. 
 - Maintain the original language of the text without translating it.  
 - If the text is already suitable for academic writing, return only "<NOERROR>". 
     ''',
@@ -93,7 +88,7 @@ You are an expert in text optimization. Your task is to rewrite a given text to 
 - Improve sentence structure for brevity and readability.  
 - Maintain proper grammar, spelling, punctuation, and logical flow.  
 - Respect the original language of the text without translating it.  
-- Do not add explanations, comments, or any additional responses.  
+- Do not add explanations, comments, or any additional responses. Just return the text of a response. 
 - If the text is already optimally concise, return only "<NOERROR>".  
     ''',
     "summarize_text" : '''
@@ -102,7 +97,7 @@ You are an expert in text summarization. Your task is to generate a concise and 
 - Retain key ideas and important details, eliminating redundant or secondary information.  
 - Ensure the summary is grammatically correct, clear, and logically structured.  
 - Maintain the original language of the text without translating it.  
-- Do not add comments, explanations, or any additional responses.  
+- Do not add comments, explanations, or any additional responses. Just return the text of a response. 
 - If the text is already in its most concise form, return only "<NOERROR>". 
     ''',
     "abstract_to_title" : '''
@@ -173,6 +168,12 @@ You are an expert in LaTeX table formatting. Your task is to convert a given tex
 - Return only the LaTeX code for the table, without explanations or comments.  
 - If column widths or alignments are not specified, use a reasonable default.  
 - If the description is ambiguous, return the most conventional tabular format.  
+    ''',
+    "readability" : '''
+You are an expert in text readability analysis. Your task is to analyze the provided readability metrics and generate a concise summary assessing the complexity and readability of the analyzed text.
+
+- Your response must be a single, well-structured paragraph.
+- Do not include explanations, comments, or additional responses. Just return the text of a response.
     '''
 }
 

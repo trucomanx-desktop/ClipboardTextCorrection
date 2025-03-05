@@ -19,6 +19,8 @@ twine upload dist/*
 
 ## Install from PYPI
 
+The homepage in pipy is https://pypi.org/project/clipboard-text-correction/
+
 ```bash
 pip install --upgrade clipboard-text-correction
 ```

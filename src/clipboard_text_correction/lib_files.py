@@ -71,6 +71,15 @@ def compare_texts(texto1, texto2, program="meld", filetype="txt",suffix1="input"
 
 ################################################################################
 
+def is_binary(file_path):
+    try:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            f.read()
+        return False  # Se o arquivo for lido como texto, retorna False
+    except UnicodeDecodeError:
+        return True 
+        
+
 def load_file_content(file_path):
     with open(file_path, 'r', encoding='utf-8') as file:
         content = file.read()
@@ -130,7 +139,7 @@ def detect_formats(texto):
     # Padrões para cada formato
     padroes = {
         "HTML": [
-            r"<\s*(html|body|p|a|div|span|h[1-6]|br|img|table|tr|td|th)[^>]*>"
+            r"<\s*(html|body|p|a|b|div|span|h[1-6]|br|img|table|tr|td|th)[^>]*>"
         ],
         "Markdown": [
             r"(^|\n)(#+\s)",  # Títulos (#)
