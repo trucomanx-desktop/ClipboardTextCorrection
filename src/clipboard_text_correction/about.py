@@ -1,6 +1,6 @@
 # about.py
 
-__version__ = "0.2.1"
+__version__ = "0.2.2"
 __package__ = "clipboard_text_correction"
 __linux_indicator__ = "clipboard-text-correction-indicator"
 __author__ = "Fernando Pujaico Rivera" 
