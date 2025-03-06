@@ -17,7 +17,7 @@ from clipboard_text_correction.about import __version__
 
 import clipboard_text_correction.lib_funcs as lib_funcs
 import clipboard_text_correction.lib_files as lib_files
-import clipboard_text_correction.lib_play as lib_play
+import clipboard_text_correction.lib_play  as lib_play
 import clipboard_text_correction.lib_stats as lib_stats
 
 import clipboard_text_correction.about as about
@@ -250,6 +250,12 @@ def basic_consult(type_consult, msg=None):
     if len(msg) < 3:
         show_message("Too few elements on clipboard.")
         return
+        
+    if config_data["api_key"]=="":
+        lib_files.open_from_filepath(config_file_path)
+        show_notification_message("open_url_usage", config_data["usage"])
+        QDesktopServices.openUrl(QUrl(config_data["usage"]))
+        return
     
     try:
         fmts = lib_files.detect_formats(msg)
@@ -262,7 +268,8 @@ def basic_consult(type_consult, msg=None):
         is_ok = True
         
         for index, text in enumerate(texts):
-            show_notification_message(type_consult, f"{index+1}/{len(texts)} - The text was sent, please wait.")
+            show_notification_message(type_consult, 
+                                      f"{index+1}/{len(texts)} - The text was sent, please wait.")
             
             print(f"{index+1}/{len(texts)} - sent format:", fmt)
             
@@ -283,7 +290,10 @@ def basic_consult(type_consult, msg=None):
             print("recived:", res)
             
         if is_ok:
-            lib_files.compare_texts(msg, all_out, program='meld', filetype=ext)
+            if lib_files.program_exists('meld'):
+                lib_files.compare_texts(msg, all_out, program='meld', filetype=ext)
+            else:
+                show_message(all_out)
         else:
             show_message("Errors in the query some answers were <ZERO>")
             
@@ -298,7 +308,13 @@ def question_answer_consult(type_consult, msg=None, show=True):
         
     if len(msg) < 3:
         show_message("Too few elements on clipboard.")
-        return
+        return None
+    
+    if config_data["api_key"]=="":
+        lib_files.open_from_filepath(config_file_path)
+        show_notification_message("open_url_usage", config_data["usage"])
+        QDesktopServices.openUrl(QUrl(config_data["usage"]))
+        return None
        
     try:
         fmts = lib_files.detect_formats(msg)
@@ -392,7 +408,10 @@ def readability():
     OUT, results = lib_stats.analyze_readability(msg)
     res = question_answer_consult("readability", msg=str(results), show=False)
     
-    show_message(OUT + "\nComment:\n" + res)
+    if res is None:
+        show_message(OUT)
+    else:
+        show_message(OUT + "\nComment:\n" + res)
     
 ################################################################################
 

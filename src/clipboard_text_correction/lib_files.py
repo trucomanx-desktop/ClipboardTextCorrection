@@ -5,9 +5,19 @@ import subprocess
 import os
 import sys
 import platform
-
-
 import webbrowser
+import shutil
+
+def program_exists(nome_do_programa):
+    # Verifica se o programa existe no PATH
+    caminho_do_programa = shutil.which(nome_do_programa)
+    
+    if caminho_do_programa:
+        return True
+    else:
+        return False
+
+################################################################################
 
 def open_url(url):
     """Abre a URL no navegador padrão do sistema operacional."""
