@@ -30,7 +30,6 @@ setup(
     packages=find_packages(),
     install_requires=[
         "PyQt5",
-        'PyGObject',
         'deep-consultation',
         'textstat',
         'gTTS',

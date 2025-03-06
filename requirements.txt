@@ -1,5 +1,4 @@
 PyQt5
-PyGObject
 deep-consultation
 textstat
 gTTS
