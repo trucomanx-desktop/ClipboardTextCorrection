@@ -8,9 +8,13 @@ Program that improves text writing.
 
 This program requires `meld` to be installed on your system to function correctly. `meld` is a graphical tool for comparing files and directories. How to install `meld`:
 
+- **Install on Ubuntu:**
+
 ```bash
 sudo apt-get install meld
 ```
+- **Install on Windows:**
+ You can download the Meld installer at [https://meldmerge.org](https://meldmerge.org).
 
 ## 2. Installing
 

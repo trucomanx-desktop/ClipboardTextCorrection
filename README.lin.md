@@ -38,6 +38,3 @@ Your donations help keep the project running and improve future updates.
 ## 5. License
 This project is licensed under the GPLv3 License.
 
-## 6. More information
-
-More information can be found in [README.extras.md](README.extras.md)
