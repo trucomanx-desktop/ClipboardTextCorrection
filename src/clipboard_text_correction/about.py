@@ -1,6 +1,8 @@
 # about.py
 
 __version__ = "0.1.6"
+__package__ = "clipboard-text-correction"
+__linux_indicator__ = "clipboard-text-correction-indicator"
 __author__ = "Fernando Pujaico Rivera" 
 __email__ = "fernando.pujaico.rivera@gmail.com"
 __description__ = "Program that collects text from the clipboard and improves text writing"

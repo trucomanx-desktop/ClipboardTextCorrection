@@ -5,7 +5,7 @@ import gi
 gi.require_version('Gtk', '3.0')
 gi.require_version('AppIndicator3', '0.1')
 gi.require_version('Notify', '0.7') 
-from gi.repository import Gtk, AppIndicator3, Notify
+from gi.repository import Gtk, AppIndicator3, Notify, GdkPixbuf
 from PyQt5.QtWidgets import QApplication
 
 from clipboard_text_correction.about import __version__
@@ -99,38 +99,111 @@ def show_message(message,width=600,height=300):
     Gtk.main()
 
 
-def show_about_window():
+def show_about_window(data,logo_path):
     """Cria e exibe a janela 'Sobre'."""
     
     # Criação da janela principal
     about_window = Gtk.Window(title="About")
-    about_window.set_default_size(400, 250)
+    #about_window.set_default_size(700, 300)
+    about_window.set_size_request(500, 300)  # Largura mínima de 400px e altura mínima de 200px
     about_window.connect("destroy", Gtk.main_quit)
 
     # Box vertical para adicionar os widgets
     vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
     about_window.add(vbox)
-
-    # Adiciona o título e descrição do programa
-    text_buffer = Gtk.TextBuffer()  # Cria o buffer de texto
-    text_buffer.set_text(f"{about.__description__}\n\n"
-                         f"Version: {about.__version__}\n"
-                         f"Author: {about.__author__}\n"
-                         f"Email: {about.__email__}\n\n"
-                         f"Source: {about.__url_source__}\n"
-                         f"Funding: {about.__url_funding__}\n"
-                         f"Bugs: {about.__url_bugs__}\n")
     
-    text_view = Gtk.TextView(buffer=text_buffer)  # Cria o TextView com o buffer
-    text_view.set_editable(False)  # Torna o texto não editável
-    text_view.set_cursor_visible(False)  # Esconde o cursor
-    text_view.set_wrap_mode(Gtk.WrapMode.WORD)  # Quebra de linha automática
-    vbox.pack_start(text_view, True, True, 0)
+    # logo
+    pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(   logo_path, 
+                                                        width=100, 
+                                                        height=100, 
+                                                        preserve_aspect_ratio=True )
+    icon_logo = Gtk.Image.new_from_pixbuf(pixbuf)
+    vbox.pack_start(icon_logo, False, False, 0)
+    
+    # Label
+    label_description = Gtk.Label()
+    label_description.set_markup("<b>"+data["description"]+"</b>")
+    label_description.set_line_wrap(True)
+    label_description.set_selectable(True)
+    vbox.pack_start(label_description, False, False, 0)
+
+    # Separator
+    separator = Gtk.Separator(orientation=Gtk.Orientation.HORIZONTAL)
+    vbox.pack_start(separator, False, False, 5)  # 5 é o espaço extra nas bordas (padding)
+
+    # package
+    label_package = Gtk.Label()
+    label_package.set_markup("Package: "+data["package"])
+    label_package.set_line_wrap(True)
+    label_package.set_selectable(True)
+    label_package.set_xalign(0)  # Alinha à esquerda
+    vbox.pack_start(label_package, False, False, 0)
+    
+    # program
+    label_program = Gtk.Label()
+    label_program.set_markup("Program: "+data["linux_indicator"])
+    label_program.set_line_wrap(True)
+    label_program.set_selectable(True)
+    label_program.set_xalign(0)  # Alinha à esquerda
+    vbox.pack_start(label_program, False, False, 0)
+    
+    # version
+    label_version = Gtk.Label()
+    label_version.set_markup("Version: "+data["version"])
+    label_version.set_line_wrap(True)
+    label_version.set_selectable(True)
+    label_version.set_xalign(0)  # Alinha à esquerda
+    vbox.pack_start(label_version, False, False, 0)
+
+    # author
+    label_author = Gtk.Label()
+    label_author.set_markup("Author: "+data["author"])
+    label_author.set_line_wrap(True)
+    label_author.set_selectable(True)
+    label_author.set_xalign(0)  # Alinha à esquerda
+    vbox.pack_start(label_author, False, False, 0)
+    
+    # email
+    label_email = Gtk.Label()
+    label_email.set_markup("Email: <a href=\"mailto:"+data["email"]+"\">"+data["email"]+"</a>")
+    label_email.set_line_wrap(True)
+    label_email.set_selectable(True)
+    label_email.set_xalign(0)  # Alinha à esquerda
+    vbox.pack_start(label_email, False, False, 0)
+
+    # Separator
+    separator = Gtk.Separator(orientation=Gtk.Orientation.HORIZONTAL)
+    vbox.pack_start(separator, False, False, 5)  # 5 é o espaço extra nas bordas (padding)
+
+
+    # url_source
+    label_url_source = Gtk.Label()
+    label_url_source.set_markup("Source: <a href=\""+data["url_source"]+"\">"+data["url_source"]+"</a>")
+    label_url_source.set_line_wrap(True)
+    label_url_source.set_selectable(True)
+    label_url_source.set_xalign(0)  # Alinha à esquerda
+    vbox.pack_start(label_url_source, False, False, 0)
+
+    # url_funding
+    label_url_funding = Gtk.Label()
+    label_url_funding.set_markup("Funding: <a href=\""+data["url_funding"]+"\">"+data["url_funding"]+"</a>")
+    label_url_funding.set_line_wrap(True)
+    label_url_funding.set_selectable(True)
+    label_url_funding.set_xalign(0)  # Alinha à esquerda
+    vbox.pack_start(label_url_funding, False, False, 0)
+
+    # url_bugs
+    label_url_bugs = Gtk.Label()
+    label_url_bugs.set_markup("Bugs: <a href=\""+data["url_bugs"]+"\">"+data["url_bugs"]+"</a>")
+    label_url_bugs.set_line_wrap(True)
+    label_url_bugs.set_selectable(True)
+    label_url_bugs.set_xalign(0)  # Alinha à esquerda
+    vbox.pack_start(label_url_bugs, False, False, 0)
 
     # Botão OK para fechar a janela
     button_ok = Gtk.Button(label="OK")
     button_ok.connect("clicked", lambda x: about_window.close())
-    vbox.pack_start(button_ok, False, False, 0)
+    vbox.pack_end(button_ok, False, False, 0)
 
     # Exibe a janela
     about_window.show_all()
@@ -401,7 +474,22 @@ def buy_me_a_coffee(source):
     lib_files.open_url("https://ko-fi.com/trucomanx")
 
 def open_about(source):
-    show_about_window()
+    data={
+        "version" : about.__version__,
+        "package" : about.__package__,
+        "linux_indicator" : about.__linux_indicator__,
+        "author" : about.__author__,
+        "email" : about.__email__,
+        "description" : about.__description__,
+        "url_source" : about.__url_source__,
+        "url_funding" : about.__url_funding__,
+        "url_bugs" : about.__url_bugs__
+    }
+    
+    base_dir_path = os.path.dirname(os.path.abspath(__file__))
+    logo_path = os.path.join(base_dir_path, 'icons', 'logo.png')
+    
+    show_about_window(data,logo_path)
 
 ################################################################################
 ################################################################################
