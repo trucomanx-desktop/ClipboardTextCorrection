@@ -4,17 +4,13 @@ Program that improves text writing.
 
 ![logo](https://raw.githubusercontent.com/trucomanx/ClipboardTextCorrection/main/src/clipboard_text_correction/icons/logo.png)
 
-## 1. Dependencies
+## 1. Dependencies on windows
 
-This program requires `meld` to be installed on your system to function correctly. `meld` is a graphical tool for comparing files and directories. How to install `meld`:
+This program requires `meld` to be installed on your system to function correctly. `meld` is a graphical tool for comparing files and directories. 
 
-```bash
-sudo apt-get install meld
-```
+How to install `meld`: You can download the Meld installer at [https://meldmerge.org](https://meldmerge.org).
 
-## 2. Installing
-
-### 2.1. Install from PyPI
+## 2. Installing from PyPI
 
 To install the package from `PyPI`, follow the instructions below:
 
@@ -25,20 +21,12 @@ pip install --upgrade clipboard-text-correction
 
 Execute `which clipboard-text-correction-indicator` to see where it was installed, probably in `/home/USERNAME/.local/bin/clipboard-text-correction-indicator`.
 
-#### Using
+### Using
 
 If the program was not added to the Linux start session, then to start, use the command below:
 
 ```bash
 clipboard-text-correction-indicator
-```
-
-
-### 2.2. Install from PyPI and add to Linux start session
-Install `clipboard-text-correction` from `pypi` and add the program to the bar indicator on Linux startup session.
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/trucomanx/ClipboardTextCorrection/main/install_linux_indicator_session.sh | sh
 ```
 
 ## 3. LLM
@@ -47,7 +35,7 @@ https://deepinfra.com/dash/api_keys
 
 Place the obtained `API_KEY` in the `clipboard-text-correction-indicator` program under menu `Program usage information >> Open config file`.
 
-![open-config-file](https://raw.githubusercontent.com/trucomanx/ClipboardTextCorrection/main/images/open-config-file.lin.png)
+![open-config-file](https://raw.githubusercontent.com/trucomanx/ClipboardTextCorrection/main/images/open-config-file.win.png)
 
 ## 4. Buy me a coffee
 

@@ -4,7 +4,8 @@ Program that improves text writing.
 
 ![logo](https://raw.githubusercontent.com/trucomanx/ClipboardTextCorrection/main/src/clipboard_text_correction/icons/logo.png)
 
-## 1. Dependencies
+
+## 1. Dependencies on Linux
 
 This program requires `meld` to be installed on your system to function correctly. `meld` is a graphical tool for comparing files and directories. How to install `meld`:
 
@@ -12,29 +13,7 @@ This program requires `meld` to be installed on your system to function correctl
 sudo apt-get install meld
 ```
 
-## 2. Installing
-
-### 2.1. Install from PyPI
-
-To install the package from `PyPI`, follow the instructions below:
-
-
-```bash
-pip install --upgrade clipboard-text-correction
-```
-
-Execute `which clipboard-text-correction-indicator` to see where it was installed, probably in `/home/USERNAME/.local/bin/clipboard-text-correction-indicator`.
-
-#### Using
-
-If the program was not added to the Linux start session, then to start, use the command below:
-
-```bash
-clipboard-text-correction-indicator
-```
-
-
-### 2.2. Install from PyPI and add to Linux start session
+## 2. Install from PyPI and add to Linux start session
 Install `clipboard-text-correction` from `pypi` and add the program to the bar indicator on Linux startup session.
 
 ```bash
@@ -57,5 +36,8 @@ Your donations help keep the project running and improve future updates.
 [☕ Buy me a coffee](https://ko-fi.com/trucomanx) 
 
 ## 5. License
+This project is licensed under the GPLv3 License.
 
-This project is licensed under the GPL license. See the `LICENSE` file for more details.
+## 6. More information
+
+More information can be found in [README.extras.md](README.extras.md)
