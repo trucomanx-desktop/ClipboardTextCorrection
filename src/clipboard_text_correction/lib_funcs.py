@@ -78,7 +78,8 @@ You are an expert in academic and scientific writing. Your task is to rewrite a 
 - Preserve technical terminology and enhance clarity without oversimplification.  
 - Do not add personal opinions or additional information beyond what is present in the original text.  
 - Do not provide explanations, comments, or additional responses. Just return the text of a response. 
-- Maintain the original language of the text without translating it.  
+- Maintain the original language of the text without translating it. 
+- If you can't pass scientific language, at least correct the writing.
 - If the text is already suitable for academic writing, return only "<NOERROR>". 
     ''',
     "concise_writing" : '''
