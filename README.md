@@ -7,9 +7,7 @@ Program that improves text writing.
 
 ## 1. Dependencies on Linux
 
-This program requires **Meld** to be installed on your system to function correctly. **Meld** is a graphical tool for comparing files and directories.
-
-How to install **Meld**:
+This program requires `meld` to be installed on your system to function correctly. `meld` is a graphical tool for comparing files and directories. How to install `meld`:
 
 ```bash
 sudo apt-get install meld
@@ -23,7 +21,7 @@ curl -fsSL https://raw.githubusercontent.com/trucomanx/ClipboardTextCorrection/m
 ```
 
 ## 3. LLM
-The program needs an API_KEY to be used. This can be obtained from
+The program needs an `API_KEY` to be used. This can be obtained from
 https://deepinfra.com/dash/api_keys
 
 Place the obtained `API_KEY` in the `clipboard-text-correction-indicator` program under menu `Program usage information >> Open config file`.
