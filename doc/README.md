@@ -4,7 +4,9 @@
 
 * **Improve writing**: Enhances the clarity and coherence of the text.
 * **Improve scientific writing**: Refines the text with a formal and academic tone.
+* **Improve writing fluency**: Enhance the readability and logical flow of ideas while preserving the original meaning, tone, and structure.
 * **Concise writing**: Reduces wordiness while maintaining meaning.
+* **Simplified writing**: Rewrite a given text to make it more accessible to a broader audience while preserving its meaning.
 * **Paraphrase**: Rewrites the text with different wording while keeping the original meaning.
 
 ## Improve texts from files

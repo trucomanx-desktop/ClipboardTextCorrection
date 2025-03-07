@@ -352,8 +352,14 @@ def improve_writing():
 def improve_scientific_writing():
     basic_consult("improve_scientific_writing")
 
+def improve_writing_fluency():
+    basic_consult("improve_writing_fluency")
+
 def concise_writing():
     basic_consult("concise_writing")
+    
+def simplified_writing():
+    basic_consult("simplified_writing")
 
 def paraphrase():
     basic_consult("paraphrase")
@@ -479,10 +485,18 @@ class ClipboardTextCorrectionApp(QApplication):
         improve_scientific_action = QAction(QIcon.fromTheme("accessories-text-editor"), "Improve scientific writing", self)
         improve_scientific_action.triggered.connect(improve_scientific_writing)
         self.improve_submenu.addAction(improve_scientific_action)
+
+        improve_writing_fluency_action = QAction(QIcon.fromTheme("accessories-text-editor"), "Improve writing fluency", self)
+        improve_writing_fluency_action.triggered.connect(improve_writing_fluency)
+        self.improve_submenu.addAction(improve_writing_fluency_action)
         
         concise_writing_action = QAction(QIcon.fromTheme("accessories-text-editor"), "Concise writing", self)
         concise_writing_action.triggered.connect(concise_writing)
         self.improve_submenu.addAction(concise_writing_action)
+        
+        simplified_writing_action = QAction(QIcon.fromTheme("accessories-text-editor"), "Simplified writing", self)
+        simplified_writing_action.triggered.connect(simplified_writing)
+        self.improve_submenu.addAction(simplified_writing_action)
         
         paraphrase_action = QAction(QIcon.fromTheme("accessories-text-editor"), "Paraphrase", self)
         paraphrase_action.triggered.connect(paraphrase)
