@@ -13,7 +13,7 @@ You can download the Meld installer at [https://meldmerge.org](https://meldmerge
 
 ### Install Python
 
-- **Open Microsoft Store:**	Press `Win + R` to open therun dialog box and type `ms-windows-store:` and press Enter. 
+- **Open Microsoft Store:**	Press `Win + R` to open the run dialog box and type `ms-windows-store:` and press Enter. 
 
 - **Search for Python:** In the Microsoft Store, use the search bar at the top right. Type "Python" and press Enter. 
 
