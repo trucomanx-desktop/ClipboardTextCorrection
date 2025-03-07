@@ -243,6 +243,8 @@ def get_clipboard_text():
 ################################################################################
 
 def basic_consult(type_consult, msg=None):
+    global config_data
+    
     if msg is None: 
         msg = get_clipboard_text()
         
@@ -251,10 +253,14 @@ def basic_consult(type_consult, msg=None):
         return
         
     if config_data["api_key"]=="":
-        lib_files.open_from_filepath(config_file_path)
-        show_notification_message("open_url_usage", config_data["usage"])
-        QDesktopServices.openUrl(QUrl(config_data["usage"]))
-        return
+        with open(config_file_path, "r") as arquivo:
+            config_data = json.load(arquivo)
+        
+        if config_data["api_key"]=="":
+            lib_files.open_from_filepath(config_file_path)
+            show_notification_message("open_url_usage", config_data["usage"])
+            QDesktopServices.openUrl(QUrl(config_data["usage"]))
+            return
     
     try:
         fmts = lib_files.detect_formats(msg)
@@ -302,6 +308,8 @@ def basic_consult(type_consult, msg=None):
         show_error_dialog(error_message)
 
 def question_answer_consult(type_consult, msg=None, show=True):
+    global config_data
+    
     if msg is None: 
         msg = get_clipboard_text()
         
@@ -310,10 +318,14 @@ def question_answer_consult(type_consult, msg=None, show=True):
         return None
     
     if config_data["api_key"]=="":
-        lib_files.open_from_filepath(config_file_path)
-        show_notification_message("open_url_usage", config_data["usage"])
-        QDesktopServices.openUrl(QUrl(config_data["usage"]))
-        return None
+        with open(config_file_path, "r") as arquivo:
+            config_data = json.load(arquivo)
+        
+        if config_data["api_key"]=="":
+            lib_files.open_from_filepath(config_file_path)
+            show_notification_message("open_url_usage", config_data["usage"])
+            QDesktopServices.openUrl(QUrl(config_data["usage"]))
+            return None
        
     try:
         fmts = lib_files.detect_formats(msg)
