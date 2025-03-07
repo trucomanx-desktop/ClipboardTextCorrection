@@ -12,12 +12,11 @@ This program requires `meld` to be installed on your system to function correctl
 You can download the Meld installer at [https://meldmerge.org](https://meldmerge.org).
 
 ### Install Python
+This program requires `python` to be installed on your system to function correctly.
 
-- **Open Microsoft Store:**	Press `Win + R` to open the run dialog box and type `ms-windows-store:` and press Enter. 
+You can download the Python installer at [https://www.python.org/downloads/windows](https://www.python.org/downloads/windows).
 
-- **Search for Python:** In the Microsoft Store, use the search bar at the top right. Type "Python" and press Enter. 
-
-- **Install Python:** Click the "Get" or "Install" button. **During installation, ensure you check the box to "Add Python to PATH"** (this is crucial for running Python from the command line). Wait for the download and installation to complete.
+During installation, ensure you check the box to **"Add Python to PATH"** (this is crucial for running Python from the command line).
 
 ## 2. Installing from PyPI
 
@@ -30,21 +29,21 @@ python -m pip install --upgrade supertools
 pip install --upgrade clipboard-text-correction
 ```
 
-Execute `pip show clipboard-text-correction` to see where it was installed, probably in `C:\Users\[USERNAME]\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.[VERSION]\local-packages\Python3[VERSION]\site-packages`.
+Execute `pip show clipboard-text-correction` to see where it was installed.
 
 ### Using
 
-If the program was not added to the windows start session, then to start, use the command below:
+Start the program using the command below:
 
 ```bash
 clipboard-text-correction-indicator
 ```
 
-### Adding to the Startup Folder
+or
 
-- Press `Win + R` to open the Run dialog box. 
-- Type `shell:startup` and press Enter. This will open the Startup folder in File Explorer.
-- In the Startup folder, create a shortcut to the program `clipboard-text-correction-indicator` you want to start automatically.
+```bash
+python3 -m clipboard_text_correction.indicator
+```
 
 ## 3. LLM
 The program needs an `API_KEY` to be used. This can be obtained from
