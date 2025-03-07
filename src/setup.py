@@ -31,8 +31,7 @@ setup(
     install_requires=[
         "PyQt5",
         'deep-consultation',
-        'textstat',
-        'gTTS'
+        'textstat'
     ],
     entry_points={
         'console_scripts': [
