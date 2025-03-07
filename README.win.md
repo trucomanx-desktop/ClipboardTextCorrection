@@ -53,13 +53,19 @@ Place the obtained `API_KEY` in the `clipboard-text-correction-indicator` progra
 
 ![open-config-file](https://raw.githubusercontent.com/trucomanx/ClipboardTextCorrection/main/images/open-config-file.win.png)
 
-## 4. Buy me a coffee
+## 4 Uninstall
+
+```bash
+pip uninstall clipboard-text-correction
+```
+
+## 5. Buy me a coffee
 
 If you find this tool useful and would like to support its development, you can buy me a coffee!  
 Your donations help keep the project running and improve future updates.  
 
 [☕ Buy me a coffee](https://ko-fi.com/trucomanx) 
 
-## 5. License
+## 6. License
 
 This project is licensed under the GPL license. See the `LICENSE` file for more details.
