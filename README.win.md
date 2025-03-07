@@ -13,7 +13,7 @@ You can download the Meld installer at [https://meldmerge.org](https://meldmerge
 
 ### Install Python
 
-- **Open Microsoft Store:**	Press `Win + R` to open the "Run" dialog box. Type `ms-windows-store:` and press Enter. 
+- **Open Microsoft Store:**	Press `Win + R` to open therun dialog box and type `ms-windows-store:` and press Enter. 
 
 - **Search for Python:** In the Microsoft Store, use the search bar at the top right. Type "Python" and press Enter. 
 
@@ -25,14 +25,16 @@ To install the package from `PyPI`, follow the instructions below:
 
 
 ```bash
+python -m pip install --upgrade pip
+python -m pip install --upgrade supertools
 pip install --upgrade clipboard-text-correction
 ```
 
-Execute `which clipboard-text-correction-indicator` to see where it was installed, probably in `/home/USERNAME/.local/bin/clipboard-text-correction-indicator`.
+Execute `pip show clipboard-text-correction` to see where it was installed, probably in `C:\Users\[USERNAME]\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.[VERSION]\local-packages\Python3[VERSION]\site-packages`.
 
 ### Using
 
-If the program was not added to the Linux start session, then to start, use the command below:
+If the program was not added to the windows start session, then to start, use the command below:
 
 ```bash
 clipboard-text-correction-indicator

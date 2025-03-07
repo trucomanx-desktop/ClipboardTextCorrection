@@ -32,8 +32,7 @@ setup(
         "PyQt5",
         'deep-consultation',
         'textstat',
-        'gTTS',
-        'playsound'
+        'gTTS'
     ],
     entry_points={
         'console_scripts': [

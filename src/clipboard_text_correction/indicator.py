@@ -17,7 +17,6 @@ from clipboard_text_correction.about import __version__
 
 import clipboard_text_correction.lib_funcs as lib_funcs
 import clipboard_text_correction.lib_files as lib_files
-import clipboard_text_correction.lib_play  as lib_play
 import clipboard_text_correction.lib_stats as lib_stats
 
 import clipboard_text_correction.about as about

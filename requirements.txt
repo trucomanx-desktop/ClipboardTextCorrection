@@ -2,4 +2,3 @@ PyQt5
 deep-consultation
 textstat
 gTTS
-playsound
