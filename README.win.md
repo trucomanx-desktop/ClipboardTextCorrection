@@ -6,9 +6,18 @@ Program that improves text writing.
 
 ## 1. Dependencies on windows
 
+### Install Meld
 This program requires `meld` to be installed on your system to function correctly. `meld` is a graphical tool for comparing files and directories. 
 
-How to install `meld`: You can download the Meld installer at [https://meldmerge.org](https://meldmerge.org).
+You can download the Meld installer at [https://meldmerge.org](https://meldmerge.org).
+
+### Install Python
+
+- **Open Microsoft Store:**	Press `Win + R` to open the "Run" dialog box. Type `ms-windows-store:` and press Enter. 
+
+- **Search for Python:** In the Microsoft Store, use the search bar at the top right. Type "Python" and press Enter. 
+
+- **Install Python:** Click the "Get" or "Install" button. **During installation, ensure you check the box to "Add Python to PATH"** (this is crucial for running Python from the command line). Wait for the download and installation to complete.
 
 ## 2. Installing from PyPI
 
@@ -28,6 +37,12 @@ If the program was not added to the Linux start session, then to start, use the 
 ```bash
 clipboard-text-correction-indicator
 ```
+
+### Adding to the Startup Folder
+
+- Press `Win + R` to open the Run dialog box. 
+- Type `shell:startup` and press Enter. This will open the Startup folder in File Explorer.
+- In the Startup folder, create a shortcut to the program `clipboard-text-correction-indicator` you want to start automatically.
 
 ## 3. LLM
 The program needs an `API_KEY` to be used. This can be obtained from
