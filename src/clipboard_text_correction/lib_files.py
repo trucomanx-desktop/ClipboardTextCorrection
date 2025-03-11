@@ -159,7 +159,7 @@ def detect_formats(texto):
             r"(\!\[.*?\]\(.*?\))"  # Imagens ![alt](url)
         ],
         "LaTeX": [
-            r"\\(documentclass|cite|textcite|title|begin|added|figure|table|replaced|deleted|end|chapter|section|subsection|subsubsection|textsc|textbf|textit|frac|usepackage)",
+            r"\\(documentclass|cite|item|textcite|title|begin|added|figure|table|replaced|deleted|end|chapter|section|subsection|subsubsection|textsc|textbf|textit|frac|usepackage)",
             r"\$\$.*?\$\$",  # Modo matemático em bloco
             r"\$.*?\$",  # Modo matemático inline
         ]
