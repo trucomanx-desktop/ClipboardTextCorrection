@@ -242,7 +242,7 @@ def get_clipboard_text():
 
 ################################################################################
 
-def basic_consult(type_consult, msg=None):
+def basic_consult(type_consult, msg=None,extra_system_msg=""):
     global config_data
     
     if msg is None: 
@@ -280,7 +280,7 @@ def basic_consult(type_consult, msg=None):
             
             res, OUT = lib_funcs.consultation_in_depth(config_data,
                                             lib_funcs.SYSTEM_QUESTION[type_consult] +
-                                            f"\n- The text sent is probably written in {fmt} format.",
+                                            f"\n- The text sent is probably written in {fmt} format."+extra_system_msg,
                                             text)
             
             if res == "<OK>":
@@ -372,6 +372,9 @@ def concise_writing():
     
 def simplified_writing():
     basic_consult("simplified_writing")
+
+def eliminate_redundancies():
+    basic_consult("eliminate_redundancies")
 
 def paraphrase():
     basic_consult("paraphrase")
@@ -509,6 +512,10 @@ class ClipboardTextCorrectionApp(QApplication):
         simplified_writing_action = QAction(QIcon.fromTheme("accessories-text-editor"), "Simplified writing", self)
         simplified_writing_action.triggered.connect(simplified_writing)
         self.improve_submenu.addAction(simplified_writing_action)
+        
+        eliminate_redundancies_action = QAction(QIcon.fromTheme("accessories-text-editor"), "Eliminate redundancies", self)
+        eliminate_redundancies_action.triggered.connect(eliminate_redundancies)
+        self.improve_submenu.addAction(eliminate_redundancies_action)
         
         paraphrase_action = QAction(QIcon.fromTheme("accessories-text-editor"), "Paraphrase", self)
         paraphrase_action.triggered.connect(paraphrase)

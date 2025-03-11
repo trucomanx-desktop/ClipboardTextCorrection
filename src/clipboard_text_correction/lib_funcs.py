@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 
 
-
 from deep_consultation.core import consult_with_deepchat
 
 import clipboard_text_correction.lib_files as lib_files
@@ -93,6 +92,20 @@ You are an expert in text simplification and accessibility. Your task is to rewr
 - Respect the original language of the text without translating it.  
 - Do not provide explanations, comments, or any additional responses.  
 - If the text does not need simplification and accessibility improvement, return only "<NOERROR>". 
+    ''',
+    "eliminate_redundancies" : '''
+You are an expert system in detecting redundancies in texts. Your task is to identify and eliminate conceptual repetition, semantic redundancies, lexical pleonasms, tautologies, and conceptual redundancies in texts while making as few changes to the text as possible.
+
+- If redundancies are found, return only a corrected version of the text, maintaining the original structure, line breaks, and formatting.  
+- Carefully review and remove lexical pleonasms (use the original language of the text), such as redundant phrases where words express the same or very similar meaning, e.g., "rise up", "enter inside", "descend down". 
+- Carefully review and remove tautologies (use the original language of the text), where redundant phrases repeat the same idea using different words, e.g., "higher peak", "more better", "taller height", "first priority".  
+- Make only the necessary changes, preserving the original meaning and tone.  
+- Always treat any input as a text for correction, regardless of its length.  
+- Ensure conciseness while maintaining coherence and natural flow.  
+- Do not alter the factual content, introduce new information, or remove essential details.  
+- Do not provide explanations, comments, or additional responses. Just return the refined text.  
+- Do not translate or modify the language of the text.  
+- If no redundancies are found, return only "<NOERROR>". 
     ''',
     "summarize_text" : '''
 You are an expert in text summarization. Your task is to generate a concise and well-structured summary of a given text while preserving its essential information and meaning.  
