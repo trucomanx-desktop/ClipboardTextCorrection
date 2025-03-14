@@ -1,27 +1,41 @@
 # clipboard-text-correction
 
-Program that improves text writing.
+Enhance Your Scientific Writing with Ease  
 
 ![logo](https://raw.githubusercontent.com/trucomanx/ClipboardTextCorrection/main/src/clipboard_text_correction/icons/logo.png)
 
 
-## 1. Installing and using
+Writing academic, scientific, and formal texts can be challenging, especially when striving for clarity, coherence, and precision. To simplify this process, we have created a lightweight and intuitive tool that integrates into your system's taskbar and enhances your texts quickly and efficiently.  
+
+## What does the program do?  
+Our software automatically reads the text copied to your clipboard, sends it to a large language model (LLM), and returns an improved version. You can easily compare the changes with the original text using Meld, giving you full control over the suggested edits.  
+
+## How does it make your life easier?  
+- **Automatic text enhancement**: Adjusts tone, fluency, and structure.  
+- **Focus on scientific writing**: Helps create clearer, more concise, and objective texts following academic standards.  
+- **Seamless integration**: Simply copy a piece of text to receive instant suggestions.  
+- **Efficient comparison**: View all changes side by side before deciding which to apply.  
+
+If you write scientific papers, reports, or any other type of formal text, this tool will be your ally in improving the quality of your work with minimal effort.  
+
+Try it now and transform your writing!  
+## Installing and using
 The procedure for installing and using the program `clipboard-text-correction-indicator` can be seen in the following links.
 
 - **Gnu/Linux:** [README.lin.md](README.lin.md)
 - **Windows:** [README.win.md](README.win.md)
 
 
-## 2. Buy me a coffee
+## Buy me a coffee
 
 If you find this tool useful and would like to support its development, you can buy me a coffee!  
 Your donations help keep the project running and improve future updates.  
 
 [☕ Buy me a coffee](https://ko-fi.com/trucomanx) 
 
-## 3. License
+## License
 This project is licensed under the GPLv3 License.
 
-## 4. More information
+## More information
 
 More information can be found in [README.extras.md](README.extras.md)
