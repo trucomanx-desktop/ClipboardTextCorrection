@@ -7,6 +7,8 @@ Enhance Your Scientific Writing with Ease
 
 Writing academic, scientific, and formal texts can be challenging, especially when striving for clarity, coherence, and precision. To simplify this process, we have created a lightweight and intuitive tool that integrates into your system's taskbar and enhances your texts quickly and efficiently.  
 
+![open-config-file](https://raw.githubusercontent.com/trucomanx/ClipboardTextCorrection/main/images/open-config-file.lin.png)
+
 ## What does the program do?  
 Our software automatically reads the text copied to your clipboard, sends it to a large language model (LLM), and returns an improved version. You can easily compare the changes with the original text using Meld, giving you full control over the suggested edits.  
 
