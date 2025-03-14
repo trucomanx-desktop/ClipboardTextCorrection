@@ -7,6 +7,7 @@
 * **Improve writing fluency**: Enhance the readability and logical flow of ideas while preserving the original meaning, tone, and structure.
 * **Concise writing**: Reduces wordiness while maintaining meaning.
 * **Simplified writing**: Rewrite a given text to make it more accessible to a broader audience while preserving its meaning.
+* **Eliminate redundancies:** Eliminates various types of redundancies in the text.
 * **Paraphrase**: Rewrites the text with different wording while keeping the original meaning.
 
 ## Improve texts from files
@@ -34,6 +35,7 @@
 ## Text analysis from clipboard
 
 * **Text statistics**: Returns an approximate analysis of the number of words, no-words and tokens in the text.
+* **Text readability:** Returns various readability indices on the text in the clipboard.
 
 ## Program usage information
 
