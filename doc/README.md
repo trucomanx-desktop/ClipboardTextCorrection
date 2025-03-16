@@ -32,6 +32,11 @@
 * **Text to LaTeX equation**: Converts plain text description into a LaTeX-formatted equation.
 * **Text to LaTeX table**: Converts plain text description into a LaTeX-formatted table.
 
+## Synthesize LaTeX texts from dialog
+
+* **Text to LaTeX equation**: Open text dialog window and convert plain text description into LaTeX-formatted equation.
+* **Text to LaTeX table**: Open text dialog window and convert plain text description into LaTeX-formatted table.
+
 ## Text analysis from clipboard
 
 * **Text statistics**: Returns an approximate analysis of the number of words, no-words and tokens in the text.

@@ -63,7 +63,7 @@ def show_notification_message(title, message):
 
 class MessageDialog(QDialog):
     """Display a message with copyable text and an OK button"""
-    def __init__(self, message, width=600, height=300, parent=None):
+    def __init__(self, message, width=600, height=300, parent=None, read_only=False):
         super().__init__(parent)
         self.setWindowTitle("Message")
         self.resize(width, height)
@@ -73,14 +73,14 @@ class MessageDialog(QDialog):
         layout.setContentsMargins(10, 10, 10, 10)
         
         # Create text view for displaying the message
-        text_edit = QTextEdit()
-        text_edit.setPlainText(message)
-        text_edit.setReadOnly(True)
-        text_edit.setLineWrapMode(QTextEdit.WidgetWidth)
+        self.text_edit = QTextEdit()
+        self.text_edit.setPlainText(message)
+        self.text_edit.setReadOnly(read_only)
+        self.text_edit.setLineWrapMode(QTextEdit.WidgetWidth)
         
         # Add text view to a scroll area
         scroll_area = QScrollArea()
-        scroll_area.setWidget(text_edit)
+        scroll_area.setWidget(self.text_edit)
         scroll_area.setWidgetResizable(True)
         layout.addWidget(scroll_area)
         
@@ -89,9 +89,11 @@ class MessageDialog(QDialog):
         ok_button.clicked.connect(self.accept)
         layout.addWidget(ok_button)
 
-def show_message(message, width=600, height=300):
-    dialog = MessageDialog(message, width, height)
+def show_message(message, width=600, height=300, read_only=False):
+    dialog = MessageDialog(message, width, height, read_only=read_only)
     dialog.exec_()
+    res = dialog.text_edit.toPlainText()
+    return res
 
 class AboutWindow(QDialog):
     """About dialog window"""
@@ -417,6 +419,22 @@ def text_to_latex_equation():
 def text_to_latex_table():
     question_answer_consult("text_to_latex_table")
     
+################################################################################
+
+def dialog_text_to_latex_equation():
+    res = show_message("")
+    if len(res)>=5:
+        question_answer_consult("text_to_latex_equation", msg = res)
+    else:
+        show_message("You need to write at least 5 characters in the description")
+    
+def dialog_text_to_latex_table():
+    res = show_message("")
+    if len(res)>=5:
+        question_answer_consult("text_to_latex_table", msg = res)
+    else:
+        show_message("You need to write at least 5 characters in the description")
+    
 ################################################################################    
 def statistics():
     msg = get_clipboard_text()
@@ -580,6 +598,27 @@ class ClipboardTextCorrectionApp(QApplication):
         # Add latex_submenu to main menu
         self.tray_menu.addMenu(self.latex_submenu)
         self.tray_menu.addSeparator()
+        
+        
+        
+        # Create latex_submenu
+        self.latex_dialog_submenu = QMenu("⌨️ Synthesize LaTeX texts from dialog")
+        
+        # Add actions to latex_dialog_submenu
+        latex_equation_dialog_action = QAction(QIcon.fromTheme("font-x-generic"), "Text to latex equation", self)
+        latex_equation_dialog_action.triggered.connect(dialog_text_to_latex_equation)
+        self.latex_dialog_submenu.addAction(latex_equation_dialog_action)
+        
+        latex_table_dialog_action = QAction(QIcon.fromTheme("font-x-generic"), "Text to latex table", self)
+        latex_table_dialog_action.triggered.connect(dialog_text_to_latex_table)
+        self.latex_dialog_submenu.addAction(latex_table_dialog_action)
+        
+        # Add latex_dialog_submenu to main menu
+        self.tray_menu.addMenu(self.latex_dialog_submenu)
+        self.tray_menu.addSeparator()
+        
+        
+        
         
         # Create analysis_submenu
         self.analysis_submenu = QMenu("📋 Text analysis from clipboard")
