@@ -27,15 +27,12 @@
 * **Logical fallacy detector**: This tool analyzes a given text to identify logical fallacies. It detects any propositions that contain logical errors and provides the name of the fallacy (if applicable) along with an explanation of why the proposition is fallacious and what the fallacy consists of. 
 * **Keyword generator**: This tool extracts the main keywords from a given scientific text. It identifies the most important terms that represent the core ideas and concepts in the text. The keywords are grouped by relevant scientific fields (e.g., health sciences, computer science, etc.) to reflect academic and research-specific terminologies, making them suitable for academic indexing and searching.
 
-## Synthesize LaTeX texts from clipboard
+## Synthesize LaTeX texts
 
-* **Text to LaTeX equation**: Converts plain text description into a LaTeX-formatted equation.
-* **Text to LaTeX table**: Converts plain text description into a LaTeX-formatted table.
-
-## Synthesize LaTeX texts from dialog
-
-* **Text to LaTeX equation**: Open text dialog window and convert plain text description into LaTeX-formatted equation.
-* **Text to LaTeX table**: Open text dialog window and convert plain text description into LaTeX-formatted table.
+* **From clipboard >> Text to LaTeX equation**: Converts plain text description into a LaTeX-formatted equation.
+* **From clipboard >> Text to LaTeX table**: Converts plain text description into a LaTeX-formatted table.
+* **From dialog >> Text to LaTeX equation**: Open text dialog window and convert plain text description into LaTeX-formatted equation.
+* **From dialog >> Text to LaTeX table**: Open text dialog window and convert plain text description into LaTeX-formatted table.
 
 ## Text analysis from clipboard
 

@@ -517,6 +517,8 @@ class ClipboardTextCorrectionApp(QApplication):
         # Create the tray menu
         self.tray_menu = QMenu()
         
+        ########################################################################
+        ########################################################################
         # Create improve_submenu
         self.improve_submenu = QMenu("📋 Improve texts from clipboard")
         
@@ -553,6 +555,9 @@ class ClipboardTextCorrectionApp(QApplication):
         self.tray_menu.addMenu(self.improve_submenu)
         self.tray_menu.addSeparator()
         
+        
+        ########################################################################
+        ########################################################################
         # Create improve_file_submenu
         self.improve_file_submenu = QMenu("💻 Improve texts from files")
         
@@ -565,6 +570,9 @@ class ClipboardTextCorrectionApp(QApplication):
         self.tray_menu.addMenu(self.improve_file_submenu)
         self.tray_menu.addSeparator()
         
+        
+        ########################################################################
+        ########################################################################
         # Create synthesize_submenu
         self.synthesize_submenu = QMenu("📋 Synthesize texts from clipboard")
         
@@ -593,8 +601,16 @@ class ClipboardTextCorrectionApp(QApplication):
         self.tray_menu.addMenu(self.synthesize_submenu)
         self.tray_menu.addSeparator()
         
+        
+        ########################################################################
+        ########################################################################
+
         # Create latex_submenu
-        self.latex_submenu = QMenu("📋 Synthesize LaTeX texts from clipboard")
+        self.all_latex_submenu = QMenu("🎉 Synthesize LaTeX texts")
+
+        #######################
+        # Create latex_submenu
+        self.latex_submenu = QMenu("📋 From clipboard")
         
         # Add actions to latex_submenu
         latex_equation_action = QAction(QIcon.fromTheme("font-x-generic"), "Text to latex equation", self)
@@ -606,13 +622,13 @@ class ClipboardTextCorrectionApp(QApplication):
         self.latex_submenu.addAction(latex_table_action)
         
         # Add latex_submenu to main menu
-        self.tray_menu.addMenu(self.latex_submenu)
-        self.tray_menu.addSeparator()
+        self.all_latex_submenu.addMenu(self.latex_submenu)
+        self.all_latex_submenu.addSeparator()
         
         
-        
+        #######################
         # Create latex_submenu
-        self.latex_dialog_submenu = QMenu("⌨️ Synthesize LaTeX texts from dialog")
+        self.latex_dialog_submenu = QMenu("⌨️ From dialog")
         
         # Add actions to latex_dialog_submenu
         latex_equation_dialog_action = QAction(QIcon.fromTheme("font-x-generic"), "Text to latex equation", self)
@@ -624,12 +640,16 @@ class ClipboardTextCorrectionApp(QApplication):
         self.latex_dialog_submenu.addAction(latex_table_dialog_action)
         
         # Add latex_dialog_submenu to main menu
-        self.tray_menu.addMenu(self.latex_dialog_submenu)
+        self.all_latex_submenu.addMenu(self.latex_dialog_submenu)
+        self.all_latex_submenu.addSeparator()
+        
+        #######################
+        # Add latex_submenu to main menu
+        self.tray_menu.addMenu(self.all_latex_submenu)
         self.tray_menu.addSeparator()
         
-        
-        
-        
+        ########################################################################
+        ########################################################################
         # Create analysis_submenu
         self.analysis_submenu = QMenu("📋 Text analysis from clipboard")
         
@@ -646,6 +666,8 @@ class ClipboardTextCorrectionApp(QApplication):
         self.tray_menu.addMenu(self.analysis_submenu)
         self.tray_menu.addSeparator()
         
+        ########################################################################
+        ########################################################################
         # Create program_information_submenu
         self.program_info_submenu = QMenu("🛠️ Program usage information")
         
@@ -666,6 +688,8 @@ class ClipboardTextCorrectionApp(QApplication):
         self.tray_menu.addMenu(self.program_info_submenu)
         self.tray_menu.addSeparator()
         
+        ########################################################################
+        ########################################################################
         # Add direct actions to main menu
         coffee_action = QAction(QIcon.fromTheme("emblem-favorite"), "☕ Buy me a coffee: TrucomanX", self)
         coffee_action.triggered.connect(buy_me_a_coffee)
@@ -677,6 +701,8 @@ class ClipboardTextCorrectionApp(QApplication):
         
         self.tray_menu.addSeparator()
         
+        ########################################################################
+        ########################################################################
         # Add quit action
         quit_action = QAction(QIcon.fromTheme("application-exit"), "❌ Exit", self)
         quit_action.triggered.connect(self.quit)
