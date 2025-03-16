@@ -45,7 +45,7 @@ setup(
     ],
     python_requires='>=3.8',
     package_data={
-        'clipboard_text_correction': ['icons/logo.png'],
+        'clipboard_text_correction': ['icons/logo.png','data/article_format.json'],
     },
     include_package_data=True, 
     project_urls={  # Optional

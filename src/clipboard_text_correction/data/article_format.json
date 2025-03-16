@@ -1,0 +1,99 @@
+[
+    {
+        "description": "This format is common for applied mathematics, numerical analysis, and mathematical modeling papers. It focuses on theory, methods, numerical validation, and analysis of results.",
+        "sections": [
+            {"Introduction": "A brief overview of the research problem, objectives, and motivation."},
+            {"Theoretical Basis": "Background on the mathematical theory, methods, or models that are used in the paper."},
+            {"Methodology": "Explanation of the approach or methods developed or applied in the research."},
+            {"Numerical Results": "Presentation of numerical experiments, data, and results obtained using the proposed methods."},
+            {"Analysis": "Interpretation of the numerical results, comparison with theory or other methods."},
+            {"Acknowledgment": "Acknowledgment of any support or funding received during the research."},
+            {"Conclusions": "Summary of the findings and potential directions for future research."}
+        ]
+    },
+    {
+        "description": "This format is typical for physics papers, especially in theoretical and experimental physics, focusing on explaining new findings or experimental setups.",
+        "sections": [
+            {"Introduction": "Overview of the problem and objectives, with a brief summary of relevant background."},
+            {"Theory and Models": "Presentation of the theoretical framework or models used to analyze the problem."},
+            {"Methodology/Experimental Setup": "Details about the experimental methods, setup, or simulations performed."},
+            {"Results": "Presentation of experimental or theoretical results, often including graphs and tables."},
+            {"Discussion": "Interpretation of results in the context of the theory and comparison with previous work."},
+            {"Acknowledgment": "Acknowledgment of contributions, funding, or support."},
+            {"Conclusions": "Concluding remarks and potential implications or future work."}
+        ]
+    },
+    {
+        "description": "This format is common in social sciences (e.g., sociology, psychology, economics) with a focus on theory, research questions, and empirical validation.",
+        "sections": [
+            {"Introduction": "Introduction to the research problem, its importance, and objectives."},
+            {"Literature Review": "Review of existing literature and theoretical frameworks relevant to the research."},
+            {"Research Questions/Hypotheses": "Clear presentation of the research questions or hypotheses being tested."},
+            {"Methodology": "Explanation of the research design, sampling, and data collection methods."},
+            {"Results": "Presentation of statistical analyses or qualitative findings."},
+            {"Discussion": "Interpretation of results in relation to the hypotheses and existing literature."},
+            {"Acknowledgment": "Acknowledgment of any assistance or funding."},
+            {"Conclusions": "Summary of findings and suggestions for future research or practical applications."}
+        ]
+    },
+    {
+        "description": "This structure is common in agricultural sciences, agronomic sciences, biology and health sciences, where experiments or observations are the focus and methods need to be reproducible.",
+        "sections": [
+            {"Introduction": "Introduction to the research question, background, and objectives."},
+            {"Background": "Review of relevant biological concepts, previous research, or disease models."},
+            {"Materials and Methods": "Detailed description of the materials, techniques, and experimental methods used."},
+            {"Results": "Presentation of experimental data, often with figures and tables."},
+            {"Discussion": "Interpretation of the results, comparison with previous research, and possible clinical implications."},
+            {"Acknowledgment": "Acknowledgment of any financial or academic support."},
+            {"Conclusions": "Summary of results, implications for practice, and future research directions."}
+        ]
+    },
+    {
+        "description": "In chemistry and chemical engineering, this format is used to report on experimental methods, systems design, and reactions or materials.",
+        "sections": [
+            {"Introduction": "Introduction to the chemical problem, its significance, and the objectives of the study."},
+            {"Literature Review": "Overview of previous research and relevant chemical theories or models."},
+            {"Experimental Section/Materials and Methods": "Detailed description of the chemical experiments, procedures, and equipment used."},
+            {"Results and Discussion": "Presentation and analysis of experimental data, with a focus on interpreting results."},
+            {"Acknowledgment": "Acknowledgment of contributions, resources, or funding."},
+            {"Conclusions": "Summary of findings, implications for chemical processes, and possible future research."}
+        ]
+    },
+    {
+        "description": "This format is used for computer science and software engineering papers, where systems or algorithms are developed and tested.",
+        "sections": [
+            {"Introduction (with related works)": "Introduction to the problem in the context of the state of the art, the goals of the research, and the motivation. Use the format:\n1. General context of the topic.\n 2. Specific problem within the topic that the text focuses on.\n3. Specific computational problem addressed.\n4. Proposed computational solution.\n5. Obtained results."},
+            {"System Design/Methodology": "Detailed description of the algorithms, models, or systems being proposed or implemented."},
+            {"Implementation": "Explanation of the implementation of the proposed system or algorithm."},
+            {"Experiments and Results": "Presentation of benchmarks, performance data, and experimental results."},
+            {"Discussion": "Analysis of results, comparison with other approaches, and limitations."},
+            {"Acknowledgment": "Acknowledgment of any support or resources."},
+            {"Conclusions": "Summary of the contributions, results, and potential future work."}
+        ]
+    },
+    {
+        "description": "This format is typical for philosophy and humanities papers, where the focus is on logical argumentation, analysis, and critique of existing ideas.",
+        "sections": [
+            {"Introduction": "Introduction to the central research question, context, and goals of the paper."},
+            {"Literature Review": "Review of existing philosophical literature and key concepts."},
+            {"Thesis or Research Question": "Presentation of the central thesis or research question the paper seeks to address."},
+            {"Argumentation": "Logical development of arguments, philosophical analysis, or critique."},
+            {"Discussion": "Reflection on the implications of the arguments and potential counterarguments."},
+            {"Acknowledgment": "Acknowledgment of any support or contributions."},
+            {"Conclusions": "Concluding summary of the arguments and future directions for research."}
+        ]
+    },
+    {
+        "description": "In economics and political science, this format is used to present theoretical models or empirical data related to policy or economic issues.",
+        "sections": [
+            {"Introduction": "Overview of the research problem, its importance, and objectives."},
+            {"Literature Review": "Review of relevant theories, models, and previous research in the field."},
+            {"Research Design/Methodology": "Explanation of the research methods, data collection, and analysis techniques."},
+            {"Results": "Presentation of empirical results, often with statistical analyses or case studies."},
+            {"Discussion": "Interpretation of the results in relation to theories and real-world implications."},
+            {"Acknowledgment": "Acknowledgment of support, data sources, or collaborations."},
+            {"Conclusions": "Summary of findings, policy implications, and suggestions for future research."}
+        ]
+    }
+]
+
