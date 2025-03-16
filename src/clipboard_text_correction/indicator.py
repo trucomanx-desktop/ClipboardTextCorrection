@@ -84,10 +84,20 @@ class MessageDialog(QDialog):
         scroll_area.setWidgetResizable(True)
         layout.addWidget(scroll_area)
         
+        # Copy to clipboard Button
+        copy_button = QPushButton("Copy to clipboard")
+        copy_button.clicked.connect(self.copy_to_clipboard)
+        layout.addWidget(copy_button)
+        
         # OK Button
         ok_button = QPushButton("OK")
         ok_button.clicked.connect(self.accept)
         layout.addWidget(ok_button)
+
+    def copy_to_clipboard(self):
+        """Copy the text from the text edit to clipboard"""
+        clipboard = QApplication.clipboard()
+        clipboard.setText(self.text_edit.toPlainText())
 
 def show_message(message, width=600, height=300, read_only=False):
     dialog = MessageDialog(message, width, height, read_only=read_only)
