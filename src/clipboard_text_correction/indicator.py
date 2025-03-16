@@ -18,6 +18,7 @@ from clipboard_text_correction.about import __version__
 import clipboard_text_correction.lib_funcs as lib_funcs
 import clipboard_text_correction.lib_files as lib_files
 import clipboard_text_correction.lib_stats as lib_stats
+import clipboard_text_correction.lib_latex as lib_latex
 
 import clipboard_text_correction.about as about
 
@@ -45,6 +46,21 @@ except json.JSONDecodeError:
     print(f"Erro: O arquivo '{config_file_path}' não contém um JSON válido.")
     sys.exit()
 
+
+try:
+    article_format_data = {}
+    base_dir_path = os.path.dirname(os.path.abspath(__file__))
+    article_format_path = os.path.join(base_dir_path, 'data', 'article_format.json')
+    with open(article_format_path, "r") as arquivo:
+        article_format_data = json.load(arquivo)
+    
+except FileNotFoundError:
+    print(f"Erro: O arquivo '{base_dir_path}' não foi encontrado.")
+    sys.exit()
+    
+except json.JSONDecodeError:
+    print(f"Erro: O arquivo '{base_dir_path}' não contém um JSON válido.")
+    sys.exit()
 ################################################################################
 ################################################################################
 ################################################################################
@@ -391,6 +407,11 @@ def eliminate_redundancies():
 def paraphrase():
     basic_consult("paraphrase")
 
+def on_action_article_template(item):
+    show_notification_message("Template", "Please copy")
+    res = lib_latex.generate_latex_article(item)
+    show_message(res)
+    
 ################################################################################
 def improves_file_writing():
     file_path = select_file()
@@ -639,9 +660,23 @@ class ClipboardTextCorrectionApp(QApplication):
         latex_table_dialog_action.triggered.connect(dialog_text_to_latex_table)
         self.latex_dialog_submenu.addAction(latex_table_dialog_action)
         
+        
         # Add latex_dialog_submenu to main menu
         self.all_latex_submenu.addMenu(self.latex_dialog_submenu)
         self.all_latex_submenu.addSeparator()
+
+        # Criar submenu para traduções
+        self.article_template_menu = QMenu("🖥️ Article template")
+        
+        for item in article_format_data:
+            label = item["title"]
+            
+            action = QAction(label, self)
+            action.setIcon(QIcon.fromTheme("emblem-default"))
+            action.triggered.connect(lambda checked, item=item: on_action_article_template(item))
+            self.article_template_menu.addAction(action)
+        
+        self.all_latex_submenu.addMenu(self.article_template_menu)
         
         #######################
         # Add latex_submenu to main menu

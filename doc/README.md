@@ -33,11 +33,12 @@
 * **From clipboard >> Text to LaTeX table**: Converts plain text description into a LaTeX-formatted table.
 * **From dialog >> Text to LaTeX equation**: Open text dialog window and convert plain text description into LaTeX-formatted equation.
 * **From dialog >> Text to LaTeX table**: Open text dialog window and convert plain text description into LaTeX-formatted table.
+* **Article template**: Complete article latex template.
 
 ## Text analysis from clipboard
 
 * **Text statistics**: Returns an approximate analysis of the number of words, no-words and tokens in the text.
-* **Text readability:** Returns various readability indices on the text in the clipboard.
+* **Text readability**: Returns various readability indices on the text in the clipboard.
 
 ## Program usage information
 
