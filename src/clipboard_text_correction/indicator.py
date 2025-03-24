@@ -79,9 +79,9 @@ def show_notification_message(title, message):
 
 class MessageDialog(QDialog):
     """Display a message with copyable text and an OK button"""
-    def __init__(self, message, width=600, height=300, parent=None, read_only=False):
+    def __init__(self, message, width=600, height=300, parent=None, read_only=False, title="Message"):
         super().__init__(parent)
-        self.setWindowTitle("Message")
+        self.setWindowTitle(title)
         self.resize(width, height)
         
         # Create layout
@@ -115,8 +115,8 @@ class MessageDialog(QDialog):
         clipboard = QApplication.clipboard()
         clipboard.setText(self.text_edit.toPlainText())
 
-def show_message(message, width=600, height=300, read_only=False):
-    dialog = MessageDialog(message, width, height, read_only=read_only)
+def show_message(message, width=600, height=300, read_only=False, title="Message"):
+    dialog = MessageDialog(message, width, height, read_only=read_only, title=title)
     dialog.exec_()
     res = dialog.text_edit.toPlainText()
     return res
@@ -308,7 +308,7 @@ def basic_consult(type_consult, msg=None,extra_system_msg=""):
             
             res, OUT = lib_funcs.consultation_in_depth(config_data,
                                             lib_funcs.SYSTEM_QUESTION[type_consult] +
-                                            f"\n- The text sent is probably written in {fmt} format."+extra_system_msg,
+                                            f"\n- The text sent is probably written in {fmt} format.\n"+extra_system_msg,
                                             text)
             
             if res == "<OK>":
@@ -407,10 +407,16 @@ def eliminate_redundancies():
 def paraphrase():
     basic_consult("paraphrase")
 
-def on_action_article_template(item):
-    show_notification_message("Template", "Please copy")
-    res = lib_latex.generate_latex_article(item)
-    show_message(res)
+def dialog_text_to_custom_orders():
+    res = show_message("",title="Write your IMPERATIVE order:")
+    if len(res)>=7:
+        res = """
+Your principal tasks as expert in writing, editing, and correcting texts are as follows:\n
+        """ + res 
+        basic_consult("text_to_custom_orders",extra_system_msg=res)
+    else:
+        show_message("You need to write at least 7 characters in the custom order")
+        
     
 ################################################################################
 def improves_file_writing():
@@ -450,8 +456,8 @@ def text_to_latex_equation():
 def text_to_latex_table():
     question_answer_consult("text_to_latex_table")
     
-################################################################################
 
+################################################################################
 def dialog_text_to_latex_equation():
     res = show_message("")
     if len(res)>=5:
@@ -465,6 +471,11 @@ def dialog_text_to_latex_table():
         question_answer_consult("text_to_latex_table", msg = res)
     else:
         show_message("You need to write at least 5 characters in the description")
+################################################################################
+def on_action_article_template(item):
+    show_notification_message("Template", "Please copy")
+    res = lib_latex.generate_latex_article(item)
+    show_message(res)
     
 ################################################################################    
 def statistics():
@@ -544,33 +555,37 @@ class ClipboardTextCorrectionApp(QApplication):
         self.improve_submenu = QMenu("📋 Improve texts from clipboard")
         
         # Add actions to improve_submenu
-        improve_writing_action = QAction(QIcon.fromTheme("accessories-text-editor"), "Improve writing", self)
+        improve_writing_action = QAction(QIcon.fromTheme("accessories-text-editor"), "\tImprove writing", self)
         improve_writing_action.triggered.connect(improve_writing)
         self.improve_submenu.addAction(improve_writing_action)
         
-        improve_scientific_action = QAction(QIcon.fromTheme("accessories-text-editor"), "Improve scientific writing", self)
+        improve_scientific_action = QAction(QIcon.fromTheme("accessories-text-editor"), "\tImprove scientific writing", self)
         improve_scientific_action.triggered.connect(improve_scientific_writing)
         self.improve_submenu.addAction(improve_scientific_action)
 
-        improve_writing_fluency_action = QAction(QIcon.fromTheme("accessories-text-editor"), "Improve writing fluency", self)
+        improve_writing_fluency_action = QAction(QIcon.fromTheme("accessories-text-editor"), "\tImprove writing fluency", self)
         improve_writing_fluency_action.triggered.connect(improve_writing_fluency)
         self.improve_submenu.addAction(improve_writing_fluency_action)
         
-        concise_writing_action = QAction(QIcon.fromTheme("accessories-text-editor"), "Concise writing", self)
+        concise_writing_action = QAction(QIcon.fromTheme("accessories-text-editor"), "\tConcise writing", self)
         concise_writing_action.triggered.connect(concise_writing)
         self.improve_submenu.addAction(concise_writing_action)
         
-        simplified_writing_action = QAction(QIcon.fromTheme("accessories-text-editor"), "Simplified writing", self)
+        simplified_writing_action = QAction(QIcon.fromTheme("accessories-text-editor"), "\tSimplified writing", self)
         simplified_writing_action.triggered.connect(simplified_writing)
         self.improve_submenu.addAction(simplified_writing_action)
         
-        eliminate_redundancies_action = QAction(QIcon.fromTheme("accessories-text-editor"), "Eliminate redundancies", self)
+        eliminate_redundancies_action = QAction(QIcon.fromTheme("accessories-text-editor"), "\tEliminate redundancies", self)
         eliminate_redundancies_action.triggered.connect(eliminate_redundancies)
         self.improve_submenu.addAction(eliminate_redundancies_action)
         
-        paraphrase_action = QAction(QIcon.fromTheme("accessories-text-editor"), "Paraphrase", self)
+        paraphrase_action = QAction(QIcon.fromTheme("accessories-text-editor"), "\tParaphrase", self)
         paraphrase_action.triggered.connect(paraphrase)
         self.improve_submenu.addAction(paraphrase_action)
+        
+        custom_orders_action = QAction(QIcon.fromTheme("emblem-default"), "\tDialog for custom orders", self)
+        custom_orders_action.triggered.connect(dialog_text_to_custom_orders)
+        self.improve_submenu.addAction(custom_orders_action)
         
         # Add improve_submenu to main menu
         self.tray_menu.addMenu(self.improve_submenu)
@@ -583,7 +598,7 @@ class ClipboardTextCorrectionApp(QApplication):
         self.improve_file_submenu = QMenu("💻 Improve texts from files")
         
         # Add actions to improve_file_submenu
-        improve_file_action = QAction(QIcon.fromTheme("edit-find-replace"), "Improves file writing", self)
+        improve_file_action = QAction(QIcon.fromTheme("edit-find-replace"), "\tImproves file writing", self)
         improve_file_action.triggered.connect(improves_file_writing)
         self.improve_file_submenu.addAction(improve_file_action)
         
@@ -598,23 +613,23 @@ class ClipboardTextCorrectionApp(QApplication):
         self.synthesize_submenu = QMenu("📋 Synthesize texts from clipboard")
         
         # Add actions to synthesize_submenu
-        summarize_action = QAction(QIcon.fromTheme("document-edit"), "Summarize text", self)
+        summarize_action = QAction(QIcon.fromTheme("document-edit"), "\tSummarize text", self)
         summarize_action.triggered.connect(summarize_text)
         self.synthesize_submenu.addAction(summarize_action)
         
-        abstract_title_action = QAction(QIcon.fromTheme("document-edit"), "Abstract to title", self)
+        abstract_title_action = QAction(QIcon.fromTheme("document-edit"), "\tAbstract to title", self)
         abstract_title_action.triggered.connect(abstract_to_title)
         self.synthesize_submenu.addAction(abstract_title_action)
         
-        cs_abstract_action = QAction(QIcon.fromTheme("document-edit"), "Text to computer science abstract", self)
+        cs_abstract_action = QAction(QIcon.fromTheme("document-edit"), "\tText to computer science abstract", self)
         cs_abstract_action.triggered.connect(text_to_computer_science_abstract)
         self.synthesize_submenu.addAction(cs_abstract_action)
         
-        fallacy_detector_action = QAction(QIcon.fromTheme("document-edit"), "Logical fallacy detector", self)
+        fallacy_detector_action = QAction(QIcon.fromTheme("document-edit"), "\tLogical fallacy detector", self)
         fallacy_detector_action.triggered.connect(logical_fallacy_detector)
         self.synthesize_submenu.addAction(fallacy_detector_action)
         
-        keyword_action = QAction(QIcon.fromTheme("document-edit"), "Keyword generator", self)
+        keyword_action = QAction(QIcon.fromTheme("document-edit"), "\tKeyword generator", self)
         keyword_action.triggered.connect(keyword_generator)
         self.synthesize_submenu.addAction(keyword_action)
         
@@ -631,14 +646,14 @@ class ClipboardTextCorrectionApp(QApplication):
 
         #######################
         # Create latex_submenu
-        self.latex_submenu = QMenu("📋 From clipboard")
+        self.latex_submenu = QMenu("\t📋 From clipboard")
         
         # Add actions to latex_submenu
-        latex_equation_action = QAction(QIcon.fromTheme("font-x-generic"), "Text to latex equation", self)
+        latex_equation_action = QAction(QIcon.fromTheme("font-x-generic"), "\tText to latex equation", self)
         latex_equation_action.triggered.connect(text_to_latex_equation)
         self.latex_submenu.addAction(latex_equation_action)
         
-        latex_table_action = QAction(QIcon.fromTheme("font-x-generic"), "Text to latex table", self)
+        latex_table_action = QAction(QIcon.fromTheme("font-x-generic"), "\tText to latex table", self)
         latex_table_action.triggered.connect(text_to_latex_table)
         self.latex_submenu.addAction(latex_table_action)
         
@@ -649,14 +664,14 @@ class ClipboardTextCorrectionApp(QApplication):
         
         #######################
         # Create latex_submenu
-        self.latex_dialog_submenu = QMenu("⌨️ From dialog")
+        self.latex_dialog_submenu = QMenu("\t⌨️ From dialog")
         
         # Add actions to latex_dialog_submenu
-        latex_equation_dialog_action = QAction(QIcon.fromTheme("font-x-generic"), "Text to latex equation", self)
+        latex_equation_dialog_action = QAction(QIcon.fromTheme("font-x-generic"), "\tText to latex equation", self)
         latex_equation_dialog_action.triggered.connect(dialog_text_to_latex_equation)
         self.latex_dialog_submenu.addAction(latex_equation_dialog_action)
         
-        latex_table_dialog_action = QAction(QIcon.fromTheme("font-x-generic"), "Text to latex table", self)
+        latex_table_dialog_action = QAction(QIcon.fromTheme("font-x-generic"), "\tText to latex table", self)
         latex_table_dialog_action.triggered.connect(dialog_text_to_latex_table)
         self.latex_dialog_submenu.addAction(latex_table_dialog_action)
         
@@ -666,12 +681,12 @@ class ClipboardTextCorrectionApp(QApplication):
         self.all_latex_submenu.addSeparator()
 
         # Criar submenu para traduções
-        self.article_template_menu = QMenu("🖥️ Article template")
+        self.article_template_menu = QMenu("\t🖥️ Article template")
         
         for item in article_format_data:
             label = item["title"]
             
-            action = QAction(label, self)
+            action = QAction("\t"+label, self)
             action.setIcon(QIcon.fromTheme("emblem-default"))
             action.triggered.connect(lambda checked, item=item: on_action_article_template(item))
             self.article_template_menu.addAction(action)
@@ -689,11 +704,11 @@ class ClipboardTextCorrectionApp(QApplication):
         self.analysis_submenu = QMenu("📋 Text analysis from clipboard")
         
         # Add actions to analysis_submenu
-        statistics_action = QAction(QIcon.fromTheme("document-page-setup"), "Text statistics", self)
+        statistics_action = QAction(QIcon.fromTheme("document-page-setup"), "\tText statistics", self)
         statistics_action.triggered.connect(statistics)
         self.analysis_submenu.addAction(statistics_action)
         
-        readability_action = QAction(QIcon.fromTheme("document-page-setup"), "Text readability", self)
+        readability_action = QAction(QIcon.fromTheme("document-page-setup"), "\tText readability", self)
         readability_action.triggered.connect(readability)
         self.analysis_submenu.addAction(readability_action)
         
@@ -707,15 +722,15 @@ class ClipboardTextCorrectionApp(QApplication):
         self.program_info_submenu = QMenu("🛠️ Program usage information")
         
         # Add actions to program_information_submenu
-        edit_config_action = QAction(QIcon.fromTheme("applications-utilities"), "Open config file", self)
+        edit_config_action = QAction(QIcon.fromTheme("applications-utilities"), "\tOpen config file", self)
         edit_config_action.triggered.connect(edit_config)
         self.program_info_submenu.addAction(edit_config_action)
         
-        url_usage_action = QAction(QIcon.fromTheme("applications-internet"), "Open url usage", self)
+        url_usage_action = QAction(QIcon.fromTheme("applications-internet"), "\tOpen url usage", self)
         url_usage_action.triggered.connect(open_url_usage)
         self.program_info_submenu.addAction(url_usage_action)
         
-        url_help_action = QAction(QIcon.fromTheme("help-contents"), "Open url help", self)
+        url_help_action = QAction(QIcon.fromTheme("help-contents"), "\tOpen url help", self)
         url_help_action.triggered.connect(open_url_help)
         self.program_info_submenu.addAction(url_help_action)
         
