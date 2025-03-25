@@ -439,8 +439,8 @@ def summarize_text():
 def abstract_to_title():
     question_answer_consult("abstract_to_title")
     
-def text_to_computer_science_abstract():
-    question_answer_consult("text_to_computer_science_abstract")
+def text_to_abstract_computer_science():
+    question_answer_consult("text_to_abstract_computer_science")
     
 def logical_fallacy_detector():
     question_answer_consult("logical_fallacy_detector")
@@ -621,8 +621,8 @@ class ClipboardTextCorrectionApp(QApplication):
         abstract_title_action.triggered.connect(abstract_to_title)
         self.synthesize_submenu.addAction(abstract_title_action)
         
-        cs_abstract_action = QAction(QIcon.fromTheme("document-edit"), "\tText to computer science abstract", self)
-        cs_abstract_action.triggered.connect(text_to_computer_science_abstract)
+        cs_abstract_action = QAction(QIcon.fromTheme("document-edit"), "\tText to abstract: computer science", self)
+        cs_abstract_action.triggered.connect(text_to_abstract_computer_science)
         self.synthesize_submenu.addAction(cs_abstract_action)
         
         fallacy_detector_action = QAction(QIcon.fromTheme("document-edit"), "\tLogical fallacy detector", self)

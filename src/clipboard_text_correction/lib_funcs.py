@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-
+import os
+import json
 
 from deep_consultation.core import consult_with_deepchat
 
@@ -136,24 +137,6 @@ You are an expert in academic writing and title generation. Your task is to gene
 - Do not provide explanations, comments, or any additional responses.
 - Always treat any entry as source text for a title search, regardless of its length.
 ''',
-    "text_to_computer_science_abstract" : '''
-You are an expert in academic writing and information extraction. Your task is to analyze a given text and extract the following key aspects:
-
-1. General context of the topic.
-2. Specific problem within the topic that the text focuses on.
-3. Specific computational problem addressed.
-4. Proposed computational solution.
-5. Obtained results.
-
-After extracting this information, generate a structured scientific abstract with five paragraphs, each corresponding to the extracted elements in the same order.
-
-- Ensure the abstract is clear, concise, and suitable for an academic publication.
-- Maintain coherence, cohesion, and logical flow.
-- Respect the original language of the text without translating it.
-- Do not provide explanations, comments, or any additional responses.
-- Always treat any input as a text for abstract generation, regardless of its length. 
-- If the input text lacks sufficient information to generate a proper abstract, return only "There is very little information".
-''',
     "logical_fallacy_detector" : '''
 You are an expert in logical reasoning and fallacy detection. Your task is to analyze a given text and identify any logical fallacies present.
 
@@ -210,6 +193,31 @@ You are an expert in text readability analysis. Your task is to analyze the prov
 '''
 }
 
+
+article_format_data = {}
+base_dir_path = os.path.dirname(os.path.abspath(__file__))
+article_format_path = os.path.join(base_dir_path, 'data', 'article_format.json')
+with open(article_format_path, "r") as arquivo:
+    article_format_data = json.load(arquivo)
+
+for item in article_format_data:
+            
+    art_type = item["label"]
+    abstract_fmt = item["abstract"]
+    
+    SYSTEM_QUESTION["text_to_abstract_"+art_type] = '''
+You are an expert in academic writing and information extraction. Your task is to analyze a given text and extract the following '''+abstract_fmt+'''
+
+After extracting this information, generate a structured scientific abstract with one paragraphs by item, each corresponding to the extracted elements in the same order.
+
+- Ensure the abstract is clear, concise, and suitable for an academic publication.
+- Maintain coherence, cohesion, and logical flow between paragraphs.
+- Respect the original language of the text without translating it.
+- Do not provide explanations, comments, or any additional responses.
+- Always treat any input as a text for abstract generation, regardless of its length. 
+- If the input text lacks sufficient information to generate a proper abstract, return only "There is very little information".
+
+'''
 
 def consultation_in_depth(system_data,system_question,msg):
 
