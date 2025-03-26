@@ -5,8 +5,10 @@ import pathlib
 here = pathlib.Path(__file__).parent.resolve()
 
 from clipboard_text_correction.about import __version__
+from clipboard_text_correction.about import __package__
 from clipboard_text_correction.about import __author__
 from clipboard_text_correction.about import __email__
+from clipboard_text_correction.about import __linux_indicator__
 from clipboard_text_correction.about import __description__
 from clipboard_text_correction.about import __url_source__
 from clipboard_text_correction.about import __url_funding__
@@ -16,7 +18,7 @@ from clipboard_text_correction.about import __url_bugs__
 long_description = (here / "README.md").read_text(encoding="utf-8");
 
 setup(
-    name="clipboard_text_correction",
+    name=__package__,
     version=__version__,
     description=__description__,
     author=__author__,
@@ -35,7 +37,7 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'clipboard-text-correction-indicator=clipboard_text_correction.indicator:main',
+            __linux_indicator__+'='+__package__+'.indicator:main',
         ],
     },
     classifiers=[
@@ -45,7 +47,7 @@ setup(
     ],
     python_requires='>=3.8',
     package_data={
-        'clipboard_text_correction': ['icons/logo.png','data/article_format.json'],
+        __package__: ['icons/logo.png','data/article_format.json'],
     },
     include_package_data=True, 
     project_urls={  # Optional

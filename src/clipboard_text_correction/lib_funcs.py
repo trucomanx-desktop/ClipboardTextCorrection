@@ -208,7 +208,7 @@ for item in article_format_data:
     SYSTEM_QUESTION["text_to_abstract_"+art_type] = '''
 You are an expert in academic writing and information extraction. Your task is to analyze a given text and extract the following '''+abstract_fmt+'''
 
-After extracting this information, generate a structured scientific abstract with one paragraphs by item, each corresponding to the extracted elements in the same order.
+After extracting this information, generate a structured scientific abstract with one paragraphs by aspect, each corresponding to the extracted elements in the same order.
 
 - Ensure the abstract is clear, concise, and suitable for an academic publication.
 - Maintain coherence, cohesion, and logical flow between paragraphs.

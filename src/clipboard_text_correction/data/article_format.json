@@ -1,5 +1,20 @@
 [
     {
+        "title": "Computer science",
+        "label": "computer_science",
+        "description": "This format is used for computer science and software engineering papers, where systems or algorithms are developed and tested.",
+        "abstract" : "Key aspects:\n1. General context of the topic.\n 2. Specific problem within the topic that the text focuses on.\n3. Specific computational problem addressed.\n4. Proposed computational solution.\n5. Obtained results.",
+        "sections": [
+            {"title":"Introduction (with related works)", "content": "Introduction to the problem in the context of the state of the art, the goals of the research, and the motivation. The introduction can expand the points covered in the abstract, except for the conclusions and results that belong to the specific sections of the article."},
+            {"title":"System Design/Methodology", "content": "Detailed description of the algorithms, models, or systems being proposed or implemented."},
+            {"title":"Implementation", "content": "Explanation of the implementation of the proposed system or algorithm."},
+            {"title":"Experiments and Results", "content": "Presentation of benchmarks, performance data, and experimental results."},
+            {"title":"Discussion", "content": "Analysis of results, comparison with other approaches, and limitations."},
+            {"title":"Acknowledgment", "content": "Acknowledgment of any support or resources."},
+            {"title":"Conclusions", "content": "Summary of the contributions, results, and potential future work."}
+        ]
+    },
+    {
         "title": "Applied math",
         "label": "applied_math",
         "description": "This format is common for applied mathematics, numerical analysis, and mathematical modeling papers. It focuses on theory, methods, numerical validation, and analysis of results.",
@@ -72,21 +87,6 @@
             {"title":"Results and Discussion", "content": "Presentation and analysis of experimental data, with a focus on interpreting results."},
             {"title":"Acknowledgment", "content": "Acknowledgment of contributions, resources, or funding."},
             {"title":"Conclusions", "content": "Summary of findings, implications for chemical processes, and possible future research."}
-        ]
-    },
-    {
-        "title": "Computer science",
-        "label": "computer_science",
-        "description": "This format is used for computer science and software engineering papers, where systems or algorithms are developed and tested.",
-        "abstract" : "Key aspects:\n1. General context of the topic.\n 2. Specific problem within the topic that the text focuses on.\n3. Specific computational problem addressed.\n4. Proposed computational solution.\n5. Obtained results.",
-        "sections": [
-            {"title":"Introduction (with related works)", "content": "Introduction to the problem in the context of the state of the art, the goals of the research, and the motivation. The introduction can expand the points covered in the abstract, except for the conclusions and results that belong to the specific sections of the article."},
-            {"title":"System Design/Methodology", "content": "Detailed description of the algorithms, models, or systems being proposed or implemented."},
-            {"title":"Implementation", "content": "Explanation of the implementation of the proposed system or algorithm."},
-            {"title":"Experiments and Results", "content": "Presentation of benchmarks, performance data, and experimental results."},
-            {"title":"Discussion", "content": "Analysis of results, comparison with other approaches, and limitations."},
-            {"title":"Acknowledgment", "content": "Acknowledgment of any support or resources."},
-            {"title":"Conclusions", "content": "Summary of the contributions, results, and potential future work."}
         ]
     },
     {

@@ -69,12 +69,16 @@ except json.JSONDecodeError:
 def show_notification_message(title, message):
     """Show a system notification"""
     if platform.system() == "Linux":
-        os.system(f'notify-send "⚠️ {title} ⚠️" "{message}"')
+        msg = message.replace("\""," ")
+        os.system(f'notify-send "⚠️ {title} ⚠️" "{msg}"')
     else:
         app = QApplication.instance()
+        
         tray_icon = app.property("tray_icon")
+        
         if tray_icon:
             tray_icon.showMessage("⚠️ " + title + " ⚠️", message, QSystemTrayIcon.Information, 3000)
+
 
 
 class MessageDialog(QDialog):
@@ -301,15 +305,20 @@ def basic_consult(type_consult, msg=None,extra_system_msg=""):
         is_ok = True
         
         for index, text in enumerate(texts):
+            
+            system_message =    lib_funcs.SYSTEM_QUESTION[type_consult] + \
+                                f"\n- The text sent is probably written in {fmt} format.\n" + \
+                                extra_system_msg
+            
             show_notification_message(type_consult, 
-                                      f"{index+1}/{len(texts)} - The text was sent, please wait.")
+                                      f"{index+1}/{len(texts)} - The text was sent, please wait.\n"+system_message)
             
             print(f"{index+1}/{len(texts)} - sent format:", fmt)
+
             
-            res, OUT = lib_funcs.consultation_in_depth(config_data,
-                                            lib_funcs.SYSTEM_QUESTION[type_consult] +
-                                            f"\n- The text sent is probably written in {fmt} format.\n"+extra_system_msg,
-                                            text)
+            res, OUT = lib_funcs.consultation_in_depth( config_data,
+                                                        system_message,
+                                                        text)
             
             if res == "<OK>":
                 all_out = all_out + OUT
@@ -335,7 +344,7 @@ def basic_consult(type_consult, msg=None,extra_system_msg=""):
         error_message = f"Error: {str(e)}\n\nDetails:\n{traceback.format_exc()}"
         show_error_dialog(error_message)
 
-def question_answer_consult(type_consult, msg=None, show=True):
+def question_answer_consult(type_consult, msg=None, show=True, extra_system_msg=""):
     global config_data
     
     if msg is None: 
@@ -361,12 +370,15 @@ def question_answer_consult(type_consult, msg=None, show=True):
         ext = lib_files.EXTENSION[fmt]
         print("format:", fmt)
     
-        show_notification_message(type_consult, "The text was sent, please wait.")
+        system_message = lib_funcs.SYSTEM_QUESTION[type_consult] + \
+                         f"\n- The text sent is probably written in {fmt} format.\n" + \
+                         extra_system_msg
         
-        res = lib_funcs.question_answer_in_depth(config_data,
-                                                lib_funcs.SYSTEM_QUESTION[type_consult] +
-                                                f"\n- The text sent is probably written in {fmt} format.",
-                                                msg)
+        show_notification_message(type_consult, "The text was sent, please wait.\n"+system_message)
+        
+        res = lib_funcs.question_answer_in_depth(   config_data,
+                                                    system_message,
+                                                    msg)
         
         show_notification_message(type_consult, "Answer recived!")
         
@@ -407,7 +419,7 @@ def eliminate_redundancies():
 def paraphrase():
     basic_consult("paraphrase")
 
-def dialog_text_to_custom_orders():
+def consult_text_to_custom_orders():
     res = show_message("",title="Write your IMPERATIVE order:")
     if len(res)>=7:
         res = """
@@ -439,15 +451,24 @@ def summarize_text():
 def abstract_to_title():
     question_answer_consult("abstract_to_title")
     
-def text_to_abstract_computer_science():
-    question_answer_consult("text_to_abstract_computer_science")
-    
 def logical_fallacy_detector():
     question_answer_consult("logical_fallacy_detector")
 
 def keyword_generator():
     question_answer_consult("keyword_generator")
+    
+def text_to_abstract(item):
+    question_answer_consult("text_to_abstract_"+item["label"])
 
+def question_text_to_custom_orders():
+    res = show_message("",title="Write your IMPERATIVE order:")
+    if len(res)>=7:
+        res = """
+Your principal tasks as expert in writing, editing, and correcting texts are as follows:\n
+        """ + res 
+        question_answer_consult("text_to_custom_orders",extra_system_msg=res)
+    else:
+        show_message("You need to write at least 7 characters in the custom order")
 ################################################################################
 
 def text_to_latex_equation():
@@ -584,7 +605,7 @@ class ClipboardTextCorrectionApp(QApplication):
         self.improve_submenu.addAction(paraphrase_action)
         
         custom_orders_action = QAction(QIcon.fromTheme("emblem-default"), "\tDialog for custom orders", self)
-        custom_orders_action.triggered.connect(dialog_text_to_custom_orders)
+        custom_orders_action.triggered.connect(consult_text_to_custom_orders)
         self.improve_submenu.addAction(custom_orders_action)
         
         # Add improve_submenu to main menu
@@ -621,10 +642,6 @@ class ClipboardTextCorrectionApp(QApplication):
         abstract_title_action.triggered.connect(abstract_to_title)
         self.synthesize_submenu.addAction(abstract_title_action)
         
-        cs_abstract_action = QAction(QIcon.fromTheme("document-edit"), "\tText to abstract: computer science", self)
-        cs_abstract_action.triggered.connect(text_to_abstract_computer_science)
-        self.synthesize_submenu.addAction(cs_abstract_action)
-        
         fallacy_detector_action = QAction(QIcon.fromTheme("document-edit"), "\tLogical fallacy detector", self)
         fallacy_detector_action.triggered.connect(logical_fallacy_detector)
         self.synthesize_submenu.addAction(fallacy_detector_action)
@@ -632,6 +649,22 @@ class ClipboardTextCorrectionApp(QApplication):
         keyword_action = QAction(QIcon.fromTheme("document-edit"), "\tKeyword generator", self)
         keyword_action.triggered.connect(keyword_generator)
         self.synthesize_submenu.addAction(keyword_action)
+
+        custom_question_action = QAction(QIcon.fromTheme("emblem-default"), "\tDialog for custom orders", self)
+        custom_question_action.triggered.connect(question_text_to_custom_orders)
+        self.synthesize_submenu.addAction(custom_question_action)
+        
+        # Create synthesize_submenu
+        self.text2abstract_subsubmenu = QMenu("\t📋 Text to abstract")
+        
+        for item in article_format_data:
+            title = item["title"]
+            cs_abstract_action = QAction(QIcon.fromTheme("document-edit"), "\t\t"+title, self)
+            cs_abstract_action.triggered.connect(lambda checked, item=item: text_to_abstract(item))
+            self.text2abstract_subsubmenu.addAction(cs_abstract_action)
+        
+        self.synthesize_submenu.addMenu(self.text2abstract_subsubmenu)
+        
         
         # Add synthesize_submenu to main menu
         self.tray_menu.addMenu(self.synthesize_submenu)

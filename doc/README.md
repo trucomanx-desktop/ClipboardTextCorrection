@@ -1,6 +1,6 @@
 # Documentation
 
-## Improve texts from clipboard
+## 📋 Improve texts from clipboard
 
 * **Improve writing**: Enhances the clarity and coherence of the text.
 * **Improve scientific writing**: Refines the text with a formal and academic tone.
@@ -10,44 +10,49 @@
 * **Eliminate redundancies:** Eliminates various types of redundancies in the text.
 * **Paraphrase**: Rewrites the text with different wording while keeping the original meaning.
 
-## Improve texts from files
+## 💻 Improve texts from files
 
 * **Improves file writing**: Enhances the clarity and coherence of text stored in a file.
 
-## Synthesize texts from clipboard
+## 📋 Synthesize texts from clipboard
 
 * **Summarize text**: Generates a concise summary of the input text.
 * **Abstract to title**: Extract 3 different possible titles from an abstract.
-* **Text to computer science abstract**: Extracts information from text and converts it into a structured abstract for computer science papers
-    1. General context of the topic.
-    2. Specific problem within the topic that the text focuses on.
-    3. Specific computational problem addressed.
-    4. Proposed computational solution.
-    5. Obtained results.
 * **Logical fallacy detector**: This tool analyzes a given text to identify logical fallacies. It detects any propositions that contain logical errors and provides the name of the fallacy (if applicable) along with an explanation of why the proposition is fallacious and what the fallacy consists of. 
 * **Keyword generator**: This tool extracts the main keywords from a given scientific text. It identifies the most important terms that represent the core ideas and concepts in the text. The keywords are grouped by relevant scientific fields (e.g., health sciences, computer science, etc.) to reflect academic and research-specific terminologies, making them suitable for academic indexing and searching.
+* **📋 Text to abstract**: Extracts information from text and converts it into a structured  abstract for: 
+    - **Applied math** papers.
+    - **Physics papers** papers.
+    - **Social sciences** papers.
+    - **Biological sciences** papers.
+    - **Chemistry reports** papers.
+    - **Computer science** papers.
+    - **Philosophy humanities** papers.
+    - **Economics political** papers.
 
-## Synthesize LaTeX texts
+## 🎉 Synthesize LaTeX texts
 
-* **From clipboard >> Text to LaTeX equation**: Converts plain text description into a LaTeX-formatted equation.
-* **From clipboard >> Text to LaTeX table**: Converts plain text description into a LaTeX-formatted table.
-* **From dialog >> Text to LaTeX equation**: Open text dialog window and convert plain text description into LaTeX-formatted equation.
-* **From dialog >> Text to LaTeX table**: Open text dialog window and convert plain text description into LaTeX-formatted table.
-* **Article template**: Complete article latex template.
+* **📋 From clipboard** 
+	- **Text to LaTeX equation**: Converts plain text description into a LaTeX-formatted equation.
+	- **Text to LaTeX table**: Converts plain text description into a LaTeX-formatted table.
+* **⌨️ From dialog**
+	- **Text to LaTeX equation**: Open text dialog window and convert plain text description into LaTeX-formatted equation.
+	- **Text to LaTeX table**: Open text dialog window and convert plain text description into LaTeX-formatted table.
+* **💻 Article template**: Complete article latex template.
 
-## Text analysis from clipboard
+## 📋 Text analysis from clipboard
 
 * **Text statistics**: Returns an approximate analysis of the number of words, no-words and tokens in the text.
 * **Text readability**: Returns various readability indices on the text in the clipboard.
 
-## Program usage information
+## 🛠️ Program usage information
 
 * **Open config file**: Opens the configuration file, showing where to set the API key.  
 * **Open url usage**: Opens a webpage displaying LLM usage, useful for tracking costs.  
 * **Open url help**: Opens this help page for troubleshooting and support.  
 
-## About
+## Others
 
-* **Buy me a coffee: TrucomanX**: Supports the developer with a small donation.  
-* **About**: A brief description about the software, its name and version, etc.
+* **☕ Buy me a coffee: TrucomanX**: Supports the developer with a small donation.  
+* **🌟 About**: A brief description about the software, its name and version, etc.
 
