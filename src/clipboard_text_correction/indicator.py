@@ -83,7 +83,15 @@ def show_notification_message(title, message):
 
 class MessageDialog(QDialog):
     """Display a message with copyable text and an OK button"""
-    def __init__(self, message, width=600, height=300, parent=None, read_only=False, title="Message"):
+    def __init__(   self, 
+                    message, 
+                    width=600, 
+                    height=300, 
+                    parent=None, 
+                    read_only=False, 
+                    title="Message", 
+                    enable_copy_button=True,
+                    pre_extra_info=None):
         super().__init__(parent)
         self.setWindowTitle(title)
         self.resize(width, height)
@@ -91,6 +99,10 @@ class MessageDialog(QDialog):
         # Create layout
         layout = QVBoxLayout(self)
         layout.setContentsMargins(10, 10, 10, 10)
+        
+        if pre_extra_info and isinstance(pre_extra_info,str):
+            label = QLabel(pre_extra_info)
+            layout.addWidget(label)
         
         # Create text view for displaying the message
         self.text_edit = QTextEdit()
@@ -105,9 +117,10 @@ class MessageDialog(QDialog):
         layout.addWidget(scroll_area)
         
         # Copy to clipboard Button
-        copy_button = QPushButton("Copy to clipboard")
-        copy_button.clicked.connect(self.copy_to_clipboard)
-        layout.addWidget(copy_button)
+        if enable_copy_button:
+            copy_button = QPushButton("Copy to clipboard")
+            copy_button.clicked.connect(self.copy_to_clipboard)
+            layout.addWidget(copy_button)
         
         # OK Button
         ok_button = QPushButton("OK")
@@ -119,8 +132,18 @@ class MessageDialog(QDialog):
         clipboard = QApplication.clipboard()
         clipboard.setText(self.text_edit.toPlainText())
 
-def show_message(message, width=600, height=300, read_only=False, title="Message"):
-    dialog = MessageDialog(message, width, height, read_only=read_only, title=title)
+def show_message(   message, 
+                    width=600, height=300, 
+                    read_only=False, 
+                    title="Message", 
+                    enable_copy_button=True,
+                    pre_extra_info=None):
+    dialog = MessageDialog( message, 
+                            width, height, 
+                            read_only=read_only, 
+                            title=title, 
+                            enable_copy_button=enable_copy_button,
+                            pre_extra_info=pre_extra_info)
     dialog.exec_()
     res = dialog.text_edit.toPlainText()
     return res
@@ -420,14 +443,18 @@ def paraphrase():
     basic_consult("paraphrase")
 
 def consult_text_to_custom_orders():
-    res = show_message("",title="Write your IMPERATIVE order:")
+    res = show_message( "",
+                        title="SYSTEM command:",
+                        enable_copy_button=False,
+                        pre_extra_info="Only write your <b>system</b> command, the message data will be collected automatically from the clipboard.")
     if len(res)>=7:
         res = """
 Your principal tasks as expert in writing, editing, and correcting texts are as follows:\n
         """ + res 
         basic_consult("text_to_custom_orders",extra_system_msg=res)
     else:
-        show_message("You need to write at least 7 characters in the custom order")
+        show_message(   "Command canceled! You need to write at least 7 characters in the custom system command.",
+                        enable_copy_button=False)
         
     
 ################################################################################
@@ -461,14 +488,17 @@ def text_to_abstract(item):
     question_answer_consult("text_to_abstract_"+item["label"])
 
 def question_text_to_custom_orders():
-    res = show_message("",title="Write your IMPERATIVE order:")
+    res = show_message("",title="SYSTEM command:",
+                        enable_copy_button=False,
+                        pre_extra_info="Only write your <b>system</b> command, the message data will be collected automatically from the clipboard.")
     if len(res)>=7:
         res = """
 Your principal tasks as expert in writing, editing, and correcting texts are as follows:\n
         """ + res 
         question_answer_consult("text_to_custom_orders",extra_system_msg=res)
     else:
-        show_message("You need to write at least 7 characters in the custom order")
+        show_message(   "Command canceled! You need to write at least 7 characters in the custom system command.",
+                        enable_copy_button=False)
 ################################################################################
 
 def text_to_latex_equation():
@@ -604,7 +634,7 @@ class ClipboardTextCorrectionApp(QApplication):
         paraphrase_action.triggered.connect(paraphrase)
         self.improve_submenu.addAction(paraphrase_action)
         
-        custom_orders_action = QAction(QIcon.fromTheme("emblem-default"), "\tDialog for custom orders", self)
+        custom_orders_action = QAction(QIcon.fromTheme("emblem-default"), "\tDialog for custom [SYSTEM] command", self)
         custom_orders_action.triggered.connect(consult_text_to_custom_orders)
         self.improve_submenu.addAction(custom_orders_action)
         
@@ -650,7 +680,7 @@ class ClipboardTextCorrectionApp(QApplication):
         keyword_action.triggered.connect(keyword_generator)
         self.synthesize_submenu.addAction(keyword_action)
 
-        custom_question_action = QAction(QIcon.fromTheme("emblem-default"), "\tDialog for custom orders", self)
+        custom_question_action = QAction(QIcon.fromTheme("emblem-default"), "\tDialog for custom [SYSTEM] command", self)
         custom_question_action.triggered.connect(question_text_to_custom_orders)
         self.synthesize_submenu.addAction(custom_question_action)
         
