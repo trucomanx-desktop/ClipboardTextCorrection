@@ -69,7 +69,7 @@ except json.JSONDecodeError:
 def show_notification_message(title, message):
     """Show a system notification"""
     if platform.system() == "Linux":
-        msg = message.replace("\""," ")
+        msg = message.replace("\""," ").replace("|"," ").replace("`"," ")
         os.system(f'notify-send "⚠️ {title} ⚠️" "{msg}"')
     else:
         app = QApplication.instance()
@@ -344,9 +344,9 @@ def basic_consult(type_consult, msg=None,extra_system_msg=""):
                                                         text)
             
             if res == "<OK>":
-                all_out = all_out + OUT
+                all_out = all_out + "\n" + OUT
             elif res == "<NOERROR>":
-                all_out = all_out + text
+                all_out = all_out + "\n" + text
             else:
                 is_ok = False
                 
@@ -510,16 +510,37 @@ def text_to_latex_table():
 
 ################################################################################
 def dialog_text_to_latex_equation():
-    res = show_message("")
+    res = show_message( "", 
+                        title="Latex equation generator", 
+                        width=800, height=300,
+                        pre_extra_info="Submit your equation description:",
+                        enable_copy_button=False)
     if len(res)>=5:
         question_answer_consult("text_to_latex_equation", msg = res)
     else:
         show_message("You need to write at least 5 characters in the description")
     
 def dialog_text_to_latex_table():
-    res = show_message("")
+    res = show_message( "", 
+                        title="Latex table generator", 
+                        width=800, height=300,
+                        pre_extra_info="Submit your table data or describe it:",
+                        enable_copy_button=False)
     if len(res)>=5:
         question_answer_consult("text_to_latex_table", msg = res)
+    else:
+        show_message("You need to write at least 5 characters in the description")
+
+
+
+def dialog_text_to_latex_guru():
+    res = show_message( "", 
+                        title="Latex GURU", 
+                        width=800, height=300,
+                        pre_extra_info="Ask your question to the latex expert <b>Guru</b>:",
+                        enable_copy_button=False)
+    if len(res)>=5:
+        question_answer_consult("text_to_latex_guru", msg = res)
     else:
         show_message("You need to write at least 5 characters in the description")
 ################################################################################
@@ -709,7 +730,7 @@ class ClipboardTextCorrectionApp(QApplication):
 
         #######################
         # Create latex_submenu
-        self.latex_submenu = QMenu("\t📋 From clipboard")
+        self.latex_submenu = QMenu("\t📋 From clipboard text")
         
         # Add actions to latex_submenu
         latex_equation_action = QAction(QIcon.fromTheme("font-x-generic"), "\tText to latex equation", self)
@@ -727,7 +748,7 @@ class ClipboardTextCorrectionApp(QApplication):
         
         #######################
         # Create latex_submenu
-        self.latex_dialog_submenu = QMenu("\t⌨️ From dialog")
+        self.latex_dialog_submenu = QMenu("\t⌨️ From dialog text")
         
         # Add actions to latex_dialog_submenu
         latex_equation_dialog_action = QAction(QIcon.fromTheme("font-x-generic"), "\tText to latex equation", self)
@@ -738,6 +759,10 @@ class ClipboardTextCorrectionApp(QApplication):
         latex_table_dialog_action.triggered.connect(dialog_text_to_latex_table)
         self.latex_dialog_submenu.addAction(latex_table_dialog_action)
         
+        
+        latex_guru_dialog_action = QAction(QIcon.fromTheme("trophy-gold"), "\tAsk the latex expert Guru", self)
+        latex_guru_dialog_action.triggered.connect(dialog_text_to_latex_guru)
+        self.latex_dialog_submenu.addAction(latex_guru_dialog_action)
         
         # Add latex_dialog_submenu to main menu
         self.all_latex_submenu.addMenu(self.latex_dialog_submenu)
