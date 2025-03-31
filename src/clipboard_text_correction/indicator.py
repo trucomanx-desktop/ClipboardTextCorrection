@@ -655,7 +655,7 @@ class ClipboardTextCorrectionApp(QApplication):
         paraphrase_action.triggered.connect(paraphrase)
         self.improve_submenu.addAction(paraphrase_action)
         
-        custom_orders_action = QAction(QIcon.fromTheme("emblem-default"), "\tDialog for custom [SYSTEM] command", self)
+        custom_orders_action = QAction(QIcon.fromTheme("emblem-default"), "\tCustom [SYSTEM] command", self)
         custom_orders_action.triggered.connect(consult_text_to_custom_orders)
         self.improve_submenu.addAction(custom_orders_action)
         
@@ -701,7 +701,7 @@ class ClipboardTextCorrectionApp(QApplication):
         keyword_action.triggered.connect(keyword_generator)
         self.synthesize_submenu.addAction(keyword_action)
 
-        custom_question_action = QAction(QIcon.fromTheme("emblem-default"), "\tDialog for custom [SYSTEM] command", self)
+        custom_question_action = QAction(QIcon.fromTheme("emblem-default"), "\tCustom [SYSTEM] command", self)
         custom_question_action.triggered.connect(question_text_to_custom_orders)
         self.synthesize_submenu.addAction(custom_question_action)
         
