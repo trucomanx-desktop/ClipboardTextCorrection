@@ -11,6 +11,3 @@ __url_funding__ = "https://trucomanx.github.io/en/funding.html"
 __url_bugs__ = "https://github.com/trucomanx/ClipboardTextCorrection/issues"
 
 
-
-
-
