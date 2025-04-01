@@ -7,7 +7,7 @@ import os
 import json
 import traceback
 import platform
-from PyQt5.QtWidgets import (QApplication, QMainWindow, QMenu, QSystemTrayIcon, QAction, 
+from PyQt5.QtWidgets import (QApplication, QMainWindow, QMenu, QSystemTrayIcon, QAction, QTextBrowser, 
                             QDialog, QVBoxLayout, QHBoxLayout, QPushButton, QLabel, 
                             QTextEdit, QScrollArea, QFileDialog, QMessageBox)
 from PyQt5.QtGui import QIcon, QPixmap, QTextCursor, QDesktopServices
@@ -19,6 +19,7 @@ import clipboard_text_correction.lib_funcs as lib_funcs
 import clipboard_text_correction.lib_files as lib_files
 import clipboard_text_correction.lib_stats as lib_stats
 import clipboard_text_correction.lib_latex as lib_latex
+import clipboard_text_correction.lib_md2html as lib_md2html
 
 import clipboard_text_correction.about as about
 
@@ -90,6 +91,7 @@ class MessageDialog(QDialog):
                     parent=None, 
                     read_only=False, 
                     title="Message", 
+                    enable_markdown = False,
                     enable_copy_button=True,
                     pre_extra_info=None):
         super().__init__(parent)
@@ -111,10 +113,16 @@ class MessageDialog(QDialog):
         self.text_edit.setLineWrapMode(QTextEdit.WidgetWidth)
         
         # Add text view to a scroll area
-        scroll_area = QScrollArea()
-        scroll_area.setWidget(self.text_edit)
-        scroll_area.setWidgetResizable(True)
-        layout.addWidget(scroll_area)
+        self.scroll_area = QScrollArea()
+        self.scroll_area.setWidget(self.text_edit)
+        self.scroll_area.setWidgetResizable(True)
+        layout.addWidget(self.scroll_area)
+        
+        if enable_markdown:
+            browser = QTextBrowser()
+            browser.setHtml(lib_md2html.markdown_to_html(message))
+            layout.addWidget(browser)
+            self.scroll_area.hide()  # O widget fica invisível
         
         # Copy to clipboard Button
         if enable_copy_button:
@@ -137,13 +145,15 @@ def show_message(   message,
                     read_only=False, 
                     title="Message", 
                     enable_copy_button=True,
-                    pre_extra_info=None):
+                    pre_extra_info=None,
+                    enable_markdown=False):
     dialog = MessageDialog( message, 
                             width, height, 
                             read_only=read_only, 
                             title=title, 
                             enable_copy_button=enable_copy_button,
-                            pre_extra_info=pre_extra_info)
+                            pre_extra_info=pre_extra_info,
+                            enable_markdown=enable_markdown)
     dialog.exec_()
     res = dialog.text_edit.toPlainText()
     return res
@@ -367,7 +377,7 @@ def basic_consult(type_consult, msg=None,extra_system_msg=""):
         error_message = f"Error: {str(e)}\n\nDetails:\n{traceback.format_exc()}"
         show_error_dialog(error_message)
 
-def question_answer_consult(type_consult, msg=None, show=True, extra_system_msg=""):
+def question_answer_consult(type_consult, msg=None, show=True, extra_system_msg="", enable_markdown=False):
     global config_data
     
     if msg is None: 
@@ -406,7 +416,7 @@ def question_answer_consult(type_consult, msg=None, show=True, extra_system_msg=
         show_notification_message(type_consult, "Answer recived!")
         
         if show:
-            show_message(res)
+            show_message(res,enable_markdown=enable_markdown)
         
         return res
         
@@ -497,16 +507,9 @@ Your principal tasks as expert in writing, editing, and correcting texts are as 
         """ + res 
         question_answer_consult("text_to_custom_orders",extra_system_msg=res)
     else:
-        show_message(   "Command canceled! You need to write at least 7 characters in the custom system command.",
+        show_message(   "You need to write at least 7 characters in the custom system command.",
+                        pre_extra_info="<b>Command canceled!</b>",
                         enable_copy_button=False)
-################################################################################
-
-def text_to_latex_equation():
-    question_answer_consult("text_to_latex_equation")
-    
-def text_to_latex_table():
-    question_answer_consult("text_to_latex_table")
-    
 
 ################################################################################
 def dialog_text_to_latex_equation():
@@ -518,7 +521,8 @@ def dialog_text_to_latex_equation():
     if len(res)>=5:
         question_answer_consult("text_to_latex_equation", msg = res)
     else:
-        show_message("You need to write at least 5 characters in the description")
+        show_message(   "You need to write at least 5 characters in the consultation",
+                        pre_extra_info="<b>Command canceled!</b>")
     
 def dialog_text_to_latex_table():
     res = show_message( "", 
@@ -529,20 +533,32 @@ def dialog_text_to_latex_table():
     if len(res)>=5:
         question_answer_consult("text_to_latex_table", msg = res)
     else:
-        show_message("You need to write at least 5 characters in the description")
+        show_message(   "You need to write at least 5 characters in the consultation",
+                        pre_extra_info="<b>Command canceled!</b>")
 
-
+def dialog_text_to_latex_figure():
+    res = show_message( "", 
+                        title="Latex figure generator", 
+                        width=800, height=300,
+                        pre_extra_info="Submit your figure path or describe it:",
+                        enable_copy_button=False)
+    if len(res)>=5:
+        question_answer_consult("text_to_latex_figure", msg = res)
+    else:
+        show_message(   "You need to write at least 5 characters in the consultation",
+                        pre_extra_info="<b>Command canceled!</b>")
 
 def dialog_text_to_latex_guru():
     res = show_message( "", 
                         title="Latex GURU", 
-                        width=800, height=300,
+                        width=1000, height=300,
                         pre_extra_info="Ask your question to the latex expert <b>Guru</b>:",
                         enable_copy_button=False)
     if len(res)>=5:
-        question_answer_consult("text_to_latex_guru", msg = res)
+        question_answer_consult("text_to_latex_guru", msg = res, enable_markdown=True)
     else:
-        show_message("You need to write at least 5 characters in the description")
+        show_message(   "You need to write at least 5 characters in the consultation",
+                        pre_extra_info="<b>Command canceled!</b>")
 ################################################################################
 def on_action_article_template(item):
     show_notification_message("Template", "Please copy")
@@ -726,46 +742,25 @@ class ClipboardTextCorrectionApp(QApplication):
         ########################################################################
 
         # Create latex_submenu
-        self.all_latex_submenu = QMenu("🎉 Synthesize LaTeX texts")
-
-        #######################
-        # Create latex_submenu
-        self.latex_submenu = QMenu("\t📋 From clipboard text")
-        
-        # Add actions to latex_submenu
-        latex_equation_action = QAction(QIcon.fromTheme("font-x-generic"), "\tText to latex equation", self)
-        latex_equation_action.triggered.connect(text_to_latex_equation)
-        self.latex_submenu.addAction(latex_equation_action)
-        
-        latex_table_action = QAction(QIcon.fromTheme("font-x-generic"), "\tText to latex table", self)
-        latex_table_action.triggered.connect(text_to_latex_table)
-        self.latex_submenu.addAction(latex_table_action)
-        
-        # Add latex_submenu to main menu
-        self.all_latex_submenu.addMenu(self.latex_submenu)
-        self.all_latex_submenu.addSeparator()
-        
-        
-        #######################
-        # Create latex_submenu
-        self.latex_dialog_submenu = QMenu("\t⌨️ From dialog text")
+        self.all_latex_submenu = QMenu("🎉 Synthesize LaTeX texts")     
         
         # Add actions to latex_dialog_submenu
         latex_equation_dialog_action = QAction(QIcon.fromTheme("font-x-generic"), "\tText to latex equation", self)
         latex_equation_dialog_action.triggered.connect(dialog_text_to_latex_equation)
-        self.latex_dialog_submenu.addAction(latex_equation_dialog_action)
+        self.all_latex_submenu.addAction(latex_equation_dialog_action)
         
         latex_table_dialog_action = QAction(QIcon.fromTheme("font-x-generic"), "\tText to latex table", self)
         latex_table_dialog_action.triggered.connect(dialog_text_to_latex_table)
-        self.latex_dialog_submenu.addAction(latex_table_dialog_action)
+        self.all_latex_submenu.addAction(latex_table_dialog_action)
         
+        latex_figure_dialog_action = QAction(QIcon.fromTheme("font-x-generic"), "\tText to latex figure", self)
+        latex_figure_dialog_action.triggered.connect(dialog_text_to_latex_figure)
+        self.all_latex_submenu.addAction(latex_figure_dialog_action)
         
         latex_guru_dialog_action = QAction(QIcon.fromTheme("trophy-gold"), "\tAsk the latex expert Guru", self)
         latex_guru_dialog_action.triggered.connect(dialog_text_to_latex_guru)
-        self.latex_dialog_submenu.addAction(latex_guru_dialog_action)
+        self.all_latex_submenu.addAction(latex_guru_dialog_action)
         
-        # Add latex_dialog_submenu to main menu
-        self.all_latex_submenu.addMenu(self.latex_dialog_submenu)
         self.all_latex_submenu.addSeparator()
 
         # Criar submenu para traduções
