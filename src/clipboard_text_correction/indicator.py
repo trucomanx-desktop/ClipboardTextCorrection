@@ -354,9 +354,9 @@ def basic_consult(type_consult, msg=None,extra_system_msg=""):
                                                         text)
             
             if res == "<OK>":
-                all_out = all_out + "\n" + OUT
+                all_out = all_out + OUT + "\n"
             elif res == "<NOERROR>":
-                all_out = all_out + "\n" + text
+                all_out = all_out + text + "\n"
             else:
                 is_ok = False
                 
