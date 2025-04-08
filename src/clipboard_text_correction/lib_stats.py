@@ -14,7 +14,7 @@ def count_approximate_words_and_non_words(text):
 def count_approximate_words_non_words_and_tokens(text):
     words,non_words = count_approximate_words_and_non_words(text)
 
-    return words, non_words, int(0.75*(words+non_words))
+    return words, non_words, int(1.5*words+1.1*non_words)
 
 
 def generate_word_token_json(text):
