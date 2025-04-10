@@ -337,6 +337,7 @@ def basic_consult(type_consult, msg=None,extra_system_msg=""):
         all_out = ""
         is_ok = True
         
+        Ltot = len(texts)
         for index, text in enumerate(texts):
             
             system_message =    lib_funcs.SYSTEM_QUESTION[type_consult] + \
@@ -354,12 +355,17 @@ def basic_consult(type_consult, msg=None,extra_system_msg=""):
                                                         text)
             
             if res == "<OK>":
-                all_out = all_out + OUT + "\n"
+                all_out = all_out + OUT
+
             elif res == "<NOERROR>":
-                all_out = all_out + text + "\n"
+                all_out = all_out + text
+            
             else:
                 is_ok = False
                 
+            if (index+1) <= Ltot:
+                all_out += "\n"
+            
             show_notification_message(type_consult, f"{index+1}/{len(texts)} - Answer {res} recived! "+lib_funcs.SYSTEM_RESPONSE[res])
             
             print("recived:", res)
