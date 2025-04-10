@@ -1,5 +1,7 @@
 # Documentation
 
+---
+
 ## 📋 Improve texts from clipboard
 
 * **Improve writing:** Enhances the clarity and coherence of the text.
@@ -10,9 +12,14 @@
 * **Eliminate redundancies:** Eliminates various types of redundancies in the text.
 * **Paraphrase:** Rewrites the text with different wording while keeping the original meaning.
 * **Custom [SYSTEM] command:** Opens a dialog box to define a custom command for the system, the LLM. Information will be collected as usual from the clipboard. The response will be compared using meld.
+
+---
+
 ## 💻 Improve texts from files
 
 * **Improves file writing:** Enhances the clarity and coherence of text stored in a file.
+
+---
 
 ## 📋 Synthesize texts from clipboard
 
@@ -31,18 +38,24 @@
     - **Philosophy humanities** papers.
     - **Economics political** papers.
 
+---
+
 ## 🎉 Synthesize LaTeX texts
 
 * **Text to LaTeX equation:** Open text dialog window and convert plain text description into LaTeX-formatted equation.
 * **Text to LaTeX table:** Open text dialog window and convert plain text description into LaTeX-formatted table.
 * **Text to LaTeX figure:** Open text dialog window and convert filepath or plain text description into LaTeX-formatted figure.
 * **Ask the latex expert guru:** Open text dialog window to ask the LaTeX Guru anything.
-* * **💻 Article template:** Complete article latex template.
+* **💻 Article template:** Complete article latex template.
+
+---
 
 ## 📋 Text analysis from clipboard
 
 * **Text statistics:** Returns an approximate analysis of the number of words, no-words and tokens in the text.
 * **Text readability:** Returns various readability indices on the text in the clipboard.
+
+---
 
 ## 🛠️ Program usage information
 
@@ -50,8 +63,12 @@
 * **Open url usage:** Opens a webpage displaying LLM usage, useful for tracking costs.  
 * **Open url help:** Opens this help page for troubleshooting and support.  
 
+---
+
 ## Others
 
 * **☕ Buy me a coffee: TrucomanX:** Supports the developer with a small donation.  
 * **🌟 About:** A brief description about the software, its name and version, etc.
+
+---
 
