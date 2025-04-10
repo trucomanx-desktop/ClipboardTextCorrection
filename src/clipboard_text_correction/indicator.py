@@ -591,7 +591,7 @@ def open_url_usage():
     QDesktopServices.openUrl(QUrl(config_data["usage"]))
     
 def open_url_help():
-    url = "https://github.com/trucomanx/ClipboardTextCorrection/blob/main/doc/README.md"
+    url = "https://github.com/trucomanx/ClipboardTextCorrection/blob/main/doc/README.ipynb"
     show_notification_message("open_url_help", url)
     QDesktopServices.openUrl(QUrl(url))
 
