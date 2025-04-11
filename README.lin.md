@@ -13,11 +13,25 @@ This program requires `meld` to be installed on your system to function correctl
 sudo apt-get install meld
 ```
 
-## 2. Install from PyPI and add to Linux start session
-Install `clipboard-text-correction` from `pypi` and add the program to the bar indicator on Linux startup session.
+## 2. Installing from PyPI
+
+To install the package from `PyPI`, follow the instructions below:
+
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/trucomanx/ClipboardTextCorrection/main/install_linux_indicator_session.sh | sh
+python -m pip install --upgrade pip
+python -m pip install --upgrade supertools
+
+pip install --upgrade clipboard-text-correction
+```
+
+Execute `pip show clipboard-text-correction` to see where it was installed.
+
+### 2.1. Add the program to Linux start session
+Add the program to the bar indicator on Linux startup session.
+
+```bash
+clipboard-text-correction-indicator --autostart
 ```
 
 ## 3. LLM

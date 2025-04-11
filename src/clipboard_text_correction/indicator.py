@@ -856,7 +856,11 @@ class ClipboardTextCorrectionApp(QApplication):
         
 def main():
     signal.signal(signal.SIGINT, signal.SIG_DFL)
-    create_desktop_file()
+    
+    for n in range(len(sys.argv)):
+        if sys.argv[n] == "--autostart":
+            create_desktop_file()
+    
     app = ClipboardTextCorrectionApp(sys.argv)
     sys.exit(app.exec_())
 
