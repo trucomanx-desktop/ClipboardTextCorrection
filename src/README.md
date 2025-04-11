@@ -24,10 +24,13 @@ To install the package from `PyPI`, follow the instructions below:
 
 
 ```bash
+python -m pip install --upgrade pip
+python -m pip install --upgrade supertools
+
 pip install --upgrade clipboard-text-correction
 ```
 
-Execute `which clipboard-text-correction-indicator` to see where it was installed, probably in `/home/USERNAME/.local/bin/clipboard-text-correction-indicator`.
+Execute `pip show clipboard-text-correction` to see where it was installed.
 
 #### Using
 
@@ -38,11 +41,12 @@ clipboard-text-correction-indicator
 ```
 
 
-### 2.2. Install from PyPI and add to Linux start session
-Install `clipboard-text-correction` from `pypi` and add the program to the bar indicator on Linux startup session.
+### 2.2. Add the program to Linux start session
+
+Add the program to the bar indicator on Linux startup session.
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/trucomanx/ClipboardTextCorrection/main/install_linux_indicator_session.sh | sh
+clipboard-text-correction-indicator --autostart
 ```
 
 ## 3. LLM
@@ -53,13 +57,19 @@ Place the obtained `API_KEY` in the `clipboard-text-correction-indicator` progra
 
 ![open-config-file](https://raw.githubusercontent.com/trucomanx/ClipboardTextCorrection/main/images/open-config-file.lin.png)
 
-## 4. Buy me a coffee
+## 4 Uninstall
+
+```bash
+pip uninstall clipboard-text-correction
+```
+
+## 5. Buy me a coffee
 
 If you find this tool useful and would like to support its development, you can buy me a coffee!  
 Your donations help keep the project running and improve future updates.  
 
 [☕ Buy me a coffee](https://ko-fi.com/trucomanx) 
 
-## 5. License
+## 6. License
 
 This project is licensed under the GPL license. See the `LICENSE` file for more details.
