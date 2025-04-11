@@ -13,7 +13,7 @@ python3 -m clipboard_text_correction.indicator
 
 ```bash
 cd src
-python setup.py sdist bdist_wheel
+python -m build
 twine upload dist/*
 ```
 
