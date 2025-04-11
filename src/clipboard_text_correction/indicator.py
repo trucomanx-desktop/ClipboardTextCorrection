@@ -20,7 +20,7 @@ import clipboard_text_correction.lib_files as lib_files
 import clipboard_text_correction.lib_stats as lib_stats
 import clipboard_text_correction.lib_latex as lib_latex
 import clipboard_text_correction.lib_md2html as lib_md2html
-from clipboard_text_correction.desktop_indicator import create_desktop_file
+from clipboard_text_correction.desktop import create_desktop_file
 
 import clipboard_text_correction.about as about
 
@@ -857,9 +857,14 @@ class ClipboardTextCorrectionApp(QApplication):
 def main():
     signal.signal(signal.SIGINT, signal.SIG_DFL)
     
+    create_desktop_file('~/.local/share/applications')
+    
     for n in range(len(sys.argv)):
         if sys.argv[n] == "--autostart":
-            create_desktop_file()
+            create_desktop_file('~/.config/autostart', overwrite=True)
+            return
+        if sys.argv[n] == "--applications":
+            create_desktop_file('~/.local/share/applications', overwrite=True)
             return
     
     app = ClipboardTextCorrectionApp(sys.argv)
