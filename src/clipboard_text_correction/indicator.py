@@ -860,6 +860,7 @@ def main():
     for n in range(len(sys.argv)):
         if sys.argv[n] == "--autostart":
             create_desktop_file()
+            return
     
     app = ClipboardTextCorrectionApp(sys.argv)
     sys.exit(app.exec_())
