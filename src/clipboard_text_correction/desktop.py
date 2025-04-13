@@ -2,6 +2,7 @@ import os
 import clipboard_text_correction.about as about
 import subprocess
 
+
 def update_desktop_database(desktop_path):
     applications_dir = os.path.expanduser(desktop_path)
     try:
@@ -15,40 +16,81 @@ def update_desktop_database(desktop_path):
     except FileNotFoundError:
         print("The command 'update-desktop-database' was not found. Verify that the package 'desktop-file-utils' is installed.")
 
-
-
 def create_desktop_file(desktop_path, overwrite=False):
     base_dir_path = os.path.dirname(os.path.abspath(__file__))
-    
-    home_dir = os.path.expanduser("~/")
-    
     icon_path = os.path.join(base_dir_path, 'icons', 'logo.png')
 
     script_path = os.path.expanduser(f"~/.local/bin/{about.__linux_indicator__}")
 
     desktop_entry = f"""[Desktop Entry]
-Type=Application
 Name={about.__linux_indicator__}
-Exec={script_path}
-X-GNOME-Autostart-enabled=true
-Icon={icon_path}
 Comment={about.__description__}
+Exec={script_path}
 Terminal=false
-Path={home_dir}
-Categories=Education;
+Type=Application
+Icon={icon_path}
 StartupNotify=true
+Categories=Education;ResearchTools;
 Keywords=education;python;
 Encoding=UTF-8
+StartupWMClass={about.__package__}
+X-GNOME-Autostart-enabled=true
 """
     path = os.path.expanduser(os.path.join( desktop_path,
                                             f"{about.__linux_indicator__}.desktop"))
-       
-    if not os.path.exists(path) or overwrite == True:
+    
+    if not os.path.exists(path) or overwrite == True: 
         with open(path, "w") as f:
             f.write(desktop_entry)
         os.chmod(path, 0o755)
         print(f"File {about.__linux_indicator__}.desktop created in {path}")
         update_desktop_database(desktop_path)
     
+def create_desktop_directory(   directory_name = "ResearchTools",
+                                long_name = "Scientific research",
+                                comment = "Tools for Writing and Research Support",
+                                icon = "accessories-text-editor", 
+                                overwrite = False):
+    
+    desktop_entry = f"""[Desktop Entry]
+Version=1.0
+Type=Directory
+Name={long_name}
+Comment={comment}
+Icon={icon}
+"""
+    path = os.path.expanduser(f"~/.local/share/desktop-directories/{directory_name}.directory")
+    
+    if not os.path.exists(path) or overwrite == True:  # Evita sobrescrever
+        with open(path, "w") as f:
+            f.write(desktop_entry)
+        os.chmod(path, 0o755)
+        print(f"File {path} created.")
+    
+def create_desktop_menu(directory_name = "ResearchTools",
+                        basename = "research-tools",
+                        overwrite = False):
+    
+    desktop_entry = f"""<!-- ~/.config/menus/applications-merged/{basename}.menu -->
+<Menu>
+    <Name>Applications</Name>
+    <Menu>
+        <Name>{directory_name}</Name>
+        <Directory>{directory_name}.directory</Directory>
+        <Include>
+            <Category>{directory_name}</Category>
+        </Include>
+    </Menu>
+</Menu>
+"""
+    path = os.path.expanduser(f"~/.config/menus/applications-merged/{basename}.menu")
+    
+    if not os.path.exists(path) or overwrite == True:  # Evita sobrescrever
+        with open(path, "w") as f:
+            f.write(desktop_entry)
+        print(f"File {path} created.")
+
 if __name__ == '__main__':
+    create_desktop_directory()
     create_desktop_file()
+
