@@ -31,15 +31,20 @@ def open_from_filepath(file_path):
         print(f"The file {file_path} does not exist.")
         return -1
     
-    # Detecta o sistema operacional
-    so = platform.system().lower()
-    
     try:
         # Define o editor baseado no sistema operacional
-        if so == "linux" or so == "darwin":  # Linux ou macOS
-            subprocess.Popen(["xdg-open", file_path])  # Usado no Linux e macOS
-        elif so == "windows":  # Windows
-            subprocess.Popen(["notepad", file_path])  # Notepad para Windows
+        if sys.platform.startswith('win'):
+            subprocess.Popen(['notepad', file_path])
+        
+        elif sys.platform.startswith('darwin'):
+            subprocess.Popen(['open', '-a', 'TextEdit', file_path])
+        
+        elif sys.platform.startswith('linux'):
+            # Tenta abrir com editores gráficos comuns
+            for editor in ['gedit', 'kate', 'mousepad', 'xed', 'leafpad', 'pluma', 'code']:  # 'code' é VS Code
+                if shutil.which(editor):
+                    subprocess.Popen([editor, file_path])
+                    break
         else:
             print(f"Operating system not supported for opening files.")
             return -3
