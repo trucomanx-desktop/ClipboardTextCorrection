@@ -10,7 +10,7 @@ from PyQt5.QtWidgets import (QApplication, QMainWindow, QMenu, QSystemTrayIcon, 
                             QDialog, QVBoxLayout, QHBoxLayout, QPushButton, QLabel, 
                             QTextEdit, QScrollArea, QFileDialog, QMessageBox)
 from PyQt5.QtGui import QIcon, QPixmap, QTextCursor, QDesktopServices
-from PyQt5.QtCore import Qt, QUrl
+from PyQt5.QtCore import Qt, QUrl, QTimer
 
 from clipboard_text_correction.about import __version__
 
@@ -30,6 +30,7 @@ CONFIG_FILE = "~/.config/clipboard_text_correction/config_data.json"
 config_data = lib_funcs.SYSTEM_DATA
 config_file_path = os.path.expanduser(CONFIG_FILE)
 
+old_dir_path = os.path.expanduser("~")
 try:
     if not os.path.exists(config_file_path):
         os.makedirs(os.path.dirname(config_file_path), exist_ok=True)
@@ -289,6 +290,9 @@ def show_error_dialog(message):
 
 def select_file(initial_path=None):
     """Open file dialog to select a file"""
+    
+    global old_dir_path
+    
     options = QFileDialog.Options()
     if initial_path:
         start_dir = initial_path
@@ -299,7 +303,12 @@ def select_file(initial_path=None):
         None, "Select a file", start_dir, "All Files (*)", options=options
     )
     
-    return filename if filename else None
+    if filename:
+        old_dir_path = str(filename)
+        return filename
+    else:
+        return None
+
 
 def get_clipboard_text():
     """Get text from clipboard"""
@@ -480,7 +489,7 @@ Your principal tasks as expert in writing, editing, and correcting texts are as 
     
 ################################################################################
 def improves_file_writing():
-    file_path = select_file()
+    file_path = select_file(old_dir_path)
     
     if file_path:
         show_notification_message("Selected", file_path)
@@ -489,7 +498,9 @@ def improves_file_writing():
             show_message("❌ 🤦‍♂️ The selected file must be a text file:\n" + file_path)
         else:
             msg = lib_files.load_file_content(file_path)
-            basic_consult("improve_writing", msg=msg)
+            
+            QTimer.singleShot(100, lambda: basic_consult("improve_writing", msg=msg))
+            
 
 ################################################################################
 
