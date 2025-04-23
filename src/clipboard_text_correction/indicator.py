@@ -492,7 +492,8 @@ def improves_file_writing():
     file_path = select_file(old_dir_path)
     
     if file_path:
-        show_notification_message("Selected", file_path)
+        basename = os.path.basename(file_path)
+        show_notification_message("Selected", basename + " (" + file_path +")")
         
         if lib_files.is_binary(file_path):
             show_message("❌ 🤦‍♂️ The selected file must be a text file:\n" + file_path)
@@ -501,7 +502,21 @@ def improves_file_writing():
             
             QTimer.singleShot(100, lambda: basic_consult("improve_writing", msg=msg))
             
-
+################################################################################
+def fluency_file_writing():
+    file_path = select_file(old_dir_path)
+    
+    if file_path:
+        basename = os.path.basename(file_path)
+        show_notification_message("Selected", basename + " (" + file_path +")")
+        
+        if lib_files.is_binary(file_path):
+            show_message("❌ 🤦‍♂️ The selected file must be a text file:\n" + file_path)
+        else:
+            msg = lib_files.load_file_content(file_path)
+            
+            QTimer.singleShot(100, lambda: basic_consult("improve_writing_fluency", msg=msg))
+            
 ################################################################################
 
 def summarize_text():
@@ -738,13 +753,25 @@ class ClipboardTextCorrectionApp(QApplication):
         # Create improve_file_submenu
         self.improve_file_submenu = QMenu("💻 Improve texts from files")
         
+        
         # Add actions to improve_file_submenu
         improve_file_action = QAction(QIcon.fromTheme("edit-find-replace"), "\tImproves file writing", self)
         improve_file_action.triggered.connect(improves_file_writing)
         self.improve_file_submenu.addAction(improve_file_action)
         
+        # Add actions to Improve writing fluency
+        fluency_file_action = QAction(  QIcon.fromTheme("edit-find-replace"), 
+                                        "\tImprove writing fluency", self)
+        fluency_file_action.triggered.connect(fluency_file_writing)
+        self.improve_file_submenu.addAction(fluency_file_action)
+        
+        
+        
+        
         # Add improve_file_submenu to main menu
         self.tray_menu.addMenu(self.improve_file_submenu)
+        
+        
         self.tray_menu.addSeparator()
         
         
