@@ -471,6 +471,9 @@ def eliminate_redundancies():
 
 def paraphrase():
     basic_consult("paraphrase")
+    
+def add_a_line():
+    basic_consult("add_a_line")
 
 def consult_text_to_custom_orders():
     res = show_message( "",
@@ -735,6 +738,13 @@ class ClipboardTextCorrectionApp(QApplication):
                                     self)
         paraphrase_action.triggered.connect(paraphrase)
         self.improve_submenu.addAction(paraphrase_action)
+        
+        
+        addaline_action = QAction(QIcon.fromTheme("accessories-text-editor"), 
+                                    "\tAdd a line", 
+                                    self)
+        addaline_action.triggered.connect(add_a_line)
+        self.improve_submenu.addAction(addaline_action)
         
         
         custom_orders_action = QAction( QIcon.fromTheme("emblem-default"), 

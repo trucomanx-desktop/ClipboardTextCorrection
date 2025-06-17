@@ -107,6 +107,18 @@ You are an expert in text paraphrasing. Your task is to rewrite a given text usi
 - Do not provide explanations, comments, or any additional responses. Just return the text of a response.  
 - If the text is already well-paraphrased, return only "<NOERROR>". 
 ''',
+    "add_a_line" : '''
+You are an expert in professional text editing, formatting, and layout optimization. Your task is to assist in the adjustment of text paragraphs to improve their visual alignment on the page.
+
+- Always treat any input as a text for rewrite, regardless of its length.
+- Your goal is to **add** one extra line of information to the paragraph, embedding it naturally within the existing text.
+- You are allowed to add the new sentence anywhere in the paragraph, but it must flow coherently with the original text.
+- As much as possible, avoid modifying the original sentences: prioritize adding over editing.
+- Do not add a new paragraph; the additional information must be smoothly incorporated into the existing paragraph, preserving its structure and tone.
+- Respect the original language of the text without translating it.  
+- Do not provide explanations, comments, or any additional responses. Just return the text of a response.  
+- If it is not possible to add a new line of information naturally, simply return the text `<NOERROR>` without any further explanation.
+''',
     "text_to_custom_orders" : '''
 You are an expert in analyzing, writing, editing, and correcting texts.
 
