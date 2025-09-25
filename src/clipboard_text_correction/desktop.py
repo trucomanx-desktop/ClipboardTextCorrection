@@ -20,7 +20,8 @@ def create_desktop_file(desktop_path, overwrite=False):
     base_dir_path = os.path.dirname(os.path.abspath(__file__))
     icon_path = os.path.join(base_dir_path, 'icons', 'logo.png')
 
-    script_path = os.path.expanduser(f"~/.local/bin/{about.__linux_indicator__}")
+    script_path = os.path.join("~",".local","bin",f"{about.__linux_indicator__}")
+    script_path = os.path.expanduser(script_path)
 
     desktop_entry = f"""[Desktop Entry]
 Name={about.__linux_indicator__}
@@ -60,7 +61,9 @@ Name={long_name}
 Comment={comment}
 Icon={icon}
 """
-    path = os.path.expanduser(f"~/.local/share/desktop-directories/{directory_name}.directory")
+    
+    path = os.path.join("~",".local","share","desktop-directories",f"{directory_name}.directory")
+    path = os.path.expanduser(path)
     
     if not os.path.exists(path) or overwrite == True:  # Evita sobrescrever
         os.makedirs(os.path.dirname(path), exist_ok=True)
@@ -85,7 +88,8 @@ def create_desktop_menu(directory_name = "ResearchTools",
     </Menu>
 </Menu>
 """
-    path = os.path.expanduser(f"~/.config/menus/applications-merged/{basename}.menu")
+    path = os.path.join("~",".config","menus","applications-merged",f"{basename}.menu")
+    path = os.path.expanduser(path)
     
     if not os.path.exists(path) or overwrite == True:  # Evita sobrescrever
         os.makedirs(os.path.dirname(path), exist_ok=True)

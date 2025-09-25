@@ -46,7 +46,8 @@ keywords = ["writing", "spelling"]
 dependencies = [
     "PyQt5",
     "deep-consultation",
-    "textstat"
+    "textstat",
+    "markdown"
 ]
 
 [project.urls]
