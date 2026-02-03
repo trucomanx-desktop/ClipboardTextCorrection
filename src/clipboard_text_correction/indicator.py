@@ -65,6 +65,35 @@ except FileNotFoundError:
 except json.JSONDecodeError:
     print(f"Erro: O arquivo '{base_dir_path}' não contém um JSON válido.")
     sys.exit()
+    
+    
+################################################################################
+################################################################################
+import unicodedata
+
+REPLACEMENTS = {
+    "∈": " in ",
+    "ℝ": " R ",
+    "ℕ": " N ",
+    "≤": "<=",
+    "≥": ">=",
+    "≠": "!=",
+}
+
+def sanitize_string(s: str) -> str:
+    # normaliza unicode
+    s = unicodedata.normalize("NFKC", s)
+
+    # substituições semânticas
+    for k, v in REPLACEMENTS.items():
+        s = s.replace(k, v)
+
+    # garante UTF-8 válido
+    s = s.encode("utf-8", errors="ignore").decode("utf-8")
+
+    return s
+
+
 ################################################################################
 ################################################################################
 ################################################################################
@@ -327,6 +356,8 @@ def basic_consult(type_consult, msg=None,extra_system_msg="", parser_func = None
     if len(msg) < 3:
         show_message("Too few elements on clipboard.")
         return
+        
+    msg = get_clipboard_text(msg)
         
     if config_data["api_key"]=="":
         with open(config_file_path, "r") as arquivo:
