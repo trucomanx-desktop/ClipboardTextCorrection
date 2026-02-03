@@ -14,6 +14,7 @@ from PyQt5.QtCore import Qt, QUrl, QTimer
 
 from clipboard_text_correction.about import __version__
 
+import clipboard_text_correction.lib_text     as lib_text
 import clipboard_text_correction.lib_funcs    as lib_funcs
 import clipboard_text_correction.lib_files    as lib_files
 import clipboard_text_correction.lib_stats    as lib_stats
@@ -69,31 +70,6 @@ except json.JSONDecodeError:
     
 ################################################################################
 ################################################################################
-import unicodedata
-
-REPLACEMENTS = {
-    "∈": " in ",
-    "ℝ": " R ",
-    "ℕ": " N ",
-    "≤": "<=",
-    "≥": ">=",
-    "≠": "!=",
-}
-
-def sanitize_string(s: str) -> str:
-    # normaliza unicode
-    s = unicodedata.normalize("NFKC", s)
-
-    # substituições semânticas
-    for k, v in REPLACEMENTS.items():
-        s = s.replace(k, v)
-
-    # garante UTF-8 válido
-    s = s.encode("utf-8", errors="ignore").decode("utf-8")
-
-    return s
-
-
 ################################################################################
 ################################################################################
 ################################################################################
@@ -357,7 +333,7 @@ def basic_consult(type_consult, msg=None,extra_system_msg="", parser_func = None
         show_message("Too few elements on clipboard.")
         return
         
-    msg = get_clipboard_text(msg)
+    msg = lib_text.sanitize_string(msg)
         
     if config_data["api_key"]=="":
         with open(config_file_path, "r") as arquivo:
@@ -415,6 +391,8 @@ def basic_consult(type_consult, msg=None,extra_system_msg="", parser_func = None
             
             print("recived:", res)
             
+        all_out = lib_text.sanitize_string(all_out)
+            
         if is_ok:
             if lib_files.program_exists('meld'):
                 lib_files.compare_texts(msg, all_out, program='meld', filetype=ext)
@@ -437,6 +415,8 @@ def question_answer_consult(type_consult, msg=None, show=True, extra_system_msg=
     if len(msg) < 3:
         show_message("Too few elements on clipboard.")
         return None
+    
+    msg = lib_text.sanitize_string(msg)
     
     if config_data["api_key"]=="":
         with open(config_file_path, "r") as arquivo:
