@@ -21,12 +21,16 @@ import clipboard_text_correction.lib_stats    as lib_stats
 import clipboard_text_correction.lib_latex    as lib_latex
 import clipboard_text_correction.lib_md2html  as lib_md2html
 
+from clipboard_text_correction.resources    import resource_path
 from clipboard_text_correction.lib_textdiff import mark_text_diff
-from clipboard_text_correction.desktop import create_desktop_file, create_desktop_directory, create_desktop_menu
+from clipboard_text_correction.desktop      import create_desktop_file, create_desktop_directory, create_desktop_menu
 
 import clipboard_text_correction.about as about
 
-CONFIG_FILE = "~/.config/clipboard_text_correction/config_data.json"
+CONFIG_FILE = os.path.join( os.path.expanduser("~"),
+                            ".config",
+                            about.__package__,
+                            "config_data.json")
 
 config_data = lib_funcs.SYSTEM_DATA
 config_file_path = os.path.expanduser(CONFIG_FILE)
@@ -54,17 +58,16 @@ except json.JSONDecodeError:
 
 try:
     article_format_data = {}
-    base_dir_path = os.path.dirname(os.path.abspath(__file__))
-    article_format_path = os.path.join(base_dir_path, 'data', 'article_format.json')
+    article_format_path = resource_path('data', 'article_format.json')
     with open(article_format_path, "r") as arquivo:
         article_format_data = json.load(arquivo)
     
 except FileNotFoundError:
-    print(f"Erro: O arquivo '{base_dir_path}' não foi encontrado.")
+    print(f"Erro: O arquivo '{article_format_path}' não foi encontrado.")
     sys.exit()
     
 except json.JSONDecodeError:
-    print(f"Erro: O arquivo '{base_dir_path}' não contém um JSON válido.")
+    print(f"Erro: O arquivo '{article_format_path}' não contém um JSON válido.")
     sys.exit()
     
     
@@ -672,8 +675,7 @@ def open_about():
         "url_bugs": about.__url_bugs__
     }
     
-    base_dir_path = os.path.dirname(os.path.abspath(__file__))
-    logo_path = os.path.join(base_dir_path, 'icons', 'logo.png')
+    logo_path = resource_path("icons", "logo.png")
     
     show_about_window(data, logo_path)
 
@@ -684,8 +686,7 @@ class ClipboardTextCorrectionApp(QApplication):
         self.setQuitOnLastWindowClosed(False)
         
         # Get base directory for icons
-        base_dir_path = os.path.dirname(os.path.abspath(__file__))
-        icon_path = os.path.join(base_dir_path, 'icons', 'logo.png')
+        icon_path = resource_path("icons", "logo.png")
         
         # Create system tray icon
         self.tray_icon = QSystemTrayIcon(QIcon(icon_path), self)
