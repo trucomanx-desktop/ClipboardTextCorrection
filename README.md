@@ -22,18 +22,6 @@ If you write scientific papers, reports, or any other type of formal text, this 
 
 Try it now and transform your writing! 
 
-# Dependencies
-
-This program requires `meld` to be installed on your system to function correctly. `meld` is a graphical tool for comparing files and directories. How to install `meld`:
-
-- **Install on Ubuntu:**
-
-```bash
-sudo apt-get install meld
-```
-- **Install on Windows:**
- You can download the Meld installer at [https://meldmerge.org](https://meldmerge.org).
-
 # Installing and using
 The procedure for installing and using the program `clipboard-text-correction-indicator` can be seen in the following links.
 
