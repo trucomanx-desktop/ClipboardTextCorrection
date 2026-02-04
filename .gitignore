@@ -3,3 +3,5 @@
 /src/dist
 /src/build/
 /src/clipboard_text_correction/modules/__pycache__/
+/venv-temporal/
+/src/clipboard_text_correction.spec

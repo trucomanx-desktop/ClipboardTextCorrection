@@ -9,7 +9,7 @@ def resource_path(*parts):
     else:
         # sobe de modules → stock_viewer
         base = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+    
     return os.path.join(base, *parts)
 
 

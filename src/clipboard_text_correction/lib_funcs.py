@@ -5,6 +5,7 @@ import json
 from deep_consultation.core import consult_with_deepchat
 
 import clipboard_text_correction.lib_files as lib_files
+from clipboard_text_correction.modules.resources import resource_path
 
 SYSTEM_RESPONSE={
     "<NOERROR>" : "No errors was found",
@@ -233,8 +234,7 @@ You are an expert in text readability analysis. Your task is to analyze the prov
 
 
 article_format_data = {}
-base_dir_path = os.path.dirname(os.path.abspath(__file__))
-article_format_path = os.path.join(base_dir_path, 'data', 'article_format.json')
+article_format_path = resource_path('data', 'article_format.json')
 with open(article_format_path, "r") as arquivo:
     article_format_data = json.load(arquivo)
 

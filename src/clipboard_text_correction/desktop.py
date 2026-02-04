@@ -1,7 +1,7 @@
 import os
 import clipboard_text_correction.about as about
 import subprocess
-
+from clipboard_text_correction.modules.resources import resource_path
 
 def update_desktop_database(desktop_path):
     applications_dir = os.path.expanduser(desktop_path)
@@ -17,8 +17,8 @@ def update_desktop_database(desktop_path):
         print("The command 'update-desktop-database' was not found. Verify that the package 'desktop-file-utils' is installed.")
 
 def create_desktop_file(desktop_path, overwrite=False):
-    base_dir_path = os.path.dirname(os.path.abspath(__file__))
-    icon_path = os.path.join(base_dir_path, 'icons', 'logo.png')
+
+    icon_path = resource_path('icons', 'logo.png')
 
     script_path = os.path.join("~",".local","bin",f"{about.__linux_indicator__}")
     script_path = os.path.expanduser(script_path)
