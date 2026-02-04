@@ -2,4 +2,4 @@
 /src/clipboard_text_correction.egg-info/
 /src/dist
 /src/build/
-
+/src/clipboard_text_correction/modules/__pycache__/

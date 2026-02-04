@@ -21,7 +21,7 @@ import clipboard_text_correction.lib_stats    as lib_stats
 import clipboard_text_correction.lib_latex    as lib_latex
 import clipboard_text_correction.lib_md2html  as lib_md2html
 
-from clipboard_text_correction.resources    import resource_path
+from clipboard_text_correction.modules.resources import resource_path
 from clipboard_text_correction.lib_textdiff import mark_text_diff
 from clipboard_text_correction.desktop      import create_desktop_file, create_desktop_directory, create_desktop_menu
 
