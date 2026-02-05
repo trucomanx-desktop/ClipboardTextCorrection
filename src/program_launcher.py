@@ -2,17 +2,25 @@
 
 '''
 python3 -m venv venv-temporal
+
+## ubuntu ##
 source venv-temporal/bin/activate
 pip install --upgrade pip
+
+## windows ##
+venv-temporal\Scripts\activate
+python -m pip install --upgrade pip
+
 pip install pyinstaller pyinstaller-hooks-contrib
 pip install -r requirements.txt
 cd src
 
-## windows ##
-python3 -m PyInstaller --onefile --windowed --name clipboard_text_correction --add-data "clipboard_text_correction/icons;icons" --add-data "clipboard_text_correction/data;data" --collect-all PyQt5  program_launcher.py
-
 ## ubuntu ##
 python3 -m PyInstaller --onefile --windowed --name clipboard_text_correction --add-data "clipboard_text_correction/icons:icons" --add-data "clipboard_text_correction/data:data" --collect-all PyQt5  program_launcher.py
+
+
+## windows ##
+python -m PyInstaller --onefile --windowed --name clipboard_text_correction --add-data "clipboard_text_correction/icons;icons" --add-data "clipboard_text_correction/data;data" --collect-all PyQt5  program_launcher.py
 
 '''
 
