@@ -20,6 +20,7 @@ During installation, ensure you check the box to **"Add Python to PATH"** (this 
 
 ## 2. Installing from PyPI
 
+### 2.1. From PyPI
 To install the package from `PyPI`, follow the instructions below:
 
 
@@ -30,6 +31,10 @@ pip install --upgrade clipboard-text-correction
 ```
 
 Execute `pip show clipboard-text-correction` to see where it was installed.
+
+### 2.2. From EXE file
+
+Download the binary file from the [release](https://github.com/trucomanx/ClipboardTextCorrection/releases) directory, then double-click to run it.
 
 ### Using
 
