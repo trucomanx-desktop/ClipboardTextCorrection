@@ -24,6 +24,15 @@ python -m PyInstaller --onefile --windowed --name clipboard_text_correction --ad
 
 '''
 
+import os
+from PyQt5.QtCore import QLibraryInfo
+
+os.environ["QT_QPA_PLATFORM_PLUGIN_PATH"] = QLibraryInfo.location(
+    QLibraryInfo.PluginsPath
+)
+
+
+
 from clipboard_text_correction.indicator import main
 
 if __name__ == "__main__":
