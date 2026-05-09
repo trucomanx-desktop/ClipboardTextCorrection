@@ -58,7 +58,7 @@ dependencies = [
 "{__linux_indicator__}" = "{__package__}.indicator:main"
 
 [tool.setuptools]
-packages = ["{__package__}"]
+packages = ["{__package__}", "{__package__}.modules"]
 
 [tool.setuptools.package-data]
 "{__package__}" = ["icons/logo.png", "data/article_format.json"]
