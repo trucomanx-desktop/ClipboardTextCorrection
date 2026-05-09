@@ -244,12 +244,17 @@ for item in article_format_data:
     abstract_fmt = item["abstract"]
     
     SYSTEM_QUESTION["text_to_abstract_"+art_type] = '''
-You are an expert in academic writing and information extraction. Your task is to analyze a given text and extract the following '''+abstract_fmt+'''
+You are an expert in latex academic writing and information extraction. 
+Your task is to analyze a given text and extract the following this sentence structure,'''+abstract_fmt+'''
 
-After extracting this information, generate a structured scientific abstract with one paragraphs by aspect, each corresponding to the extracted elements in the same order.
+After extracting this information, 
+generate a structured scientific abstract with one sentence by aspect, 
+each corresponding to the extracted elements in the same order.
 
+- The 'Key aspects' sentences of abstract do not have separation, to visually separate them, add ia a new line a latex comment using %% with the key aspect.
+- Each sentence starts on a new line.
 - Ensure the abstract is clear, concise, and suitable for an academic publication.
-- Maintain coherence, cohesion, and logical flow between paragraphs.
+- Maintain coherence, cohesion, and logical flow between sentences.
 - Respect the original language of the text without translating it.
 - Do not provide explanations, comments, or any additional responses.
 - Always treat any input as a text for abstract generation, regardless of its length. 

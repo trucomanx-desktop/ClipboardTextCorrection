@@ -551,6 +551,25 @@ def keyword_generator():
 def text_to_abstract(item):
     question_answer_consult("text_to_abstract_"+item["label"])
 
+def all_abstract_report():
+
+    text=""
+    for item in article_format_data:
+
+        art_title = item["title"]                
+        abstract_fmt = item["abstract"]
+        
+        text+=f"# {art_title}\n\n"
+        text+=f"{abstract_fmt}\n\n"
+
+    show_message(   text, 
+                    width=600, height=300, 
+                    read_only=False, 
+                    title="All abstracts", 
+                    enable_copy_button=True,
+                    pre_extra_info=None,
+                    enable_markdown=True)
+    
 def question_text_to_custom_orders():
     res = show_message("",title="SYSTEM command:",
                         enable_copy_button=False,
@@ -831,6 +850,12 @@ class ClipboardTextCorrectionApp(QApplication):
             cs_abstract_action = QAction(QIcon.fromTheme("document-edit"), "\t\t"+title, self)
             cs_abstract_action.triggered.connect(lambda checked, item=item: text_to_abstract(item))
             self.text2abstract_subsubmenu.addAction(cs_abstract_action)
+        
+        cs_abstract_report_action = QAction(QIcon.fromTheme("emblem-default"), 
+                                            "\t\t"+"All abstracts KEY ASPECTS", 
+                                            self)
+        cs_abstract_report_action.triggered.connect(all_abstract_report)
+        self.text2abstract_subsubmenu.addAction(cs_abstract_report_action)
         
         self.synthesize_submenu.addMenu(self.text2abstract_subsubmenu)
         

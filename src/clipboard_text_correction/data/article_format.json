@@ -3,7 +3,7 @@
         "title": "Computer science",
         "label": "computer_science",
         "description": "This format is used for computer science and software engineering papers, where systems or algorithms are developed and tested.",
-        "abstract" : "Key aspects:\n1. General context of the topic.\n 2. Specific problem within the topic that the text focuses on.\n3. Specific computational problem addressed.\n4. Proposed computational solution.\n5. Obtained results.",
+        "abstract" : "Key aspects:\n\n* Sentence 1. Introduce the broader scientific or technological challenge motivating the research. Do not describe the present study yet.\n* Sentence 2. Describe the specific computational problem or limitation addressed by the work.\n* Sentence 3. Present the proposed algorithm, model, framework, or computational approach.\n* Sentence 4. Summarize the experimental setup, datasets, benchmarks, or evaluation methodology.\n* Sentence 5. Report the main results, performance improvements, and broader implications of the proposed solution.",
         "sections": [
             {"title":"Introduction (with related works)", "content": "Introduction to the problem in the context of the state of the art, the goals of the research, and the motivation. The introduction can expand the points covered in the abstract, except for the conclusions and results that belong to the specific sections of the article."},
             {"title":"System Design/Methodology", "content": "Detailed description of the algorithms, models, or systems being proposed or implemented."},
@@ -18,9 +18,9 @@
         "title": "Applied math",
         "label": "applied_math",
         "description": "This format is common for applied mathematics, numerical analysis, and mathematical modeling papers. It focuses on theory, methods, numerical validation, and analysis of results.",
-        "abstract": "Key aspects:\n1. General context of the mathematical or numerical problem.\n2. Mathematical formulation or model being studied.\n3. Methods or numerical techniques applied to solve the problem.\n4. Validation of the proposed methods or model through numerical experiments.\n5. Analysis and discussion of the results obtained, including their implications.",
+        "abstract": "Key aspects:\n\n* Sentence 1. Introduce the broader scientific, mathematical, or numerical challenge motivating the research. Do not describe the present study yet.\n* Sentence 2. Present the specific mathematical formulation, equation, or modeling problem being investigated.\n* Sentence 3. Describe the analytical, numerical, or computational methods used to solve or analyze the problem.\n* Sentence 4. Summarize the validation procedure, numerical experiments, or theoretical verification.\n* Sentence 5. Present the main findings, mathematical insights, and implications of the results.",
         "sections": [
-            {"title":"Introduction", "content": "A brief overview of the research problem, objectives, and motivation. The introduction can expand the points covered in the abstract, except for the conclusions and results that belong to the specific sections of the article."},
+            {"title":"Introduction", "content": "A brief overview of the research problem, objectives, and problem motivation. The introduction can expand the points covered in the abstract, except for the conclusions and results that belong to the specific sections of the article."},
             {"title":"Theoretical Basis", "content": "Background on the mathematical theory, methods, or models that are used in the paper."},
             {"title":"Methodology", "content": "Explanation of the approach or methods developed or applied in the research."},
             {"title":"Numerical Results", "content": "Presentation of numerical experiments, data, and results obtained using the proposed methods."},
@@ -33,7 +33,7 @@
         "title": "Physics papers",
         "label": "physics_papers",
         "description": "This format is typical for physics papers, especially in theoretical and experimental physics, focusing on explaining new findings or experimental setups.",
-        "abstract": "Key aspects:\n1. General context of the field or topic in physics.\n2. Description of the specific phenomenon or concept being investigated.\n3. Theoretical background or experimental setup.\n4. New findings or experimental results.\n5. Implications or future directions based on the results.",
+        "abstract": "Key aspects:\n\n* Sentence 1. Introduce the broader physical phenomenon, scientific challenge, or theoretical context motivating the research. Do not describe the present study yet.\n* Sentence 2. Describe the specific physical phenomenon, hypothesis, or system being investigated.\n* Sentence 3. Summarize the theoretical framework, simulations, or experimental setup.\n* Sentence 4. Present the principal findings, observations, or measured results.\n* Sentence 5. Explain the scientific implications, theoretical significance, or future directions arising from the results.",
         "sections": [
             {"title":"Introduction", "content": "Overview of the problem and objectives, with a brief summary of relevant background. The introduction can expand the points covered in the abstract, except for the conclusions and results that belong to the specific sections of the article."},
             {"title":"Theory and Models", "content": "Presentation of the theoretical framework or models used to analyze the problem."},
@@ -48,7 +48,7 @@
         "title": "Social sciences",
         "label": "social_sciences",
         "description": "This format is common in social sciences (e.g., sociology, psychology, economics) with a focus on theory, research questions, and empirical validation.",
-        "abstract": "Key aspects:\n1. General context of the theoretical framework or background of the topic.\n2. Specific research question or hypothesis being explored.\n3. Empirical methods used to investigate the question.\n4. Key findings or results from the research.\n5. Interpretation of the results and their implications for theory or practice.",
+        "abstract": "Key aspects:\n\n* Sentence 1. Introduce the broader social, behavioral, or theoretical issue motivating the research. Do not describe the present study yet.\n* Sentence 2. State the specific research question, hypothesis, or social problem being investigated.\n* Sentence 3. Describe the empirical methods, participants, datasets, or analytical framework used.\n* Sentence 4. Present the main findings or empirical observations.\n* Sentence 5. Explain the theoretical, social, or practical implications of the results.",
         "sections": [
             {"title":"Introduction", "content": "Introduction to the research problem, its importance, and objectives. The introduction can expand the points covered in the abstract, except for the conclusions and results that belong to the specific sections of the article."},
             {"title":"Literature Review", "content": "Review of existing literature and theoretical frameworks relevant to the research."},
@@ -64,7 +64,7 @@
         "title": "Biological sciences",
         "label": "biological_sciences",
         "description": "This structure is common in agricultural sciences, agronomic sciences, biology and health sciences, where experiments or observations are the focus and methods need to be reproducible.",
-        "abstract" : "Key aspects:\n1. General context of the topic.\n2. Objective of the experiment or observation.\n3. Methodology used, emphasizing reproducibility.\n4. Key findings or observations.\n5. Conclusion and implications of the results.",
+        "abstract" : "Key aspects:\n\n* Sentence 1. Introduce the broader biological, agricultural, environmental, or health-related challenge motivating the research. Do not describe the present study yet.\n* Sentence 2. State the objective of the experiment, observation, or biological investigation.\n* Sentence 3. Summarize the methodology used, emphasizing reproducibility and experimental design.\n* Sentence 4. Present the key findings, observations, or statistically relevant results.\n* Sentence 5. Explain the main conclusion and the biological, agricultural, clinical, or ecological implications of the findings.",
         "sections": [
             {"title":"Introduction", "content": "Introduction to the research question, background, and objectives. The introduction can expand the points covered in the abstract, except for the conclusions and results that belong to the specific sections of the article."},
             {"title":"Background", "content": "Review of relevant biological concepts, previous research, or disease models."},
@@ -79,7 +79,7 @@
         "title": "Chemistry reports",
         "label": "chemistry_reports",
         "description": "In chemistry and chemical engineering, this format is used to report on experimental methods, systems design, and reactions or materials.",
-        "abstract": "Key aspects:\n1. General context of the topic, including the importance of the chemical process or material.\n2. Specific problem or challenge within the field of chemistry or chemical engineering being addressed.\n3. Experimental methods or systems design used to investigate the problem.\n4. Results obtained from experiments or system testing.\n5. Conclusions and potential implications for future research or practical applications.",
+        "abstract": "Key aspects:\n\n* Sentence 1. Introduce the broader chemical, material, or industrial challenge motivating the research. Do not describe the present study yet.\n* Sentence 2. Describe the specific chemical reaction, material, process, or engineering problem being addressed.\n* Sentence 3. Summarize the experimental procedures, synthesis methods, or system design used.\n* Sentence 4. Present the principal experimental results, reaction outcomes, or material properties obtained.\n* Sentence 5. Explain the scientific, industrial, or technological implications of the findings.",
         "sections": [
             {"title":"Introduction", "content": "Introduction to the chemical problem, its significance, and the objectives of the study. The introduction can expand the points covered in the abstract, except for the conclusions and results that belong to the specific sections of the article."},
             {"title":"Literature Review", "content": "Overview of previous research and relevant chemical theories or models."},
@@ -93,7 +93,7 @@
         "title": "Philosophy humanities",
         "label": "philosophy_humanities",
         "description": "This format is typical for philosophy and humanities papers, where the focus is on logical argumentation, analysis, and critique of existing ideas.",
-        "abstract": "Key aspects:\n1. Introduction to the philosophical or theoretical context.\n2. Identification of the specific issue or concept being analyzed or critiqued.\n3. Exploration of the relevant arguments, perspectives, or theories.\n4. Critical analysis and evaluation of these arguments or perspectives.\n5. Conclusion, including insights gained and implications for further discussion.",
+        "abstract": "Key aspects:\n\n* Sentence 1. Introduce the broader philosophical, cultural, or theoretical context motivating the discussion. Do not describe the present work yet.\n* Sentence 2. Identify the specific philosophical issue, concept, text, or debate being analyzed.\n* Sentence 3. Summarize the main arguments, interpretative framework, or theoretical perspectives explored.\n* Sentence 4. Present the critical analysis, comparisons, or conceptual evaluation developed in the work.\n* Sentence 5. Explain the conclusions, insights gained, and implications for further philosophical or humanistic discussion.",
         "sections": [
             {"title":"Introduction", "content": "Introduction to the central research question, context, and goals of the paper. The introduction can expand the points covered in the abstract, except for the conclusions and results that belong to the specific sections of the article."},
             {"title":"Literature Review", "content": "Review of existing philosophical literature and key concepts."},
@@ -108,7 +108,7 @@
         "title": "Economics political",
         "label": "economics_political",
         "description": "In economics and political science, this format is used to present theoretical models or empirical data related to policy or economic issues.",
-        "abstract": "Key aspects:\n1. General context of the economic or political issue.\n2. Specific policy or economic problem being analyzed.\n3. Theoretical model or empirical data used to address the problem.\n4. Analysis of the findings and their implications.\n5. Policy recommendations or conclusions based on the results.",
+        "abstract": "Key aspects:\n\n* Sentence 1. Introduce the broader economic, political, or societal challenge motivating the research. Do not describe the present study yet.\n* Sentence 2. Describe the specific economic, institutional, or policy problem being analyzed.\n* Sentence 3. Summarize the theoretical framework, empirical strategy, or datasets used.\n* Sentence 4. Present the principal findings, trends, or statistical results.\n* Sentence 5. Explain the policy implications, recommendations, or broader significance of the findings.",
         "sections": [
             {"title":"Introduction", "content": "Overview of the research problem, its importance, and objectives. The introduction can expand the points covered in the abstract, except for the conclusions and results that belong to the specific sections of the article."},
             {"title":"Literature Review", "content": "Review of relevant theories, models, and previous research in the field."},
