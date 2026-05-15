@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "clipboard_text_correction"
-version = "0.2.24"
+version = "0.2.25"
 description = "Program that collects text from the clipboard and improves text writing"
 readme = "README.md"
 authors = [{name = "Fernando Pujaico Rivera", email = "fernando.pujaico.rivera@gmail.com"}]
@@ -25,9 +25,9 @@ dependencies = [
 ]
 
 [project.urls]
-"Bug Reports" = "https://github.com/trucomanx/ClipboardTextCorrection/issues"
+"Bug Reports" = "https://github.com/trucomanx-desktop/ClipboardTextCorrection/issues"
 "Funding" = "https://trucomanx.github.io/en/funding.html"
-"Source" = "https://github.com/trucomanx/ClipboardTextCorrection"
+"Source" = "https://github.com/trucomanx-desktop/ClipboardTextCorrection"
 
 [project.scripts]
 "clipboard-text-correction-indicator" = "clipboard_text_correction.indicator:main"
@@ -36,4 +36,4 @@ dependencies = [
 packages = ["clipboard_text_correction", "clipboard_text_correction.modules"]
 
 [tool.setuptools.package-data]
-"clipboard_text_correction" = ["icons/logo.png", "data/article_format.json"]
+"clipboard_text_correction" = ["icons/*.png", "data/article_format.json"]

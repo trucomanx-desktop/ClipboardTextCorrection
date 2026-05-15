@@ -2,11 +2,11 @@
 
 Enhance Your Scientific Writing with Ease.
 
-![logo](https://raw.githubusercontent.com/trucomanx/ClipboardTextCorrection/main/src/clipboard_text_correction/icons/logo.png)
+![logo](https://raw.githubusercontent.com/trucomanx-desktop/ClipboardTextCorrection/main/src/clipboard_text_correction/icons/logo.png)
 
 Writing academic, scientific, and formal texts can be challenging, especially when striving for clarity, coherence, and precision. To simplify this process, we have created a lightweight and intuitive tool that integrates into your system's taskbar and enhances your texts quickly and efficiently. 
 
-![open-config-file](https://raw.githubusercontent.com/trucomanx/ClipboardTextCorrection/main/images/open-config-file.lin.png)
+![open-config-file](https://raw.githubusercontent.com/trucomanx-desktop/ClipboardTextCorrection/main/images/open-config-file.lin.png)
 
 
 ## What does the program do?  
@@ -25,8 +25,8 @@ Try it now and transform your writing!
 # Installing and using
 The procedure for installing and using the program `clipboard-text-correction-indicator` can be seen in the following links.
 
-- **Gnu/Linux:** [doc/INSTALL.lin.md](https://github.com/trucomanx/ClipboardTextCorrection/tree/main/doc/INSTALL.lin.md)
-- **Windows:** [doc/INSTALL.win.md](https://github.com/trucomanx/ClipboardTextCorrection/tree/main/doc/INSTALL.win.md)
+- **Gnu/Linux:** [doc/INSTALL.lin.md](https://github.com/trucomanx-desktop/ClipboardTextCorrection/tree/main/doc/INSTALL.lin.md)
+- **Windows:** [doc/INSTALL.win.md](https://github.com/trucomanx-desktop/ClipboardTextCorrection/tree/main/doc/INSTALL.win.md)
 
 # Buy me a coffee
 
@@ -40,5 +40,5 @@ This project is licensed under the GPLv3 License.
 
 # More information
 
-More information can be found in [doc](https://github.com/trucomanx/ClipboardTextCorrection/tree/main/doc) directory.
+More information can be found in [doc](https://github.com/trucomanx-desktop/ClipboardTextCorrection/tree/main/doc) directory.
 

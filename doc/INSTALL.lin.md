@@ -2,7 +2,7 @@
 
 Program that improves text writing.
 
-![logo](https://raw.githubusercontent.com/trucomanx/ClipboardTextCorrection/main/src/clipboard_text_correction/icons/logo.png)
+![logo](https://raw.githubusercontent.com/trucomanx-desktop/ClipboardTextCorrection/main/src/clipboard_text_correction/icons/logo.png)
 
 ## 1. Dependencies
 
@@ -14,6 +14,7 @@ sudo apt-get install meld
 
 ## 2. Installing from PyPI
 
+### From PyPI
 To install the package from `PyPI`, follow the instructions below:
 
 
@@ -26,12 +27,20 @@ pip install --upgrade clipboard-text-correction
 
 Execute `pip show clipboard-text-correction` to see where it was installed.
 
-### 2.1. Add the program to Linux start session
+### Add the program to Linux start session
 
 Add the program to the bar indicator on Linux startup session.
 
 ```bash
 clipboard-text-correction-indicator --autostart
+```
+
+### Using
+
+Start the program using the command below:
+
+```bash
+clipboard-text-correction-indicator
 ```
 
 ## 3. LLM
@@ -40,7 +49,7 @@ https://deepinfra.com/dash/api_keys
 
 Place the obtained `API_KEY` in the `clipboard-text-correction-indicator` program under menu `Program usage information >> Open config file`.
 
-![open-config-file](https://raw.githubusercontent.com/trucomanx/ClipboardTextCorrection/main/images/open-config-file.lin.png)
+![open-config-file](https://raw.githubusercontent.com/trucomanx-desktop/ClipboardTextCorrection/main/images/open-config-file.lin.png)
 
 ## 4 Uninstall
 
@@ -50,12 +59,11 @@ pip uninstall clipboard-text-correction
 
 ## 5. Buy me a coffee
 
-If you find this tool useful and would like to support its development, you can buy me a coffee!  
-Your donations help keep the project running and improve future updates.  
+If you find this tool useful and would like to support its development, you can buy me a coffee! 
+Your donations help keep the project running and improve future updates. 
 
 [☕ Buy me a coffee](https://ko-fi.com/trucomanx) 
 
 ## 6. License
 
-This project is licensed under the GPLv3 License.
-
+This project is licensed under the GPL license. See the `LICENSE` file for more details.

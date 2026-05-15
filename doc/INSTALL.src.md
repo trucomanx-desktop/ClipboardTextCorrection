@@ -6,7 +6,7 @@ Program that improves text writing
 Installing `clipboard-text-correction` program
 
 ```bash
-git clone https://github.com/trucomanx/ClipboardTextCorrection.git
+git clone https://github.com/trucomanx-desktop/ClipboardTextCorrection.git
 cd ClipboardTextCorrection
 pip install -r requirements.txt
 cd src
