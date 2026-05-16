@@ -21,7 +21,9 @@ import clipboard_text_correction.lib_stats    as lib_stats
 import clipboard_text_correction.lib_latex    as lib_latex
 import clipboard_text_correction.lib_md2html  as lib_md2html
 
+from clipboard_text_correction.modules.wabout    import show_about_window
 from clipboard_text_correction.modules.resources import resource_path
+
 from clipboard_text_correction.lib_textdiff import mark_text_diff
 from clipboard_text_correction.desktop      import create_desktop_file
 from clipboard_text_correction.desktop      import create_desktop_directory
@@ -29,32 +31,34 @@ from clipboard_text_correction.desktop      import create_desktop_menu
 
 import clipboard_text_correction.about as about
 
-CONFIG_FILE = os.path.join( os.path.expanduser("~"),
+old_dir_path = os.path.expanduser("~")
+
+CONFIG_PATH = os.path.join( os.path.expanduser("~"),
                             ".config",
                             about.__package__,
                             "config_data.json")
 
 config_data = lib_funcs.SYSTEM_DATA
-config_file_path = os.path.expanduser(CONFIG_FILE)
 
-old_dir_path = os.path.expanduser("~")
+
+
 try:
-    if not os.path.exists(config_file_path):
-        os.makedirs(os.path.dirname(config_file_path), exist_ok=True)
+    if not os.path.exists(CONFIG_PATH):
+        os.makedirs(os.path.dirname(CONFIG_PATH), exist_ok=True)
         
-        with open(config_file_path, "w", encoding="utf-8") as arquivo:
+        with open(CONFIG_PATH, "w", encoding="utf-8") as arquivo:
             json.dump(config_data, arquivo, indent=4)
-        print(f"Arquivo criado em: {config_file_path}")
+        print(f"Arquivo criado em: {CONFIG_PATH}")
         
-    with open(config_file_path, "r") as arquivo:
+    with open(CONFIG_PATH, "r") as arquivo:
         config_data = json.load(arquivo)
     
 except FileNotFoundError:
-    print(f"Erro: O arquivo '{config_file_path}' não foi encontrado.")
+    print(f"Erro: O arquivo '{CONFIG_PATH}' não foi encontrado.")
     sys.exit()
     
 except json.JSONDecodeError:
-    print(f"Erro: O arquivo '{config_file_path}' não contém um JSON válido.")
+    print(f"Erro: O arquivo '{CONFIG_PATH}' não contém um JSON válido.")
     sys.exit()
 
 
@@ -171,102 +175,6 @@ def show_message(   message,
     res = dialog.text_edit.toPlainText()
     return res
 
-class AboutWindow(QDialog):
-    """About dialog window"""
-    def __init__(self, data, logo_path, parent=None):
-        super().__init__(parent)
-        self.setWindowTitle("About")
-        self.setMinimumSize(500, 300)
-        
-        # Create layout
-        layout = QVBoxLayout(self)
-        
-        # Logo
-        logo_label = QLabel()
-        pixmap = QPixmap(logo_path)
-        pixmap = pixmap.scaled(100, 100, Qt.KeepAspectRatio, Qt.SmoothTransformation)
-        logo_label.setPixmap(pixmap)
-        logo_label.setAlignment(Qt.AlignCenter)
-        layout.addWidget(logo_label)
-        
-        # Description
-        description_label = QLabel(f"<b>{data['description']}</b>")
-        description_label.setWordWrap(True)
-        description_label.setTextInteractionFlags(Qt.TextSelectableByMouse)
-        layout.addWidget(description_label)
-        
-        # Add separator
-        separator = QLabel()
-        separator.setFrameShape(QLabel.HLine)
-        separator.setFrameShadow(QLabel.Sunken)
-        layout.addWidget(separator)
-        
-        # Package info
-        package_label = QLabel(f"Package: {data['package']}")
-        package_label.setTextInteractionFlags(Qt.TextSelectableByMouse)
-        package_label.setAlignment(Qt.AlignLeft)
-        layout.addWidget(package_label)
-        
-        # Program info
-        program_label = QLabel(f"Program: {data['linux_indicator']}")
-        program_label.setTextInteractionFlags(Qt.TextSelectableByMouse)
-        program_label.setAlignment(Qt.AlignLeft)
-        layout.addWidget(program_label)
-        
-        # Version info
-        version_label = QLabel(f"Version: {data['version']}")
-        version_label.setTextInteractionFlags(Qt.TextSelectableByMouse)
-        version_label.setAlignment(Qt.AlignLeft)
-        layout.addWidget(version_label)
-        
-        # Author info
-        author_label = QLabel(f"Author: {data['author']}")
-        author_label.setTextInteractionFlags(Qt.TextSelectableByMouse)
-        author_label.setAlignment(Qt.AlignLeft)
-        layout.addWidget(author_label)
-        
-        # Email info
-        email_label = QLabel(f"Email: <a href=\"mailto:{data['email']}\">{data['email']}</a>")
-        email_label.setTextInteractionFlags(Qt.TextSelectableByMouse)
-        email_label.setOpenExternalLinks(True)
-        email_label.setAlignment(Qt.AlignLeft)
-        layout.addWidget(email_label)
-        
-        # Add another separator
-        separator2 = QLabel()
-        separator2.setFrameShape(QLabel.HLine)
-        separator2.setFrameShadow(QLabel.Sunken)
-        layout.addWidget(separator2)
-        
-        # Source URL
-        source_label = QLabel(f"Source: <a href=\"{data['url_source']}\">{data['url_source']}</a>")
-        source_label.setTextInteractionFlags(Qt.TextSelectableByMouse)
-        source_label.setOpenExternalLinks(True)
-        source_label.setAlignment(Qt.AlignLeft)
-        layout.addWidget(source_label)
-        
-        # Funding URL
-        funding_label = QLabel(f"Funding: <a href=\"{data['url_funding']}\">{data['url_funding']}</a>")
-        funding_label.setTextInteractionFlags(Qt.TextSelectableByMouse)
-        funding_label.setOpenExternalLinks(True)
-        funding_label.setAlignment(Qt.AlignLeft)
-        layout.addWidget(funding_label)
-        
-        # Bugs URL
-        bugs_label = QLabel(f"Bugs: <a href=\"{data['url_bugs']}\">{data['url_bugs']}</a>")
-        bugs_label.setTextInteractionFlags(Qt.TextSelectableByMouse)
-        bugs_label.setOpenExternalLinks(True)
-        bugs_label.setAlignment(Qt.AlignLeft)
-        layout.addWidget(bugs_label)
-        
-        # OK Button
-        ok_button = QPushButton("OK")
-        ok_button.clicked.connect(self.accept)
-        layout.addWidget(ok_button)
-
-def show_about_window(data, logo_path):
-    dialog = AboutWindow(data, logo_path)
-    dialog.exec_()
 
 class ErrorDialog(QDialog):
     """Error dialog with scrollable text area"""
@@ -341,11 +249,11 @@ def basic_consult(type_consult, msg=None,extra_system_msg="", parser_func = None
     msg = lib_text.sanitize_string(msg)
         
     if config_data["api_key"]=="":
-        with open(config_file_path, "r") as arquivo:
+        with open(CONFIG_PATH, "r") as arquivo:
             config_data = json.load(arquivo)
         
         if config_data["api_key"]=="":
-            lib_files.open_from_filepath(config_file_path)
+            lib_files.open_from_filepath(CONFIG_PATH)
             show_notification_message("open_url_usage", config_data["usage"])
             QDesktopServices.openUrl(QUrl(config_data["usage"]))
             return
@@ -424,11 +332,11 @@ def question_answer_consult(type_consult, msg=None, show=True, extra_system_msg=
     msg = lib_text.sanitize_string(msg)
     
     if config_data["api_key"]=="":
-        with open(config_file_path, "r") as arquivo:
+        with open(CONFIG_PATH, "r") as arquivo:
             config_data = json.load(arquivo)
         
         if config_data["api_key"]=="":
-            lib_files.open_from_filepath(config_file_path)
+            lib_files.open_from_filepath(CONFIG_PATH)
             show_notification_message("open_url_usage", config_data["usage"])
             QDesktopServices.openUrl(QUrl(config_data["usage"]))
             return None
@@ -667,15 +575,14 @@ def readability():
 ################################################################################
 
 def edit_config():
-    lib_files.open_from_filepath(config_file_path)
+    lib_files.open_from_filepath(CONFIG_PATH)
     
 def open_url_usage():
     show_notification_message("open_url_usage", config_data["usage"])
     QDesktopServices.openUrl(QUrl(config_data["usage"]))
     
 def open_url_help():
-    url = "https://github.com/trucomanx-desktop/ClipboardTextCorrection/blob/main/doc/README.md"
-    show_notification_message("open_url_help", url)
+    show_notification_message("open_url_help", about.__url_doc__)
     QDesktopServices.openUrl(QUrl(url))
 
 ################################################################################
@@ -687,11 +594,12 @@ def open_about():
     data = {
         "version": about.__version__,
         "package": about.__package__,
-        "linux_indicator": about.__linux_indicator__,
+        "program_name": about.__linux_indicator__,
         "author": about.__author__,
         "email": about.__email__,
         "description": about.__description__,
         "url_source": about.__url_source__,
+        "url_doc": about.__url_doc__,
         "url_funding": about.__url_funding__,
         "url_bugs": about.__url_bugs__
     }
