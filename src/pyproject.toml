@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "clipboard_text_correction"
-version = "0.2.25"
+version = "0.2.26"
 description = "Program that collects text from the clipboard and improves text writing"
 readme = "README.md"
 authors = [{name = "Fernando Pujaico Rivera", email = "fernando.pujaico.rivera@gmail.com"}]

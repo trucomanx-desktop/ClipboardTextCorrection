@@ -20,6 +20,7 @@ import clipboard_text_correction.lib_files    as lib_files
 import clipboard_text_correction.lib_stats    as lib_stats
 import clipboard_text_correction.lib_latex    as lib_latex
 import clipboard_text_correction.lib_md2html  as lib_md2html
+import clipboard_text_correction.modules.configure as configure
 
 from clipboard_text_correction.modules.wabout    import show_about_window
 from clipboard_text_correction.modules.resources import resource_path
@@ -33,33 +34,17 @@ import clipboard_text_correction.about as about
 
 old_dir_path = os.path.expanduser("~")
 
+
+
 CONFIG_PATH = os.path.join( os.path.expanduser("~"),
                             ".config",
                             about.__package__,
                             "config_data.json")
 
-config_data = lib_funcs.SYSTEM_DATA
+configure.verify_default_config(CONFIG_PATH,
+                                default_content=lib_funcs.SYSTEM_DATA)
 
-
-
-try:
-    if not os.path.exists(CONFIG_PATH):
-        os.makedirs(os.path.dirname(CONFIG_PATH), exist_ok=True)
-        
-        with open(CONFIG_PATH, "w", encoding="utf-8") as arquivo:
-            json.dump(config_data, arquivo, indent=4)
-        print(f"Arquivo criado em: {CONFIG_PATH}")
-        
-    with open(CONFIG_PATH, "r") as arquivo:
-        config_data = json.load(arquivo)
-    
-except FileNotFoundError:
-    print(f"Erro: O arquivo '{CONFIG_PATH}' não foi encontrado.")
-    sys.exit()
-    
-except json.JSONDecodeError:
-    print(f"Erro: O arquivo '{CONFIG_PATH}' não contém um JSON válido.")
-    sys.exit()
+config_data=configure.load_config(CONFIG_PATH)
 
 
 try:
